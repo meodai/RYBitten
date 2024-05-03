@@ -4,62 +4,95 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RYBitten Demo</title>
+    <link href="https://fonts.cdnfonts.com/css/apple-garamond" rel="stylesheet">
   </head>
   <body>
-    <style>
-      body,
-      html,
-      :root {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-      }
-      #app {
-        height: 100dvh;
+    <div class="intro block">
+      <div class="c">
+        <div class="c">
+          <div class="c">
+            <div class="c">
+              <div class="c"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="intro-text block__text">
+        <h1>RYBitten</h1>
+        <p>
+          Implementation of pseudo RYB color conversions derived from Johannes Itten's color wheel.
+        </p>
+      </div>
+    </div>
 
-        background: linear-gradient(90deg, var(--gradient)),
-          linear-gradient(90deg, var(--gradientHSL));
-        background-size:
-          100% 50%,
-          100% 50%;
-        background-repeat: no-repeat;
-        background-position:
-          0 0,
-          0 100%;
-      }
-      #app::after,
-      #app::before {
-        content: "";
-        position: absolute;
-        display: block;
-        top: 50%;
-        aspect-ratio: 1;
-        width: 20vmin;
-        right: 5vmin;
-        background: conic-gradient(var(--gradient));
-        border-radius: 50%;
-        transform: translateY(-50%);
-      }
-      #app::before {
-        background: conic-gradient(var(--gradientHSL));
-        transform: translateY(-50%) scale(1.1);
-      }
-      h1,
-      h2 {
-        font-size: 5vmin;
-        position: absolute;
-        left: 1em;
-        top: 1em;
-        margin: 0;
-      }
-      h2 {
-        top: calc(50% + 1em);
-      }
-    </style>
+    <div class="ryb block">
+      <form class="edges" data-edges>
+        <svg viewBox="0 0 100 100">
+          <g stroke-width=".5">
+            <rect x="33" y="3" width="60" height="68" fill="none" />
+            <rect x="6" y="30" width="60" height="68" fill="none" />
+      
+            <line x1="33" y1="3" x2="6" y2="30" />
+            <line x1="66" y1="98" x2="93" y2="71" />
+          </g>
+      
+        </svg>
+        <label class="g">
+          <b>green</b>
+          <span><input data-c="g" type="color"></span>
+        </label>
+        <label class="b">
+          <b>blue</b>
+          <span><input data-c="b" type="color"></span>
+        </label>
+        <label class="black">
+          <b>black</b>
+          <span><input data-c="0" type="color"></span>
+        </label>
+        <label class="v">
+          <b>violet</b>
+          <span><input data-c="v" type="color"></span>
+        </label>
+        <label class="y">
+          <b>yellow</b>
+          <span><input data-c="y" type="color"></span>
+        </label>
+        <label class="w">
+          <b>white</b>
+          <span><input data-c="w" type="color"></span>
+        </label>
+        <label class="o">
+          <b>orange</b>
+          <span><input data-c="o" type="color"></span>
+        </label>
+        <label class="r">
+          <b>red</b>
+          <span><input data-c="r" type="color"></span>
+        </label>
+      </form>
+      <div class="block__text">
+        <h2>Trilinear Interpolation</h2>
+        <p>
+          Trilinear interpolation is the method used by this library to translate between RGB and RYB color spaces, creating an
+          imaginative new color space that aligns with RGB.
+        </p>
+        <p>
+          The RGB/RYB cube has been manually tuned to emulate Johannes Itten's color wheel. 
+          By manipulating the cube's edges, you can see how the colors change and create a colorspace
+          that fits your artistic needs. 
+        </p>
+      </div>
+    </div>
+
+
     <div id="app">
       <h1>RYBitten HSL</h1>
       <h2>RGB HSL</h2>
     </div>
+
+    <quote>
+      Play becomes joy, joy becomes work, work becomes play.
+    </quote>
     <script type="module" src="/src/demo.ts"></script>
   </body>
 </html>
