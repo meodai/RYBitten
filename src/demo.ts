@@ -53,7 +53,7 @@ function generateHardStopGradient(colors: string[]): string {
     })
     .join(", ");
 
-  return `linear-gradient(to right, ${gradient})` as string;
+  return `${gradient}` as string;
 }
 
 const colors = new Array(36).fill(0).map((_, index) => {

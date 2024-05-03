@@ -17,7 +17,8 @@
       #app {
         height: 100dvh;
 
-        background: var(--gradient), var(--gradientHSL);
+        background: linear-gradient(90deg, var(--gradient)),
+          linear-gradient(90deg, var(--gradientHSL));
         background-size:
           100% 50%,
           100% 50%;
@@ -26,8 +27,39 @@
           0 0,
           0 100%;
       }
+      #app::after,
+      #app::before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 50%;
+        aspect-ratio: 1;
+        width: 20vmin;
+        right: 5vmin;
+        background: conic-gradient(var(--gradient));
+        border-radius: 50%;
+        transform: translateY(-50%);
+      }
+      #app::before {
+        background: conic-gradient(var(--gradientHSL));
+        transform: translateY(-50%) scale(1.1);
+      }
+      h1,
+      h2 {
+        font-size: 5vmin;
+        position: absolute;
+        left: 1em;
+        top: 1em;
+        margin: 0;
+      }
+      h2 {
+        top: calc(50% + 1em);
+      }
     </style>
-    <div id="app"></div>
+    <div id="app">
+      <h1>RYBitten HSL</h1>
+      <h2>RGB HSL</h2>
+    </div>
     <script type="module" src="/src/demo.ts"></script>
   </body>
 </html>
