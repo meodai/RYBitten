@@ -1,7 +1,16 @@
 import "./demo.css";
 import { ryb2rgb, RYB_CUBE, ColorCoords } from "./main";
 
-console.log(RYB_CUBE);
+const DEMO_RYB_CUBE: ColorCoords[] = [
+    [0.11372549019607843,0.10980392156862745,0.10980392156862745],
+    [0.9686274509803922,0.17647058823529413,0.1607843137254902],
+    [0.9921568627450981,0.796078431372549,0],
+    [0.9803921568627451,0.4,0.050980392156862744],
+    [0.06666666666666667,0.3803921568627451,0.6666666666666666],
+    [0.396078431372549,0.2235294117647059,0.5411764705882353],
+    [0.27450980392156865,0.5450980392156862,0.28627450980392155],
+    [0.9921568627450981,0.9647058823529412,0.9294117647058824]
+];
 
 const $app = document.getElementById("app") as HTMLElement;
 
@@ -60,7 +69,7 @@ function hslToRgb(hsl: ColorCoords): ColorCoords {
 function hsl2farbrad(hsl: ColorCoords): ColorCoords {
   const [h, s, l] = hsl;
   const rgbColor = hslToRgb([wrapAngle(h), s, l]);
-  return ryb2rgb(rgbColor);
+  return ryb2rgb(rgbColor, DEMO_RYB_CUBE);
 }
 
 // generate hard stop css gradient
@@ -127,45 +136,50 @@ document.documentElement.style.setProperty('--stops-48', colorsToHardStopGradien
 
 document.documentElement.style.setProperty(
   '--white',
-  formatCSS(RYB_CUBE[7])
+  formatCSS(DEMO_RYB_CUBE[7])
 );
 document.documentElement.style.setProperty(
   '--black',
-  formatCSS(RYB_CUBE[0])
+  formatCSS(DEMO_RYB_CUBE[0])
 );
 document.documentElement.style.setProperty(
   '--red',
-  formatCSS(RYB_CUBE[1])
+  formatCSS(DEMO_RYB_CUBE[1])
 );
 document.documentElement.style.setProperty(
   '--yellow',
-  formatCSS(RYB_CUBE[2])
+  formatCSS(DEMO_RYB_CUBE[2])
 );
 document.documentElement.style.setProperty(
   '--orange',
-  formatCSS(RYB_CUBE[3])
+  formatCSS(DEMO_RYB_CUBE[3])
 );
 document.documentElement.style.setProperty(
   '--blue',
-  formatCSS(RYB_CUBE[4])
+  formatCSS(DEMO_RYB_CUBE[4])
 );
 document.documentElement.style.setProperty(
   '--violet',
-  formatCSS(RYB_CUBE[5])
+  formatCSS(DEMO_RYB_CUBE[5])
 );
 document.documentElement.style.setProperty(
   '--green',
-  formatCSS(RYB_CUBE[6])
+  formatCSS(DEMO_RYB_CUBE[6])
 );
 
-$w.value = rgbToHex(RYB_CUBE[7]);
-$r.value = rgbToHex(RYB_CUBE[1]);
-$y.value = rgbToHex(RYB_CUBE[2]);
-$o.value = rgbToHex(RYB_CUBE[3]);
-$b.value = rgbToHex(RYB_CUBE[4]);
-$v.value = rgbToHex(RYB_CUBE[5]);
-$g.value = rgbToHex(RYB_CUBE[6]);
-$black.value = rgbToHex(RYB_CUBE[0]);
+$w.value = rgbToHex(DEMO_RYB_CUBE[7]);
+$r.value = rgbToHex(DEMO_RYB_CUBE[1]);
+$y.value = rgbToHex(DEMO_RYB_CUBE[2]);
+$o.value = rgbToHex(DEMO_RYB_CUBE[3]);
+$b.value = rgbToHex(DEMO_RYB_CUBE[4]);
+$v.value = rgbToHex(DEMO_RYB_CUBE[5]);
+$g.value = rgbToHex(DEMO_RYB_CUBE[6]);
+$black.value = rgbToHex(DEMO_RYB_CUBE[0]);
+
+console.log(
+  'current RYB_CUBE',
+  DEMO_RYB_CUBE
+)
 }
 
 repaint();
@@ -184,7 +198,7 @@ document.querySelector('[data-edges]')?.addEventListener('input', (e) => {
   }
   const index = els.indexOf($tarInEls);
   if ( index > -1 ) {
-    RYB_CUBE[index] = hexToRgb(value);
+    DEMO_RYB_CUBE[index] = hexToRgb(value);
     repaint();
   }
 });
