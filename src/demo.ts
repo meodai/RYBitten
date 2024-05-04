@@ -88,9 +88,13 @@ const getColorsHSL = (
   s = 1,
   l = 0.5,
   hFn = (h: number): number => h,
+  oldScool = false,
 ) =>
   new Array(amount).fill(0).map((_, i) => {
-    return formatCSS(hsl2farbrad([hFn(i / amount) * 360, s, l]));
+    const h = oldScool
+      ? hFn(1 - i / amount) * 360 + 120
+      : hFn(i / amount) * 360;
+    return formatCSS(hsl2farbrad([h, s, l]));
   });
 
 // generate an array containing each color gradient as
@@ -186,7 +190,7 @@ const repaint = () => {
   });
   */
 
-  const colors = getColorsHSL(36, 1, 0.5, tuneH);
+  const colors = getColorsHSL(36, 1, 0.5, tuneH, true);
 
   const colorsHSL = new Array(36).fill(0).map((_, index) => {
     const rybAngle = index * 10;
@@ -211,23 +215,25 @@ const repaint = () => {
 
   document.documentElement.style.setProperty(
     "--stops-3",
-    colorsToHardStopGradients(getColorsHSL(3)),
+    colorsToHardStopGradients(getColorsHSL(3, 1, 0.5, (h) => h, true)),
   );
   document.documentElement.style.setProperty(
     "--stops-6",
-    colorsToHardStopGradients(getColorsHSL(6).filter((_, i) => i % 2)),
+    colorsToHardStopGradients(
+      getColorsHSL(6, 1, 0.5, (h) => h, true).filter((_, i) => i % 2),
+    ),
   );
   document.documentElement.style.setProperty(
     "--stops-12",
-    colorsToHardStopGradients(getColorsHSL(12)),
+    colorsToHardStopGradients(getColorsHSL(12, 1, 0.5, (h) => h, true)),
   );
   document.documentElement.style.setProperty(
     "--stops-24",
-    colorsToHardStopGradients(getColorsHSL(24)),
+    colorsToHardStopGradients(getColorsHSL(24, 1, 0.5, (h) => h, true)),
   );
   document.documentElement.style.setProperty(
     "--stops-48",
-    colorsToHardStopGradients(getColorsHSL(48)),
+    colorsToHardStopGradients(getColorsHSL(48, 1, 0.5, (h) => h, true)),
   );
 
   document.documentElement.style.setProperty(
