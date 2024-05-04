@@ -1,7 +1,6 @@
 // vite.config.js
-import { resolve } from "path";
 import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
+import { viteSingleFile } from "vite-plugin-singlefile";
 
 export default defineConfig({
   // define the input file being src/index.html
@@ -9,4 +8,5 @@ export default defineConfig({
   build: {
     outDir: "../demo",
   },
+  plugins: [viteSingleFile()],
 });
