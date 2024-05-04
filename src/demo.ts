@@ -79,6 +79,67 @@ function hsl2farbrad(hsl: ColorCoords): ColorCoords {
   return ryb2rgb(rgbColor, DEMO_RYB_CUBE);
 }
 
+function tuneH(h: number): number {
+  return Math.pow(h, 2 / 3);
+}
+
+const getColorsHSL = (
+  amount = 12,
+  s = 1,
+  l = 0.5,
+  hFn = (h: number): number => h,
+) =>
+  new Array(amount).fill(0).map((_, i) => {
+    return formatCSS(hsl2farbrad([hFn(i / amount) * 360, s, l]));
+  });
+
+// generate an array containing each color gradient as
+// an array
+const colorStairs = (floors = 4, firstFloorSteps = 10): string[][] => [
+  getColorsHSL(firstFloorSteps, 1, 0.5),
+  ...new Array(floors - 1)
+    .fill("")
+    .map((_, i) =>
+      getColorsHSL(
+        firstFloorSteps * 2 * (i + 1),
+        1,
+        0.5 + ((i + 1) / floors) * 0.5,
+      ),
+    ),
+];
+
+const colorStairArrToGradient = (starisArr: string[][]): string => {
+  //const gradients = starisArr.reverse();
+  const gradients = starisArr;
+  return gradients.reduce(
+    (prevGrad, colors, i) =>
+      (prevGrad +=
+        (prevGrad ? "," : "") +
+        `linear-gradient(90deg, ${
+          !i
+            ? colors.join()
+            : colors
+                .map(
+                  (c, i) =>
+                    `${c} ${(i / colors.length) * 100}% ${((i + 1) / colors.length) * 100}%`,
+                )
+                .join()
+        })`),
+    "",
+  );
+};
+
+function generateColorSection(stairs: string[][], gradients: string): void {
+  document.documentElement.style.setProperty("--g", gradients);
+  document.documentElement.style.setProperty("--gs", `${stairs.length}`);
+  document.documentElement.style.setProperty(
+    "--gp",
+    stairs
+      .map((_, i) => `0% calc(${i * (100 / (stairs.length - 1))}% - 1px)`)
+      .join(),
+  );
+}
+
 // generate hard stop css gradient
 function generateHardStopGradient(colors: string[]): string {
   const gradient = colors
@@ -90,9 +151,13 @@ function generateHardStopGradient(colors: string[]): string {
   return `${gradient}` as string;
 }
 
-function tuneH(h: number): number {
-  return Math.pow(h, 2 / 3);
-}
+const colorsToHardStopGradients = (cls: string[]): string =>
+  cls
+    .map(
+      (c, i) =>
+        `${c} ${(i / cls.length) * 100}% ${((i + 1) / cls.length) * 100}%`,
+    )
+    .join();
 
 const $w = document.querySelector('[data-c="w"]') as HTMLInputElement;
 const $r = document.querySelector('[data-c="r"]') as HTMLInputElement;
@@ -112,33 +177,37 @@ $v.parentElement!.style.setProperty("--c", `var(--violet)`);
 $g.parentElement!.style.setProperty("--c", `var(--green)`);
 $black.parentElement!.style.setProperty("--c", `var(--black)`);
 
+const lightnessSteps = 9;
+
 const repaint = () => {
+  /*
   const colors = new Array(36).fill(0).map((_, index) => {
-    const rybAngle = index * 10;
-    const relI = rybAngle / 360;
-    return formatCSS(hsl2farbrad([tuneH(relI) * 360, 1, 0.5]));
+    return formatCSS(hsl2farbrad([tuneH(index/36) * 360, 1, 0.5]));
   });
+  */
+
+  const colors = getColorsHSL(36, 1, 0.5, tuneH);
 
   const colorsHSL = new Array(36).fill(0).map((_, index) => {
     const rybAngle = index * 10;
     return `hsl(${rybAngle}, 100%, 50%)`;
   });
 
-  const getColorsHSL = (amount = 12, s = 1, l = 0.5) =>
-    new Array(amount).fill("").map((_, i) => {
-      return formatCSS(hsl2farbrad([(1 - i / amount) * 360 + 120, s, l]));
-    });
-
-  const colorsToHardStopGradients = (cls: string[]): string =>
-    cls
-      .map(
-        (c, i) =>
-          `${c} ${(i / cls.length) * 100}% ${((i + 1) / cls.length) * 100}%`,
-      )
-      .join();
-
   $app.style.setProperty("--gradientHSL", generateHardStopGradient(colorsHSL));
   $app.style.setProperty("--gradient", generateHardStopGradient(colors));
+
+  for (let i = 0; i < lightnessSteps; i++) {
+    const colors = getColorsHSL(36, 0.4, 0.1 + (i / lightnessSteps) * 0.9);
+    document.documentElement.style.setProperty(
+      `--gradient-l${i}`,
+      colors.join(),
+    );
+  }
+
+  for (let i = 0; i < 36; i++) {
+    const color = formatCSS(hsl2farbrad([tuneH((i + 1) / 36) * 360, 1, 0.5]));
+    document.documentElement.style.setProperty(`--color-${i + 1}`, color);
+  }
 
   document.documentElement.style.setProperty(
     "--stops-3",
@@ -204,6 +273,11 @@ const repaint = () => {
   $black.value = rgbToHex(DEMO_RYB_CUBE[0]);
 
   console.log("current RYB_CUBE", DEMO_RYB_CUBE);
+
+  const stairs = colorStairs(4, 10);
+  const gradient = colorStairArrToGradient(stairs);
+
+  generateColorSection(stairs, gradient);
 };
 
 repaint();
