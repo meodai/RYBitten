@@ -13,8 +13,6 @@ const DEMO_RYB_CUBE: ColorCube = [
   [0.9921568627450981, 0.9647058823529412, 0.9294117647058824],
 ];
 
-const $app = document.getElementById("app") as HTMLElement;
-
 const formatCSS = (rgb: ColorCoords): string => {
   return `rgb(${Math.round(rgb[0] * 255)} ${Math.round(rgb[1] * 255)} ${Math.round(rgb[2] * 255)})`;
 };
@@ -144,17 +142,6 @@ function generateColorSection(stairs: string[][], gradients: string): void {
   );
 }
 
-// generate hard stop css gradient
-function generateHardStopGradient(colors: string[]): string {
-  const gradient = colors
-    .map((color, index) => {
-      return `${color} ${(index * 100) / (colors.length - 1)}%`;
-    })
-    .join(", ");
-
-  return `${gradient}` as string;
-}
-
 const colorsToHardStopGradients = (cls: string[]): string =>
   cls
     .map(
@@ -190,15 +177,23 @@ const repaint = () => {
   });
   */
 
-  const colors = getColorsHSL(36, 1, 0.5, tuneH, true);
+  const colors = getColorsHSL(36, 1, 0.5, (h) => h, false);
 
   const colorsHSL = new Array(36).fill(0).map((_, index) => {
     const rybAngle = index * 10;
     return `hsl(${rybAngle}, 100%, 50%)`;
   });
 
-  $app.style.setProperty("--gradientHSL", generateHardStopGradient(colorsHSL));
-  $app.style.setProperty("--gradient", generateHardStopGradient(colors));
+  document.documentElement.style.setProperty(
+    "--gradientHSLHard",
+    colorsToHardStopGradients(colorsHSL),
+  );
+  document.documentElement.style.setProperty("--gradientHSL", colorsHSL.join());
+  document.documentElement.style.setProperty(
+    "--gradientHard",
+    colorsToHardStopGradients(colors),
+  );
+  document.documentElement.style.setProperty("--gradient", colors.join());
 
   for (let i = 0; i < lightnessSteps; i++) {
     const colors = getColorsHSL(36, 0.4, 0.1 + (i / lightnessSteps) * 0.9);

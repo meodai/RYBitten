@@ -94,40 +94,6 @@ h2 {
   margin-bottom: 0.25ex;
 }
 
-#app {
-  position: relative;
-  height: 100dvh;
-
-  background: linear-gradient(90deg, var(--gradient)),
-    linear-gradient(90deg, var(--gradientHSL));
-  background-size:
-    100% 50%,
-    100% 50%;
-  background-repeat: no-repeat;
-  background-position:
-    0 0,
-    0 100%;
-}
-
-#app::after,
-#app::before {
-  content: "";
-  position: absolute;
-  display: block;
-  top: 50%;
-  aspect-ratio: 1;
-  width: 20vmin;
-  right: 5vmin;
-  background: conic-gradient(var(--gradient));
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-
-#app::before {
-  background: conic-gradient(var(--gradientHSL));
-  transform: translateY(-50%) scale(1.1);
-}
-
 /* itten color wheel */
 .c {
   position: relative;
@@ -203,7 +169,7 @@ h2 {
 
 /* color cube */
 .edges {
-  --w: calc(var(--size-illu) - 2em);
+  --w: calc(var(--size-illu) - 4em);
   --padding-top: 3%;
   --padding-left: 33%;
   --padding-right: 7%;
@@ -213,9 +179,7 @@ h2 {
   --padding-top-front: 30%;
   --padding-left-front: 6%;
 
-  margin-top: 2em;
-  margin-bottom: 2em;
-  margin-right: 2em;
+  margin: 2em;
 
   position: relative;
   width: var(--w);
@@ -455,4 +419,21 @@ h2 {
     0 0 0 0.05em var(--c),
     0 0 0 0.2em var(--white),
     inset 0 0 0 0.1em var(--white);
+}
+
+.graddeco {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 12vw;
+  background: linear-gradient(0deg, var(--gradient)),
+    linear-gradient(0deg, var(--gradientHard));
+  background-size:
+    calc(100% - 1.5rem) 100%,
+    50% 100%;
+  background-repeat: no-repeat;
+  background-position:
+    0 0,
+    100% 0;
 }
