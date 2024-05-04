@@ -15,7 +15,9 @@
   },
   "scripts": {
     "dev": "vite --open src/index.html",
-    "build": "npm run lint && tsc && vite build",
+    "build": "npm run build:lib && npm run build:html",
+    "build:html": "vite build --config vite.configdemo.js",
+    "build:lib": "npm run lint && tsc && vite build --outDir dist",
     "lint": "eslint && npx prettier --check ./src/",
     "prettier": "npx prettier --write ./src/",
     "preview": "vite preview"
