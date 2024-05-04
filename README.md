@@ -4,8 +4,7 @@
 [![npm version](https://badge.fury.io/js/rybitten.svg)](https://badge.fury.io/js/rybitten)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
-![RYBitten Logo](itten-wheel.png)
+<img src="itten-wheel.png" alt="RYBitten Logo" width="400" />
 
 RYBitten is a library for translating colors between RGB and a custom RYB color space. The library uses trilinear interpolation and is manually tuned to emulate Johannes Itten's chromatic circle. It is designed for developers, generative artists and designers who want to experiment with alternative color representations.
 
@@ -20,7 +19,7 @@ Install RYBitten with your favorite package manager:
 npm install rybitten
 ```
 
-### Include RYBitten in your project:
+### Include RYBitten in your project
   
 ```javascript
 // ES6 style
@@ -33,7 +32,6 @@ const { ryb2rgb } = require('rybitten');
 ## Quick Start 🚀
 
 **All RGB and RYB values are in the range `[0, 1]`.**
-
 
 ```javascript
 import { ryb2rgb, rgb2ryb } from 'rybitten';
