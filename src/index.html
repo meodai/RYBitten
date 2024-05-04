@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RYBitten Demo</title>
-    <link href="https://fonts.cdnfonts.com/css/apple-garamond" rel="stylesheet">
+    <link
+      href="https://fonts.cdnfonts.com/css/apple-garamond"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="intro block">
@@ -20,78 +23,82 @@
       <div class="intro-text block__text">
         <h1>RYBitten</h1>
         <p>
-          Implementation of pseudo RYB color conversions derived from Johannes Itten's color wheel.
+          Implementation of pseudo RYB color conversions derived from Johannes
+          Itten's color wheel.
         </p>
       </div>
     </div>
 
     <div class="ryb block">
       <form class="edges" data-edges>
-        <svg viewBox="0 0 100 100">
-          <g stroke-width=".5">
-            <rect x="33" y="3" width="60" height="68" fill="none" />
-            <rect x="6" y="30" width="60" height="68" fill="none" />
-      
+        <svg viewBox="0 0 100 100" class="cube">
+          <g>
             <line x1="33" y1="3" x2="6" y2="30" />
             <line x1="66" y1="98" x2="93" y2="71" />
+            <rect x="33" y="3" width="60" height="68" class="cube__back" />
+            <rect x="6" y="30" width="60" height="68" class="cube__front" />
+            <polyline points="33,30 33,71 93,71" class="cube__coverline" />
           </g>
-      
         </svg>
         <label class="g">
           <b>green</b>
-          <span><input data-c="g" type="color"></span>
+          <span><input data-c="g" type="color" /></span>
         </label>
         <label class="b">
           <b>blue</b>
-          <span><input data-c="b" type="color"></span>
+          <span><input data-c="b" type="color" /></span>
         </label>
         <label class="black">
           <b>black</b>
-          <span><input data-c="0" type="color"></span>
+          <span><input data-c="0" type="color" /></span>
         </label>
         <label class="v">
           <b>violet</b>
-          <span><input data-c="v" type="color"></span>
+          <span><input data-c="v" type="color" /></span>
         </label>
         <label class="y">
           <b>yellow</b>
-          <span><input data-c="y" type="color"></span>
+          <span><input data-c="y" type="color" /></span>
         </label>
         <label class="w">
           <b>white</b>
-          <span><input data-c="w" type="color"></span>
+          <span><input data-c="w" type="color" /></span>
         </label>
         <label class="o">
           <b>orange</b>
-          <span><input data-c="o" type="color"></span>
+          <span><input data-c="o" type="color" /></span>
         </label>
         <label class="r">
           <b>red</b>
-          <span><input data-c="r" type="color"></span>
+          <span><input data-c="r" type="color" /></span>
         </label>
       </form>
       <div class="block__text">
         <h2>RYB Colorspace</h2>
         <p>
-          Trilinear interpolation is the method used by this library to translate between RGB and RYB color spaces, creating an
-          imaginative new color space that aligns with RGB.
+          Trilinear interpolation is the method used by this library to
+          translate between RGB and RYB color spaces, creating an imaginative
+          new color space that aligns with RGB.
         </p>
         <p>
-          The RGB/RYB cube has been manually tuned to emulate Johannes Itten's <a href="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/#jp-carousel-809511">chromatic circle</a>. 
-          By manipulating the cube's edges, you can see how the colors change and create a colorspace
-          that fits your artistic needs. 
+          The RGB/RYB cube has been manually tuned to emulate Johannes Itten's
+          <a
+            href="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/#jp-carousel-809511"
+            >chromatic circle</a
+          >. By manipulating the cube's edges, you can see how the colors change
+          and create a colorspace that fits your artistic needs.
         </p>
       </div>
     </div>
-
 
     <div id="app">
       <h1>RYBitten HSL</h1>
       <h2>RGB HSL</h2>
     </div>
 
-
-    <blockquote cite="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/">
+    <blockquote
+      cite="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/"
+    >
       <p>Play becomes joy, joy becomes work, work becomes play.</p>
       <footer>—Johannes Itten, <cite>Bauhaus</cite></footer>
     </blockquote>

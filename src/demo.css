@@ -5,7 +5,7 @@
   background: var(--white);
   color: var(--black);
 
-  font-size: calc(.65em + 1vmin);
+  font-size: calc(0.65em + 1vmin);
 
   --size-illu: calc(10 * 1.6em);
 }
@@ -15,8 +15,23 @@ html,
 :root {
   margin: 0;
   padding: 0;
-  font-family: 'Apple Garamond Light', sans-serif;
+  font-family: "Apple Garamond Light", sans-serif;
   -webkit-font-smoothing: subpixel-antialiased;
+}
+
+::selection {
+  background: var(--yellow);
+  color: color-mix(in lab, var(--black) 50%, var(--yellow));
+}
+
+a:link {
+  color: var(--blue);
+}
+a:hover {
+  text-decoration: none;
+}
+a:visited {
+  color: var(--violet);
 }
 
 .block {
@@ -26,7 +41,7 @@ html,
 }
 
 .block__text {
-  font-size: .8em;
+  font-size: 0.8em;
   line-height: 1.4;
 
   h1 + p,
@@ -45,13 +60,12 @@ html,
 
   align-items: center;
   p {
-
     max-width: 35ch;
   }
 }
 
 .intro-text {
-  font-size: .8em;
+  font-size: 0.8em;
   line-height: 1.4;
   h1 + p {
     margin-top: 0;
@@ -59,8 +73,10 @@ html,
   }
 }
 
-h1, h2, h3 {
-  font-family: 'Apple Garamond Light', sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Apple Garamond Light", sans-serif;
   font-weight: 100;
   line-height: 1;
 }
@@ -68,28 +84,28 @@ h1, h2, h3 {
 h1 {
   font-size: 5rem;
   margin: 0;
-  margin-bottom: .25ex;
+  margin-bottom: 0.25ex;
 }
 
 h2 {
   font-size: 2.5rem;
-  margin: .5em 0 0;
-  margin-bottom: .25ex;
+  margin: 0.5em 0 0;
+  margin-bottom: 0.25ex;
 }
 
 #app {
   position: relative;
   height: 100dvh;
-  
+
   background: linear-gradient(90deg, var(--gradient)),
-  linear-gradient(90deg, var(--gradientHSL));
+    linear-gradient(90deg, var(--gradientHSL));
   background-size:
-  100% 50%,
-  100% 50%;
+    100% 50%,
+    100% 50%;
   background-repeat: no-repeat;
   background-position:
-  0 0,
-  0 100%;
+    0 0,
+    0 100%;
 }
 
 #app::after,
@@ -117,9 +133,12 @@ h2 {
   width: var(--size-illu);
   flex: 0 0 var(--size-illu);
   aspect-ratio: 1;
-  background: conic-gradient(from calc(360deg / 48 / -2) at 50% 50%, var(--stops-48));
+  background: conic-gradient(
+    from calc(360deg / 48 / -2) at 50% 50%,
+    var(--stops-48)
+  );
   border-radius: 50%;
-  box-shadow: 0 0 0 .2em var(--white);
+  box-shadow: 0 0 0 0.2em var(--white);
 }
 
 .c .c {
@@ -127,11 +146,17 @@ h2 {
   position: absolute;
   inset: 1.5em;
   width: auto;
-  background: conic-gradient(from calc(360deg / 24 / -2) at 50% 50%, var(--stops-24));
+  background: conic-gradient(
+    from calc(360deg / 24 / -2) at 50% 50%,
+    var(--stops-24)
+  );
 }
 
 .c .c .c {
-  background: conic-gradient(from calc(360deg / 12 / -2) at 50% 50%, var(--stops-12));
+  background: conic-gradient(
+    from calc(360deg / 12 / -2) at 50% 50%,
+    var(--stops-12)
+  );
 }
 
 .c .c .c::before {
@@ -152,12 +177,16 @@ h2 {
 }
 
 .c .c .c .c .c {
-  background: conic-gradient(from calc(360deg / 3 / -2) at 50% 50%, var(--stops-3));
+  background: conic-gradient(
+    from calc(360deg / 3 / -2) at 50% 50%,
+    var(--stops-3)
+  );
   -webkit-clip-path: polygon(50% 0%, 6% 75%, 94% 75%);
   clip-path: polygon(50% 0%, 6% 75%, 94% 75%);
   inset: 0;
 }
 
+/* color cube */
 .edges {
   --w: calc(var(--size-illu) - 2em);
   --padding-top: 3%;
@@ -172,7 +201,7 @@ h2 {
   margin-top: 2em;
   margin-bottom: 2em;
   margin-right: 2em;
-  
+
   position: relative;
   width: var(--w);
   height: var(--w);
@@ -183,39 +212,49 @@ h2 {
     padding: 0;
     border: 0;
     opacity: 0;
+    cursor: pointer;
   }
 
   span {
     display: block;
     background: var(--c);
-    width: .5rem;
-    height: .5rem;
+    background: var(--white);
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
-    box-shadow: 0 0 0 .05em var(--black),
-                0 0 0 .15em var(--white);  
+    box-shadow:
+      0 0 0 0.05em var(--black),
+      0 0 0 0.1em var(--white),
+      0 0 0 0.2em var(--c),
+      0 0 0 0.3em var(--white);
+    transition:
+      300ms box-shadow cubic-bezier(0.3, 0.7, 0, 1) 150ms,
+      200ms background linear;
   }
-}
-
-.edges svg {
-  display: block;
-}
-
-.edges svg g {
-  stroke: currentColor;
 }
 
 .edges label {
   position: absolute;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.edges label:hover span {
+  background: var(--c);
+  box-shadow:
+    0 0 0 0.1em var(--black),
+    0 0 0 0.1em var(--white),
+    0 0 0 0.2em var(--white),
+    0 0 0 0.3em var(--c);
 }
 
 .edges b {
   position: absolute;
   left: 100%;
   top: 50%;
-  transform: translate(.2rem, .2rem);
+  transform: translate(0.2rem, 0.2rem);
   line-height: 1;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .edges .g {
@@ -256,4 +295,24 @@ h2 {
 .edges .o {
   left: calc(var(--padding-left-front) + var(--width));
   top: var(--padding-top-front);
+}
+
+.cube {
+  display: block;
+}
+
+.cube g {
+  stroke: currentColor;
+  stroke-width: 0.5;
+  fill: none;
+}
+
+.cube__front {
+  fill: var(--white);
+}
+
+.cube__coverline {
+  fill: none;
+  stroke: var(--black);
+  stroke-dasharray: 1.5 1.5;
 }
