@@ -426,7 +426,7 @@ h2 {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 12vw;
+  width: 5vw;
   background: linear-gradient(0deg, var(--gradient)),
     linear-gradient(0deg, var(--gradientHard));
   background-size:

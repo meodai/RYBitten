@@ -1,5 +1,5 @@
 import "./demo.css";
-import { ryb2rgb, RYB_CUBE, ColorCoords, ColorCube } from "./main";
+import { RYB_CUBE, ColorCoords, ColorCube, rybHsl2rgb } from "./main";
 
 console.log(RYB_CUBE);
 const DEMO_RYB_CUBE: ColorCube = [
@@ -35,48 +35,6 @@ const rgbToHex = (rgb: ColorCoords): string => {
     .join("")}`;
 };
 
-function wrapAngle(angle: number): number {
-  // Wrap angle between 0 and 360
-  return ((angle % 360) + 360) % 360; // this avoids negative results
-}
-
-function hslToRgb(hsl: ColorCoords): ColorCoords {
-  let [h, s, l] = hsl;
-  h = wrapAngle(h || 0);
-  let m1 = l + s * (l < 0.5 ? l : 1 - l);
-  let m2 = m1 - (m1 - l) * 2 * Math.abs(((h / 60) % 2) - 1);
-  let res;
-  switch (Math.floor(h / 60)) {
-    case 0:
-      res = [m1, m2, 2 * l - m1];
-      break;
-    case 1:
-      res = [m2, m1, 2 * l - m1];
-      break;
-    case 2:
-      res = [2 * l - m1, m1, m2];
-      break;
-    case 3:
-      res = [2 * l - m1, m2, m1];
-      break;
-    case 4:
-      res = [m2, 2 * l - m1, m1];
-      break;
-    case 5:
-      res = [m1, 2 * l - m1, m2];
-      break;
-    default:
-      res = [2 * l - m1, 2 * l - m1, 2 * l - m1];
-  }
-  return res as ColorCoords;
-}
-
-function hsl2farbrad(hsl: ColorCoords): ColorCoords {
-  const [h, s, l] = hsl;
-  const rgbColor = hslToRgb([wrapAngle(h), s, l]);
-  return ryb2rgb(rgbColor, DEMO_RYB_CUBE);
-}
-
 function tuneH(h: number): number {
   return Math.pow(h, 2 / 3);
 }
@@ -92,7 +50,7 @@ const getColorsHSL = (
     const h = oldScool
       ? hFn(1 - i / amount) * 360 + 120
       : hFn(i / amount) * 360;
-    return formatCSS(hsl2farbrad([h, s, l]));
+    return formatCSS(rybHsl2rgb([h, s, l], DEMO_RYB_CUBE));
   });
 
 // generate an array containing each color gradient as
@@ -171,12 +129,6 @@ $black.parentElement!.style.setProperty("--c", `var(--black)`);
 const lightnessSteps = 9;
 
 const repaint = () => {
-  /*
-  const colors = new Array(36).fill(0).map((_, index) => {
-    return formatCSS(hsl2farbrad([tuneH(index/36) * 360, 1, 0.5]));
-  });
-  */
-
   const colors = getColorsHSL(36, 1, 0.5, (h) => h, false);
 
   const colorsHSL = new Array(36).fill(0).map((_, index) => {
@@ -204,7 +156,9 @@ const repaint = () => {
   }
 
   for (let i = 0; i < 36; i++) {
-    const color = formatCSS(hsl2farbrad([tuneH((i + 1) / 36) * 360, 1, 0.5]));
+    const color = formatCSS(
+      rybHsl2rgb([tuneH((i + 1) / 36) * 360, 1, 0.5], DEMO_RYB_CUBE),
+    );
     document.documentElement.style.setProperty(`--color-${i + 1}`, color);
   }
 
