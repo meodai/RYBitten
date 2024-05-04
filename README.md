@@ -1,6 +1,5 @@
 # RYBitten 👄
 
-// add logo
 [![npm version](https://badge.fury.io/js/rybitten.svg)](https://badge.fury.io/js/rybitten)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
