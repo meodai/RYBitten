@@ -8,10 +8,9 @@
   "main": "./dist/rybitten.umd.cjs",
   "module": "./dist/rybitten.js",
   "exports": {
-    ".": {
-      "import": "./dist/rybitten.js",
-      "require": "./dist/rybitten.umd.cjs"
-    }
+    "import": "./dist/rybitten.js",
+    "require": "./dist/rybitten.umd.cjs",
+    "types": "./dist/main.d.ts"
   },
   "scripts": {
     "dev": "vite --open src/index.html",
@@ -29,6 +28,7 @@
     "eslint": "^8.57.0",
     "globals": "^15.1.0",
     "prettier": "^3.2.5",
+    "rampensau": "^0.14.0",
     "typescript": "^5.2.2",
     "typescript-eslint": "^7.8.0",
     "vite": "^5.2.0",

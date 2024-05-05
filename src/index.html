@@ -76,17 +76,20 @@
       <div class="block__text">
         <h2>RYB Colorspace</h2>
         <p>
-          Trilinear interpolation is the method used by this library to
-          translate between RGB and RYB color spaces, creating an imaginative
-          new color space that aligns with RGB.
+          This library employs trilinear interpolation to convert between RGB
+          and RYB color spaces, allowing for a flexible and imaginative approach
+          to color representation that remains compatible with the RGB model.
         </p>
         <p>
-          The RGB/RYB cube has been manually tuned to emulate Johannes Itten's
+          The RGB/RYB cube is meticulously calibrated to resemble Johannes
+          Itten's
           <a
             href="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/#jp-carousel-809511"
             >chromatic circle</a
-          >. By manipulating the cube's edges, you can see how the colors change
-          and create a colorspace that fits your artistic needs.
+          >. By adjusting the edges of the cube, you can observe how color
+          shifts and create custom color spaces tailored to your artistic
+          vision. This flexibility offers a unique perspective for designers,
+          artists, and developers seeking to explore new dimensions of color.
         </p>
       </div>
     </div>
@@ -317,13 +320,36 @@
       <div class="block__text">
         <h2>Itten HSL</h2>
         <p>
-          The HSL wheel is created by calculating the RGB values first and then
-          translate them to the custom RYB color space.
+          The Itten HSL wheel is derived by first calculating RGB values, which
+          are then converted to a custom RYB color space. This dual-step process
+          results in a unique color wheel that reflects the principles of
+          Johannes Itten's chromatic circle.
         </p>
         <p>
-          Using HSL makes it easy to use the library with existing color
-          generation libraries.
+          Utilizing the HSL model allows for seamless integration with existing
+          color generation libraries, providing an accessible pathway for
+          artists, designers, and developers to experiment with vibrant,
+          customized palettes. This approach ensures compatibility with a wide
+          range of tools while maintaining the aesthetic characteristics of the
+          RYB color space.
         </p>
+      </div>
+    </div>
+
+    <div class="ramps block block--vertical">
+      <div class="block__text">
+        <h2>RYB-HSL Ramps</h2>
+        <p>
+          Visualizing the RYB-HSL color space as a collection of swatches on a
+          palette reveals the inherent harmony of these hues. They evoke the
+          essence of an artist's color palette, reminiscent of classic
+          illustrations or vintage prints. This approach underscores the organic
+          quality of the RYB-HSL color space, suggesting a more natural and
+          balanced progression of tones.
+        </p>
+      </div>
+      <div class="ramps__container">
+        <div data-ramps class="ramp-list"></div>
       </div>
     </div>
 

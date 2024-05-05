@@ -1,5 +1,6 @@
 import "./demo.css";
-import { RYB_CUBE, ColorCoords, ColorCube, rybHsl2rgb } from "./main";
+import { RYB_CUBE, ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb } from "./main";
+//import { generateColorRamp } from "rampensau";
 
 console.log(RYB_CUBE);
 const DEMO_RYB_CUBE: ColorCube = [
@@ -52,6 +53,104 @@ const getColorsHSL = (
       : hFn(i / amount) * 360;
     return formatCSS(rybHsl2rgb([h, s, l], DEMO_RYB_CUBE));
   });
+
+const romanNumerals = [
+  "Zero",
+  "I",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VIII",
+  "IX",
+  "X",
+  "XI",
+  "XII",
+  "XIII",
+  "XIV",
+  "XV",
+  "XVI",
+  "XVII",
+  "XVIII",
+  "XIX",
+  "XX",
+  "XXI",
+  "XXII",
+  "XXIII",
+  "XXIV",
+  "XXV",
+  "XXVI",
+  "XXVII",
+  "XXVIII",
+  "XXIX",
+  "XXX",
+];
+
+const createRamps = async (amount = 18, stepsPerRamp = 9) => {
+  const ramps = new Array(amount).fill(0).map((_, i) => {
+    const h = i / amount;
+    const steps = new Array(stepsPerRamp).fill(0).map((_, j) => {
+      const l = (j + 1) / (stepsPerRamp + 1);
+      return rgbToHex(rybHsl2rgb([h * 360, 1, 1 - l], DEMO_RYB_CUBE));
+    });
+    return steps;
+  });
+
+  // add grey ramp
+  ramps.push(
+    new Array(stepsPerRamp).fill(0).map((_, j) => {
+      const l = (j + 1) / (stepsPerRamp + 1);
+      return rgbToHex(ryb2rgb([1 - l, 1 - l, 1 - l]));
+    }),
+  );
+
+  const allHexes = ramps.flat().map((hex) => {
+    // remove the first char (#)
+    return hex.slice(1);
+  });
+
+  const names = await fetch(
+    `https://api.color.pizza/v1/?values=${allHexes.join()}&list=bestOf&noduplicates=true`,
+    {
+      method: "GET",
+    },
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data.colors;
+    });
+
+  const namesForHexes = allHexes.reduce(
+    (acc: { [key: string]: string }, hex: string) => {
+      const prefixedHex = `#${hex}`;
+      const color = names.find(
+        (color: any) => color.requestedHex === prefixedHex,
+      );
+      acc[prefixedHex] = color?.name || "unknown";
+      return acc;
+    },
+    {},
+  );
+
+  const $wrapper = document.querySelector("[data-ramps]") as HTMLElement;
+  $wrapper.innerHTML = ramps
+    .map((ramp, i) => {
+      return `<div class="ramp">
+      <h2>${romanNumerals[i + 1]}</h2>
+      ${ramp
+        .map((hex) => {
+          return `<div class="ramp__step" style="--c: ${hex}; --rnd: ${-1 + Math.random() * 2}; --rnd2: ${Math.random()};">
+            <span>${namesForHexes[hex]}</span>
+            <span>${hex}</span>
+          </div>`;
+        })
+        .join("")}
+    </div>`;
+    })
+    .join("");
+};
 
 // generate an array containing each color gradient as
 // an array
@@ -233,6 +332,8 @@ const repaint = () => {
   const gradient = colorStairArrToGradient(stairs);
 
   generateColorSection(stairs, gradient);
+
+  console.log(createRamps());
 };
 
 repaint();

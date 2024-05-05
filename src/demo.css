@@ -40,6 +40,13 @@ a:visited {
   gap: 4rem;
   padding: 6vmin 6rem;
 }
+.block--vertical {
+  flex-direction: column;
+  gap: 0rem;
+  .block__text p {
+    max-width: 70ch;
+  }
+}
 
 .block__text {
   font-size: 0.8em;
@@ -436,4 +443,53 @@ h2 {
   background-position:
     0 0,
     100% 0;
+}
+
+.ramp-list {
+  display: flex;
+  gap: 10%;
+  flex-wrap: wrap;
+}
+
+.ramp {
+  flex: 0 0 10em;
+}
+
+.ramp__step {
+  position: relative;
+  background: var(--c);
+  box-shadow: 0 0 0 0.1em var(--white);
+  transform: rotate(calc(var(--rnd) * 5deg))
+    translateX(calc(var(--rnd) * 0.5em));
+
+  height: calc(0.75rem + var(--rnd2) * 1.5rem);
+  overflow: hidden;
+  transition: 400ms height cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+
+  span {
+    padding: 4rem 0.5rem 0;
+    display: block;
+  }
+
+  span + span {
+    font-size: 0.6em;
+    padding: 0 0.5rem 1rem;
+  }
+}
+
+.ramp__step:nth-child(8),
+.ramp__step:nth-child(9),
+.ramp__step:nth-child(10) {
+  color: var(--white);
+}
+
+.ramp__step:hover {
+  z-index: 1;
+  height: 6.5rem;
+}
+
+.ramp-list h2 {
+  text-align: center;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
 }
