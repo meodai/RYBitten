@@ -1,18 +1,14 @@
 import "./demo.css";
-import { RYB_CUBE, ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb } from "./main";
+import {
+  RYB_ITTEN_ALT,
+  ColorCoords,
+  ColorCube,
+  rybHsl2rgb,
+  ryb2rgb,
+} from "./main";
 //import { generateColorRamp } from "rampensau";
 
-console.log(RYB_CUBE);
-const DEMO_RYB_CUBE: ColorCube = [
-  [0.11372549019607843, 0.10980392156862745, 0.10980392156862745],
-  [0.9686274509803922, 0.17647058823529413, 0.1607843137254902],
-  [0.9921568627450981, 0.796078431372549, 0],
-  [0.9803921568627451, 0.4, 0.050980392156862744],
-  [0.06666666666666667, 0.3803921568627451, 0.6666666666666666],
-  [0.396078431372549, 0.2235294117647059, 0.5411764705882353],
-  [0.27450980392156865, 0.5450980392156862, 0.28627450980392155],
-  [0.9921568627450981, 0.9647058823529412, 0.9294117647058824],
-];
+const DEMO_RYB_CUBE: ColorCube = RYB_ITTEN_ALT;
 
 const formatCSS = (rgb: ColorCoords): string => {
   return `rgb(${Math.round(rgb[0] * 255)} ${Math.round(rgb[1] * 255)} ${Math.round(rgb[2] * 255)})`;
@@ -89,8 +85,8 @@ const romanNumerals = [
 ];
 
 const createRamps = async (amount = 18, stepsPerRamp = 9) => {
-  const ramps = new Array(amount).fill(0).map((_, i) => {
-    const h = i / amount;
+  const ramps = new Array(amount - 1).fill(0).map((_, i) => {
+    const h = i / (amount - 1);
     const steps = new Array(stepsPerRamp).fill(0).map((_, j) => {
       const l = (j + 1) / (stepsPerRamp + 1);
       return rgbToHex(rybHsl2rgb([h * 360, 1, 1 - l], DEMO_RYB_CUBE));
@@ -227,6 +223,8 @@ $black.parentElement!.style.setProperty("--c", `var(--black)`);
 
 const lightnessSteps = 9;
 
+let timer: number | null = null;
+
 const repaint = () => {
   const colors = getColorsHSL(36, 1, 0.5, (h) => h, false);
 
@@ -332,8 +330,10 @@ const repaint = () => {
   const gradient = colorStairArrToGradient(stairs);
 
   generateColorSection(stairs, gradient);
-
-  console.log(createRamps());
+  clearTimeout(timer!);
+  timer = setTimeout(() => {
+    createRamps();
+  }, 1000);
 };
 
 repaint();

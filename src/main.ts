@@ -1,5 +1,8 @@
-export type ColorCoords = [number, number, number];
-export type ColorCube = ColorCoords[] & { length: 8 };
+import { RYB_ITTEN } from "./cubes";
+export { RYB_ITTEN, RYB_ITTEN_ALT, RYB_BEZOLD } from "./cubes";
+
+import { ColorCoords, ColorCube } from "./cubes";
+export type { ColorCoords, ColorCube } from "./cubes";
 
 type CubeCoords = [
   number,
@@ -64,20 +67,9 @@ const trilerp: Trilerp = (
   );
 };
 
-export const RYB_CUBE: ColorCube = [
-  [29 / 255, 28 / 255, 28 / 255], // black
-  [0.8901960784313725, 0.1411764705882353, 0.12941176470588237], // red
-  [0.9529411764705882, 0.9019607843137255, 0], // yellow
-  [0.9411764705882353, 0.5568627450980392, 0.10980392156862745], // orange
-  [0.08627450980392157, 0.6, 0.8549019607843137], // blue
-  [0.47058823529411764, 0.13333333333333333, 0.6666666666666666], // violet
-  [0, 0.5568627450980392, 0.3568627450980392], // green
-  [253 / 255, 246 / 255, 237 / 255], // white
-];
-
 export function ryb2rgb(
   coords: ColorCoords,
-  cube: ColorCube = RYB_CUBE,
+  cube: ColorCube = RYB_ITTEN,
 ): ColorCoords {
   const r = easingSmoothstep(coords[0]);
   const y = easingSmoothstep(coords[1]);
