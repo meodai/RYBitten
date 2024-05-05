@@ -33,7 +33,7 @@ const { ryb2rgb } = require('rybitten');
 **All RGB and RYB values are in the range `[0, 1]`.**
 
 ```javascript
-import { ryb2rgb, rgb2ryb } from 'rybitten';
+import { ryb2rgb } from 'rybitten';
 
 const rybColor = [1, 0, 0.5]; // RYB coordinates
 const rgbColor = ryb2rgb(rybColor);
