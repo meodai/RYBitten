@@ -4,22 +4,6 @@ import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb, cubes } from "./main";
 
 let DEMO_RYB_CUBE: ColorCube = cubes.get("itten-normalized")!.cube;
 
-cubes.set("RGB", {
-  title: "RGB",
-  year: 1980,
-  reference: "rgb.jpg",
-  cube: [
-    [0, 0, 0],
-    [1, 0, 0],
-    [1, 1, 0],
-    [1, 0.5, 0],
-    [0, 0, 1],
-    [1, 0, 1],
-    [0, 1, 0],
-    [1, 1, 1],
-  ],
-});
-
 const logCube = (cube: ColorCube) => {
   console.log("Customized RYB_CUBE");
   console.log(cube.map((row) => row.map((it) => it * 255 + "/255")));
