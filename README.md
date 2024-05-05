@@ -92,6 +92,49 @@ const RYB_CUBE = [
 ];
 ```
 
+## Custom Color Gamuts 🎨
+
+The library ships with a curated list of color gamuts that you can use to experiment with different color spaces. The default gamut is based on the work of Johannes Itten. But you can access other gamuts by importing the `CUBES` map.
+
+Each gamut is an object with the following properties:
+
+- `title`: The name of the color space
+- `reference`: A reference image used to pick the edges of the custom color gamut
+- `year`: The year the color space was introduced
+- `cube`: The color cube used for interpolation
+
+```javascript
+import { cubes } from 'rybitten';
+
+cubes.get('munsell');
+
+/**
+ * {
+ *  title: 'Munsell',
+ *  reference: 'munsell.jpg',
+ *  year: 1905,
+ *  cube: [
+ *  ...cube data
+ *  ]
+ * }
+ */
+```
+
+### Available Color Gamuts
+
+| Key | Title | Year 
+| --- | --- | --- |
+| itten | Johannes Itten: Chromatic Circle | 1961 |
+| itten-normalized | Johannes Itten: Chromatic Circle (Normalized) | 1961 |
+| bezold | Wilhelm von Bezold: Farbentafel | 1874 |
+| boutet | Claude Boutet: Twelve-color color circles | 1708 |
+| hett | J. A. H. Hett: RGV Color Wheel | 1908 |
+| schiffermueller | Ignaz Schiffermüller: Versuch eines Farbensystems | 1772 |
+| harris | Harris: The Natural System of Colours | 1766 |
+| goethe | Goethe: Farbenkreis | 1809 |
+| munsell | Munsell Color System | 1905 |
+| hayer | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 |
+
 ## License 📄
 
 RYBitten is distributed under the [MIT License](./LICENSE).

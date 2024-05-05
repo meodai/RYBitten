@@ -32,7 +32,7 @@ a:hover {
   text-decoration: none;
 }
 a:visited {
-  color: var(--violet);
+  color: var(--pink);
 }
 
 .block {

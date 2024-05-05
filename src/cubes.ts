@@ -21,7 +21,7 @@ export const RYB_ITTEN: ColorCube = [
   // blue
   [22 / 255, 153 / 255, 218 / 255],
 
-  // violet
+  // pink / but often violet in old color wheels
   [120 / 255, 34 / 255, 170 / 255],
 
   // green

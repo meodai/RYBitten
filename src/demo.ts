@@ -4,6 +4,22 @@ import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb, cubes } from "./main";
 
 let DEMO_RYB_CUBE: ColorCube = cubes.get("itten-normalized")!.cube;
 
+cubes.set("RGB", {
+  title: "RGB",
+  year: 1980,
+  reference: "rgb.jpg",
+  cube: [
+    [0, 0, 0],
+    [1, 0, 0],
+    [1, 1, 0],
+    [1, 0.5, 0],
+    [0, 0, 1],
+    [1, 0, 1],
+    [0, 1, 0],
+    [1, 1, 1],
+  ],
+});
+
 const logCube = (cube: ColorCube) => {
   console.log("Customized RYB_CUBE");
   console.log(cube.map((row) => row.map((it) => it * 255 + "/255")));
@@ -216,7 +232,7 @@ $r.parentElement!.style.setProperty("--c", `var(--red)`);
 $y.parentElement!.style.setProperty("--c", `var(--yellow)`);
 $o.parentElement!.style.setProperty("--c", `var(--orange)`);
 $b.parentElement!.style.setProperty("--c", `var(--blue)`);
-$v.parentElement!.style.setProperty("--c", `var(--violet)`);
+$v.parentElement!.style.setProperty("--c", `var(--pink)`);
 $g.parentElement!.style.setProperty("--c", `var(--green)`);
 $black.parentElement!.style.setProperty("--c", `var(--black)`);
 
@@ -306,7 +322,7 @@ const repaint = () => {
     formatCSS(DEMO_RYB_CUBE[4]),
   );
   document.documentElement.style.setProperty(
-    "--violet",
+    "--pink",
     formatCSS(DEMO_RYB_CUBE[5]),
   );
   document.documentElement.style.setProperty(
