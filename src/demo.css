@@ -498,4 +498,8 @@ h2 {
   position: fixed;
   bottom: 2rem;
   right: 5rem;
+  background: var(--white);
+  color: var(--black);
+  font: inherit;
+  padding: 0.5em 1em;
 }
