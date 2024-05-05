@@ -493,3 +493,9 @@ h2 {
   margin-bottom: 0.5em;
   margin-top: 1em;
 }
+
+.select {
+  position: fixed;
+  bottom: 2rem;
+  right: 5rem;
+}

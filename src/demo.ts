@@ -1,14 +1,13 @@
 import "./demo.css";
-import {
-  RYB_ITTEN_ALT,
-  ColorCoords,
-  ColorCube,
-  rybHsl2rgb,
-  ryb2rgb,
-} from "./main";
+import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb, cubes } from "./main";
 //import { generateColorRamp } from "rampensau";
 
-const DEMO_RYB_CUBE: ColorCube = RYB_ITTEN_ALT;
+let DEMO_RYB_CUBE: ColorCube = cubes.get("itten-normalized")!.cube;
+
+const logCube = (cube: ColorCube) => {
+  console.log("Customized RYB_CUBE");
+  console.log(cube.map((row) => row.map((it) => it * 255 + "/255")));
+};
 
 const formatCSS = (rgb: ColorCoords): string => {
   return `rgb(${Math.round(rgb[0] * 255)} ${Math.round(rgb[1] * 255)} ${Math.round(rgb[2] * 255)})`;
@@ -324,7 +323,7 @@ const repaint = () => {
   $g.value = rgbToHex(DEMO_RYB_CUBE[6]);
   $black.value = rgbToHex(DEMO_RYB_CUBE[0]);
 
-  console.log("current RYB_CUBE", DEMO_RYB_CUBE);
+  logCube(DEMO_RYB_CUBE);
 
   const stairs = colorStairs(4, 10);
   const gradient = colorStairArrToGradient(stairs);
@@ -353,6 +352,32 @@ document.querySelector("[data-edges]")?.addEventListener("input", (e) => {
   const index = els.indexOf($tarInEls);
   if (index > -1) {
     DEMO_RYB_CUBE[index] = hexToRgb(value);
+    repaint();
+  }
+});
+
+const $select = document.createElement("select");
+// create an option for each of the cubes
+for (const [key, obj] of cubes) {
+  const $option = document.createElement("option");
+  $option.value = key;
+  $option.textContent = obj.title;
+  $select.appendChild($option);
+}
+
+$select.classList.add("select");
+
+document.querySelector("body")!.appendChild($select);
+
+$select.addEventListener("change", (e) => {
+  const $target = e.target;
+  if (!($target instanceof HTMLSelectElement)) {
+    return;
+  }
+  const value = $target.value;
+  const cube = cubes.get(value);
+  if (cube) {
+    DEMO_RYB_CUBE = cube.cube;
     repaint();
   }
 });

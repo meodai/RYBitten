@@ -1,8 +1,8 @@
 import { RYB_ITTEN } from "./cubes";
-export { RYB_ITTEN, RYB_ITTEN_ALT, RYB_BEZOLD } from "./cubes";
+export { cubes } from "./cubes";
 
 import { ColorCoords, ColorCube } from "./cubes";
-export type { ColorCoords, ColorCube } from "./cubes";
+export type { ColorCoords, ColorCube, CubesMap } from "./cubes";
 
 type CubeCoords = [
   number,
