@@ -52,6 +52,11 @@ a:visited {
   font-size: 0.8em;
   line-height: 1.4;
 
+  h1,
+  h2 {
+    margin-left: -0.1ex;
+  }
+
   h1 + p,
   h2 + p {
     margin-top: 1.5em;
@@ -59,7 +64,6 @@ a:visited {
 
   p {
     max-width: 50ch;
-    padding-left: 1.25ex;
   }
 }
 
