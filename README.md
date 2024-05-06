@@ -39,28 +39,29 @@ const rybColor = [1, 0, 0.5]; // RYB coordinates
 const rgbColor = ryb2rgb(rybColor);
 
 console.log(rgbColor); // Outputs the converted RGB coordinates
-
 ```
 
 ## Functions 📖
 
-### ryb2rgb(coords: ColorCoords, cube?: ColorCube = RYB_CUBE): ColorCoords
+### ryb2rgb(coords: ColorCoords, cube?: ColorCube = RYB_CUBE, easingFn? = smoothstep): ColorCoords
 
 - `coords`: `[0…1, 0…1, 0…1]` RYB coordinates
-- `cube` (optional): [See the note on the color cube below](#interpolation-color-cube)
+- `cube`: (*optional*): [See the note on the color cube below](#cube)
+- `easingFn`: (*optional*) A custom easing function for the interpolation, defaults to `smoothstep`
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
 
 Converts RYB coordinates to RGB using trilinear interpolation. The default color cube is manually tuned to represent the RYB color space derived from Johannes Itten's color wheel. But you can pass your own cube if you want to experiment with different color spaces. (When interacting with the RGB cube on the demo page, the custom `RYB_CUBE` is visible in your console.)
 
-### rybHsl2rgb(hsl: ColorCoords, cube: ColorCube = RYB_CUBE): ColorCoords
+### rybHsl2rgb(hsl: ColorCoords, cube?: ColorCube = RYB_CUBE, easingFn? = smoothstep): ColorCoords
 
 - `hsl`: `[0…360, 0…1, 0…1]` HSL coordinates
-- `cube` (optional): [See the note on the color cube below](#interpolation-color-cube
+- `cube`: (*optional*) [See the note on the color cube below](#interpolation-color-cube,
+- `easingFn`: (*optional*) A custom easing function for the interpolation, defaults to `smoothstep`
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
 
 Converts HSL coordinates to RGB, then translates them to the custom RYB color space using ryb2rgb. The HSL coordinates are in the range `[0,360], [0, 1], [0, 1]`.
 
-## Interpolation Color Cube 🎛️
+## Interpolation Color Cube 🎛️ {#cube}
 
 The default RYB color cube used for interpolation in `RYBitten` is tuned to mimic Johannes Itten's chromatic circle. By adjusting the cube, you can achieve different effects and customize the RYB to RGB conversion.
 
@@ -104,10 +105,11 @@ Each gamut is an object with the following properties:
 - `cube`: The color cube used for interpolation
 
 ```javascript
-import { cubes } from 'rybitten';
+import { cubes, rybHsl2rgb } from 'rybitten';
 
-cubes.get('munsell');
+const cube = cubes.get('munsell');
 
+console.log(cube); 
 /**
  * {
  *  title: 'Munsell',
@@ -118,6 +120,8 @@ cubes.get('munsell');
  *  ]
  * }
  */
+
+rybHsl2rgb([0, 1, 0.5], cube);
 ```
 
 ### Available Color Gamuts
