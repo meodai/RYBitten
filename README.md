@@ -18,6 +18,14 @@ Install RYBitten with your favorite package manager:
 npm install rybitten
 ```
 
+Or include it directly in your HTML:
+
+```html
+<script type="module">
+  import { ryb2rgb, rybHsl2rgb, cubes } from "https://esm.sh/rybitten/";
+</script>
+```
+
 ### Include RYBitten in your project
   
 ```javascript
