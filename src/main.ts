@@ -73,15 +73,15 @@ export function ryb2rgb(
   easingFn = easingSmoothstep,
 ): ColorCoords {
   const r = easingFn(coords[0]);
-  const y = easingFn(coords[1]);
+  const g = easingFn(coords[1]);
   const b = easingFn(coords[2]);
   const reds = cube.map((it) => it[0]) as CubeCoords;
   const greens = cube.map((it) => it[1]) as CubeCoords;
   const blues = cube.map((it) => it[2]) as CubeCoords;
   return [
-    trilerp(...reds, r, y, b),
-    trilerp(...greens, r, y, b),
-    trilerp(...blues, r, y, b),
+    trilerp(...reds, r, g, b),
+    trilerp(...greens, r, g, b),
+    trilerp(...blues, r, g, b),
   ];
 }
 
