@@ -70,10 +70,11 @@ const trilerp: Trilerp = (
 export function ryb2rgb(
   coords: ColorCoords,
   cube: ColorCube = RYB_ITTEN,
+  easingFn = easingSmoothstep,
 ): ColorCoords {
-  const r = easingSmoothstep(coords[0]);
-  const y = easingSmoothstep(coords[1]);
-  const b = easingSmoothstep(coords[2]);
+  const r = easingFn(coords[0]);
+  const y = easingFn(coords[1]);
+  const b = easingFn(coords[2]);
   const reds = cube.map((it) => it[0]) as CubeCoords;
   const greens = cube.map((it) => it[1]) as CubeCoords;
   const blues = cube.map((it) => it[2]) as CubeCoords;
@@ -127,7 +128,11 @@ export function hslToRgb(hsl: ColorCoords): ColorCoords {
   return res as ColorCoords;
 }
 
-export function rybHsl2rgb(hsl: ColorCoords, cube: ColorCube): ColorCoords {
+export function rybHsl2rgb(
+  hsl: ColorCoords,
+  cube: ColorCube,
+  easingFn = easingSmoothstep,
+): ColorCoords {
   const rgbColor = hslToRgb(hsl);
-  return ryb2rgb(rgbColor, cube);
+  return ryb2rgb(rgbColor, cube, easingFn);
 }

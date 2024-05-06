@@ -2,7 +2,7 @@ import "./demo.css";
 import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb, cubes } from "./main";
 //import { generateColorRamp } from "rampensau";
 
-let DEMO_RYB_CUBE: ColorCube = cubes.get("itten-normalized")!.cube;
+let currentCube: ColorCube = cubes.get("itten-normalized")!.cube;
 
 const logCube = (cube: ColorCube) => {
   console.log("Customized RYB_CUBE");
@@ -46,7 +46,7 @@ const getColorsHSL = (
     const h = oldScool
       ? hFn(1 - i / amount) * 360 + 120
       : hFn(i / amount) * 360;
-    return formatCSS(rybHsl2rgb([h, s, l], DEMO_RYB_CUBE));
+    return formatCSS(rybHsl2rgb([h, s, l], currentCube));
   });
 
 const romanNumerals = [
@@ -88,7 +88,7 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
     const h = i / (amount - 1);
     const steps = new Array(stepsPerRamp).fill(0).map((_, j) => {
       const l = (j + 1) / (stepsPerRamp + 1);
-      return rgbToHex(rybHsl2rgb([h * 360, 1, 1 - l], DEMO_RYB_CUBE));
+      return rgbToHex(rybHsl2rgb([h * 360, 1, 1 - l], currentCube));
     });
     return steps;
   });
@@ -97,7 +97,7 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
   ramps.push(
     new Array(stepsPerRamp).fill(0).map((_, j) => {
       const l = (j + 1) / (stepsPerRamp + 1);
-      return rgbToHex(ryb2rgb([1 - l, 1 - l, 1 - l]));
+      return rgbToHex(ryb2rgb([1 - l, 1 - l, 1 - l], currentCube));
     }),
   );
 
@@ -253,7 +253,7 @@ const repaint = () => {
 
   for (let i = 0; i < 36; i++) {
     const color = formatCSS(
-      rybHsl2rgb([tuneH((i + 1) / 36) * 360, 1, 0.5], DEMO_RYB_CUBE),
+      rybHsl2rgb([tuneH((i + 1) / 36) * 360, 1, 0.5], currentCube),
     );
     document.documentElement.style.setProperty(`--color-${i + 1}`, color);
   }
@@ -283,47 +283,47 @@ const repaint = () => {
 
   document.documentElement.style.setProperty(
     "--white",
-    formatCSS(DEMO_RYB_CUBE[7]),
+    formatCSS(currentCube[7]),
   );
   document.documentElement.style.setProperty(
     "--black",
-    formatCSS(DEMO_RYB_CUBE[0]),
+    formatCSS(currentCube[0]),
   );
   document.documentElement.style.setProperty(
     "--red",
-    formatCSS(DEMO_RYB_CUBE[1]),
+    formatCSS(currentCube[1]),
   );
   document.documentElement.style.setProperty(
     "--yellow",
-    formatCSS(DEMO_RYB_CUBE[2]),
+    formatCSS(currentCube[2]),
   );
   document.documentElement.style.setProperty(
     "--orange",
-    formatCSS(DEMO_RYB_CUBE[3]),
+    formatCSS(currentCube[3]),
   );
   document.documentElement.style.setProperty(
     "--blue",
-    formatCSS(DEMO_RYB_CUBE[4]),
+    formatCSS(currentCube[4]),
   );
   document.documentElement.style.setProperty(
     "--pink",
-    formatCSS(DEMO_RYB_CUBE[5]),
+    formatCSS(currentCube[5]),
   );
   document.documentElement.style.setProperty(
     "--green",
-    formatCSS(DEMO_RYB_CUBE[6]),
+    formatCSS(currentCube[6]),
   );
 
-  $w.value = rgbToHex(DEMO_RYB_CUBE[7]);
-  $r.value = rgbToHex(DEMO_RYB_CUBE[1]);
-  $y.value = rgbToHex(DEMO_RYB_CUBE[2]);
-  $o.value = rgbToHex(DEMO_RYB_CUBE[3]);
-  $b.value = rgbToHex(DEMO_RYB_CUBE[4]);
-  $v.value = rgbToHex(DEMO_RYB_CUBE[5]);
-  $g.value = rgbToHex(DEMO_RYB_CUBE[6]);
-  $black.value = rgbToHex(DEMO_RYB_CUBE[0]);
+  $w.value = rgbToHex(currentCube[7]);
+  $r.value = rgbToHex(currentCube[1]);
+  $y.value = rgbToHex(currentCube[2]);
+  $o.value = rgbToHex(currentCube[3]);
+  $b.value = rgbToHex(currentCube[4]);
+  $v.value = rgbToHex(currentCube[5]);
+  $g.value = rgbToHex(currentCube[6]);
+  $black.value = rgbToHex(currentCube[0]);
 
-  logCube(DEMO_RYB_CUBE);
+  logCube(currentCube);
 
   const stairs = colorStairs(4, 10);
   const gradient = colorStairArrToGradient(stairs);
@@ -351,7 +351,7 @@ document.querySelector("[data-edges]")?.addEventListener("input", (e) => {
   }
   const index = els.indexOf($tarInEls);
   if (index > -1) {
-    DEMO_RYB_CUBE[index] = hexToRgb(value);
+    currentCube[index] = hexToRgb(value);
     repaint();
   }
 });
@@ -377,7 +377,7 @@ $select.addEventListener("change", (e) => {
   const value = $target.value;
   const cube = cubes.get(value);
   if (cube) {
-    DEMO_RYB_CUBE = cube.cube;
+    currentCube = cube.cube;
     repaint();
   }
 });
