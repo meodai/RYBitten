@@ -3,6 +3,7 @@ import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb, cubes } from "./main";
 //import { generateColorRamp } from "rampensau";
 
 let currentCube: ColorCube = cubes.get("itten-normalized")!.cube;
+let additiveColor = false;
 
 const logCube = (cube: ColorCube) => {
   console.log("Customized RYB_CUBE");
@@ -46,7 +47,12 @@ const getColorsHSL = (
     const h = oldScool
       ? hFn(1 - i / amount) * 360 + 120
       : hFn(i / amount) * 360;
-    return formatCSS(rybHsl2rgb([h, s, l], currentCube));
+    return formatCSS(
+      rybHsl2rgb([h, s, l], {
+        cube: currentCube,
+        additive: additiveColor,
+      }),
+    );
   });
 
 const romanNumerals = [
@@ -88,7 +94,12 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
     const h = i / (amount - 1);
     const steps = new Array(stepsPerRamp).fill(0).map((_, j) => {
       const l = (j + 1) / (stepsPerRamp + 1);
-      return rgbToHex(rybHsl2rgb([h * 360, 1, 1 - l], currentCube));
+      return rgbToHex(
+        rybHsl2rgb([h * 360, 1, 1 - l], {
+          cube: currentCube,
+          additive: additiveColor,
+        }),
+      );
     });
     return steps;
   });
@@ -97,7 +108,12 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
   ramps.push(
     new Array(stepsPerRamp).fill(0).map((_, j) => {
       const l = (j + 1) / (stepsPerRamp + 1);
-      return rgbToHex(ryb2rgb([1 - l, 1 - l, 1 - l], currentCube));
+      return rgbToHex(
+        ryb2rgb([1 - l, 1 - l, 1 - l], {
+          cube: currentCube,
+          additive: additiveColor,
+        }),
+      );
     }),
   );
 
@@ -253,7 +269,10 @@ const repaint = () => {
 
   for (let i = 0; i < 36; i++) {
     const color = formatCSS(
-      rybHsl2rgb([tuneH((i + 1) / 36) * 360, 1, 0.5], currentCube),
+      rybHsl2rgb([tuneH((i + 1) / 36) * 360, 1, 0.5], {
+        cube: currentCube,
+        additive: additiveColor,
+      }),
     );
     document.documentElement.style.setProperty(`--color-${i + 1}`, color);
   }
@@ -381,3 +400,17 @@ $select.addEventListener("change", (e) => {
     repaint();
   }
 });
+
+const $additive = document.createElement("input");
+$additive.type = "checkbox";
+$additive.checked = additiveColor;
+$additive.id = "additive";
+$additive.addEventListener("change", () => {
+  additiveColor = $additive.checked;
+  repaint();
+});
+const $label = document.createElement("label");
+$label.textContent = "Additive Colors";
+$label.htmlFor = "additive";
+$label.appendChild($additive);
+document.querySelector("body")!.appendChild($label);

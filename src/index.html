@@ -11,9 +11,7 @@
   </head>
   <body>
     <div class="layout">
-      <nav class="nav">
-
-      </nav>
+      <nav class="nav"></nav>
       <div class="main">
         <main>
           <div class="intro block">
@@ -29,8 +27,8 @@
             <div class="intro-text block__text">
               <h1>RYBitten</h1>
               <p>
-                Implementation of pseudo RYB color conversions derived from Johannes
-                Itten's color wheel.
+                Implementation of pseudo RYB color conversions derived from
+                Johannes Itten's color wheel.
               </p>
             </div>
           </div>
@@ -41,9 +39,24 @@
                 <g>
                   <line x1="33" y1="3" x2="6" y2="30" />
                   <line x1="66" y1="98" x2="93" y2="71" />
-                  <rect x="33" y="3" width="60" height="68" class="cube__back" />
-                  <rect x="6" y="30" width="60" height="68" class="cube__front" />
-                  <polyline points="33,30 33,71 93,71" class="cube__coverline" />
+                  <rect
+                    x="33"
+                    y="3"
+                    width="60"
+                    height="68"
+                    class="cube__back"
+                  />
+                  <rect
+                    x="6"
+                    y="30"
+                    width="60"
+                    height="68"
+                    class="cube__front"
+                  />
+                  <polyline
+                    points="33,30 33,71 93,71"
+                    class="cube__coverline"
+                  />
                 </g>
               </svg>
               <label class="g">
@@ -82,9 +95,10 @@
             <div class="block__text">
               <h2>RYB Colorspace</h2>
               <p>
-                This library employs trilinear interpolation to convert between RGB
-                and RYB color spaces, allowing for a flexible and imaginative approach
-                to color representation that remains compatible with the RGB model.
+                This library employs trilinear interpolation to convert between
+                RGB and RYB color spaces, allowing for a flexible and
+                imaginative approach to color representation that remains
+                compatible with the RGB model.
               </p>
               <p>
                 The RGB/RYB cube is meticulously calibrated to resemble Johannes
@@ -94,8 +108,9 @@
                   >chromatic circle</a
                 >. By adjusting the edges of the cube, you can observe how color
                 shifts and create custom color spaces tailored to your artistic
-                vision. This flexibility offers a unique perspective for designers,
-                artists, and developers seeking to explore new dimensions of color.
+                vision. This flexibility offers a unique perspective for
+                designers, artists, and developers seeking to explore new
+                dimensions of color.
               </p>
             </div>
           </div>
@@ -326,18 +341,18 @@
             <div class="block__text">
               <h2>Itten HSL</h2>
               <p>
-                The Itten HSL wheel is derived by first calculating RGB values, which
-                are then converted to a custom RYB color space. This dual-step process
-                results in a unique color wheel that reflects the principles of
-                Johannes Itten's chromatic circle.
+                The Itten HSL wheel is derived by first calculating RGB values,
+                which are then converted to a custom RYB color space. This
+                dual-step process results in a unique color wheel that reflects
+                the principles of Johannes Itten's chromatic circle.
               </p>
               <p>
-                Utilizing the HSL model allows for seamless integration with existing
-                color generation libraries, providing an accessible pathway for
-                artists, designers, and developers to experiment with vibrant,
-                customized palettes. This approach ensures compatibility with a wide
-                range of tools while maintaining the aesthetic characteristics of the
-                RYB color space.
+                Utilizing the HSL model allows for seamless integration with
+                existing color generation libraries, providing an accessible
+                pathway for artists, designers, and developers to experiment
+                with vibrant, customized palettes. This approach ensures
+                compatibility with a wide range of tools while maintaining the
+                aesthetic characteristics of the RYB color space.
               </p>
             </div>
           </div>
@@ -346,12 +361,12 @@
             <div class="block__text">
               <h2>RYB-HSL Ramps</h2>
               <p>
-                Visualizing the RYB-HSL color space as a collection of swatches on a
-                palette reveals the inherent harmony of these hues. They evoke the
-                essence of an artist's color palette, reminiscent of classic
-                illustrations or vintage prints. This approach underscores the organic
-                quality of the RYB-HSL color space, suggesting a more natural and
-                balanced progression of tones.
+                Visualizing the RYB-HSL color space as a collection of swatches
+                on a palette reveals the inherent harmony of these hues. They
+                evoke the essence of an artist's color palette, reminiscent of
+                classic illustrations or vintage prints. This approach
+                underscores the organic quality of the RYB-HSL color space,
+                suggesting a more natural and balanced progression of tones.
               </p>
             </div>
             <div class="ramps__container">
@@ -364,9 +379,9 @@
             <div class="block__text">
               <h2>RYB Gradient</h2>
               <p>
-                The gradient below is created by interpolating between two colors in
-                the RYB colorspace. The gradient is created by interpolating between
-                the two colors in the RYB colorspace.
+                The gradient below is created by interpolating between two
+                colors in the RYB colorspace. The gradient is created by
+                interpolating between the two colors in the RYB colorspace.
               </p>
             </div>
           </div>
@@ -378,8 +393,10 @@
             <footer>—Johannes Itten, <cite>Bauhaus</cite></footer>
           </blockquote>
         </main>
-      </div><!-- /.main -->
-    </div><!-- /.layout -->
+      </div>
+      <!-- /.main -->
+    </div>
+    <!-- /.layout -->
 
     <script type="module" src="./demo.ts"></script>
   </body>
