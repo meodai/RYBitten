@@ -141,6 +141,20 @@ export const RYB_HAYER: ColorCube = [
   [237 / 255, 213 / 255, 177 / 255],
 ];
 
+// contemporary
+
+export const RYB_IPPSKETCH: ColorCube = [
+  [38/255,38/255,38/255],
+  [196/255,82/255,69/255],
+  [196/255,167/255,80/255],
+  [200/255,123/255,70/255],
+  [74/255,104/255,167/255],
+  [94/255,89/255,161/255],
+  [86/255,139/255,70/255],
+  [221/255,219/255,211/255]
+]
+
+
 const cubes: CubesMap = new Map();
 
 cubes.set("itten", {
@@ -221,6 +235,13 @@ cubes.set("hayer", {
   year: 1826,
   reference: "Color_diagram_Charles_Hayter.jpg",
   cube: RYB_HAYER,
+});
+
+cubes.set("ippsketch", {
+  title: "Ippsketch: imposter syndrome",
+  year: 2021,
+  reference: "ippsketch.png",
+  cube: RYB_IPPSKETCH,
 });
 
 cubes.set("rgb", {

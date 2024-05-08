@@ -134,6 +134,8 @@ rybHsl2rgb([0, 1, 0.5], cube);
 
 ### Available Color Gamuts
 
+#### Historical Color Spaces
+
 | Key | Title | Year | Reference |
 | --- | --- | --- | --- |
 | itten | Johannes Itten: Chromatic Circle | 1961 | [reference](references/farbkreis_extended.png) |
@@ -146,6 +148,15 @@ rybHsl2rgb([0, 1, 0.5], cube);
 | goethe | Goethe: Farbenkreis | 1809 | [reference](references/Goethe_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens_1809.jpg) |
 | munsell | Munsell Color System | 1905 | [reference](references/munsell-atlas-11.jpg) |
 | hayer | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg) |
+
+#### Featured Artist Spectrum
+
+The following color spaces were provided by artists and designers who have contributed to the project.
+
+| Key | Title | Year | Reference |
+| --- | --- | --- | --- |
+| [ippsketch](https://ippsketch.com/) | Ippsketch: imposter syndrome | 2022 | [reference](references/ippsketch.png) |
+
 
 ## License 📄
 
