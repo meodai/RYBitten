@@ -42,6 +42,17 @@ export const RYB_ITTEN_ALT: ColorCube = [
   [253 / 255, 246 / 255, 237 / 255],
 ];
 
+export const RYB_ITTEN_NEUTRAL: ColorCube = [
+  [0.2,   0.094, 0.0],
+  [1,     1,     0],
+  [1,     0,     0],
+  [1,     0.5,   0],
+  [0.163, 0.373, 0.6],
+  [0.0,   0.66,  0.2],
+  [0.5,   0.0,   0.5],
+  [1,     1,     1],
+];
+
 export const RYB_BEZOLD: ColorCube = [
   [44 / 255, 37 / 255, 30 / 255],
   [170 / 255, 14 / 255, 1 / 255],
@@ -145,6 +156,13 @@ cubes.set("itten-normalized", {
   reference:
     "Johannes-Itten-The-chromatic-circle-some-exercises-on-the-contrast-of-pure-colors.webp",
   cube: RYB_ITTEN_ALT,
+});
+
+cubes.set("itten-neutral", {
+  title: "Johannes Itten: Nathan Gossett & Baoquan Chen",
+  year: 1961,
+  reference: "itten-ryb.pdf",
+  cube: RYB_ITTEN_NEUTRAL,
 });
 
 cubes.set("bezold", {

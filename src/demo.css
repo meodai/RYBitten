@@ -35,6 +35,29 @@ a:visited {
   color: var(--pink);
 }
 
+.nav {
+  position: fixed;
+  width: 5vw;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(0deg, var(--gradient)),
+              linear-gradient(0deg, var(--gradientHard));
+  background-size:
+    calc(1px + 50%) 100%,
+    50% 100%;
+  background-repeat: no-repeat;
+  background-position:
+    0 0,
+    100% 0;
+  
+  box-shadow: 0 0 0 0.15em var(--white);
+}
+
+.main {
+  position: relative;
+}
+
 .block {
   display: flex;
   gap: 4rem;
@@ -68,7 +91,10 @@ a:visited {
 }
 
 .intro {
+  flex-direction: column;
+  width: max-content;
   margin-top: 20vmin;
+  margin-left: calc(var(--size-illu) + 4em);
 
   align-items: center;
   p {
@@ -430,23 +456,6 @@ h2 {
     0 0 0 0.05em var(--c),
     0 0 0 0.2em var(--white),
     inset 0 0 0 0.1em var(--white);
-}
-
-.graddeco {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 5vw;
-  background: linear-gradient(0deg, var(--gradient)),
-    linear-gradient(0deg, var(--gradientHard));
-  background-size:
-    calc(100% - 1.5rem) 100%,
-    50% 100%;
-  background-repeat: no-repeat;
-  background-position:
-    0 0,
-    100% 0;
 }
 
 .ramp-list {

@@ -243,8 +243,8 @@ const repaint = () => {
   );
   document.documentElement.style.setProperty("--gradient", colors.join());
 
-  for (let i = 0; i < lightnessSteps; i++) {
-    const colors = getColorsHSL(36, 0.4, 0.1 + (i / lightnessSteps) * 0.9);
+  for (let i = 0; i <= lightnessSteps; i++) {
+    const colors = getColorsHSL(36, 0.4, 0.2 + (i / lightnessSteps) * 0.7);
     document.documentElement.style.setProperty(
       `--gradient-l${i}`,
       colors.join(),
