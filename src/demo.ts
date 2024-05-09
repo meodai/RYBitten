@@ -102,7 +102,7 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
     new Array(stepsPerRamp).fill(0).map((_, j) => {
       const l = (j + 1) / (stepsPerRamp + 1);
       return rgbToHex(
-        ryb2rgb([1 - l, 1 - l, 1 - l], {
+        ryb2rgb([l, l, l], {
           cube: currentCube,
         }),
       );
