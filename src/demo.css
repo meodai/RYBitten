@@ -516,3 +516,61 @@ h2 {
   font: inherit;
   padding: 0.5em 1em;
 }
+
+.converter {
+  --w: calc(var(--size-illu) - 4em);
+  width: var(--w);
+  margin: 2em;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.swatch {
+  position: absolute;
+  display: block;
+  box-shadow: 0 0 0 0.05rem var(--black);
+  padding: 0.3rem;
+  width: 6rem;
+  background: var(--white);
+}
+
+.swatch--ryb {
+  top: 0;
+  right: 0;
+}
+
+.swatch--rgb {
+  left: 2em;
+  bottom: 0;
+  background: #fff;
+}
+
+.swatch__color {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--c, var(--black));
+}
+
+.swatch__input {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+
+.swatch__value,
+.swatch__name {
+  display: block;
+  font-size: 0.8em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.swatch__value {
+  font-size: 1rem;
+}
+
+.swatch__label {
+  padding: 0.25em 0 0;
+}

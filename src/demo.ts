@@ -3,7 +3,6 @@ import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb, cubes } from "./main";
 //import { generateColorRamp } from "rampensau";
 
 let currentCube: ColorCube = cubes.get("itten-normalized")!.cube;
-let additiveColor = false;
 
 const logCube = (cube: ColorCube) => {
   console.log("Customized RYB_CUBE");
@@ -50,7 +49,6 @@ const getColorsHSL = (
     return formatCSS(
       rybHsl2rgb([h, s, l], {
         cube: currentCube,
-        additive: additiveColor,
       }),
     );
   });
@@ -97,7 +95,6 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
       return rgbToHex(
         rybHsl2rgb([h * 360, 1, 1 - l], {
           cube: currentCube,
-          additive: additiveColor,
         }),
       );
     });
@@ -111,7 +108,6 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
       return rgbToHex(
         ryb2rgb([1 - l, 1 - l, 1 - l], {
           cube: currentCube,
-          additive: additiveColor,
         }),
       );
     }),
@@ -240,7 +236,72 @@ const lightnessSteps = 9;
 
 let timer: number | null = null;
 
+// color swatch
+const $swatchRGB = document.querySelector("[data-rgb]") as HTMLElement;
+const $swatchRYB = document.querySelector("[data-ryb]") as HTMLElement;
+const $swatchRGBinput = $swatchRGB.querySelector("input") as HTMLInputElement;
+
+let swatchTimer: number | null = null;
+function setSwatchColor(rgb: ColorCoords, bypassTimer = false) {
+  const hex = rgbToHex(rgb);
+  const ryb = ryb2rgb(rgb, { cube: currentCube });
+  const hexRYB = rgbToHex(ryb);
+  const cssRGB = formatCSS(rgb);
+  const cssRYB = formatCSS(ryb);
+
+  $swatchRGB.style.setProperty("--c", cssRGB);
+  $swatchRGBinput.value = hex;
+  $swatchRYB.style.setProperty("--c", cssRYB);
+  const [r, g, b] = rgb.map((c) => Math.round(c * 255));
+  const [r2, y2, b2] = ryb.map((c) => Math.round(c * 255));
+
+  $swatchRGB.querySelector(".swatch__value")!.textContent = `${r} ${g} ${b}`;
+  $swatchRYB.querySelector(".swatch__value")!.textContent = `${r2} ${y2} ${b2}`;
+
+  swatchTimer && clearTimeout(swatchTimer);
+  const time = bypassTimer ? 0 : 1000;
+  swatchTimer = setTimeout(() => {
+    // get both names
+    fetch(`https://api.color.pizza/v1/${hex.slice(1)}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        $swatchRGB.querySelector(".swatch__name")!.textContent =
+          data.colors[0].name;
+      });
+
+    fetch(`https://api.color.pizza/v1/${hexRYB.slice(1)}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        $swatchRYB.querySelector(".swatch__name")!.textContent =
+          data.colors[0].name;
+      });
+  }, time);
+}
+
+// generate a well saturated color
+let swatchColorHSL = [Math.random() * 360, 0.8, 0.5] as ColorCoords;
+
+$swatchRGBinput.addEventListener("input", (e) => {
+  const $target = e.target;
+  if (!($target instanceof HTMLInputElement)) {
+    return;
+  }
+  const value = $target.value;
+  setSwatchColor(hexToRgb(value));
+});
+
 const repaint = () => {
+  setSwatchColor(
+    rybHsl2rgb(swatchColorHSL, {
+      cube: currentCube,
+    }),
+    true,
+  );
+
   const colors = getColorsHSL(36, 1, 0.5, (h) => h, false);
 
   const colorsHSL = new Array(36).fill(0).map((_, index) => {
@@ -271,7 +332,6 @@ const repaint = () => {
     const color = formatCSS(
       rybHsl2rgb([tuneH((i + 1) / 36) * 360, 1, 0.5], {
         cube: currentCube,
-        additive: additiveColor,
       }),
     );
     document.documentElement.style.setProperty(`--color-${i + 1}`, color);
@@ -302,11 +362,11 @@ const repaint = () => {
 
   document.documentElement.style.setProperty(
     "--white",
-    formatCSS(currentCube[7]),
+    formatCSS(currentCube[0]),
   );
   document.documentElement.style.setProperty(
     "--black",
-    formatCSS(currentCube[0]),
+    formatCSS(currentCube[7]),
   );
   document.documentElement.style.setProperty(
     "--red",
@@ -333,14 +393,14 @@ const repaint = () => {
     formatCSS(currentCube[6]),
   );
 
-  $w.value = rgbToHex(currentCube[7]);
+  $w.value = rgbToHex(currentCube[0]);
   $r.value = rgbToHex(currentCube[1]);
   $y.value = rgbToHex(currentCube[2]);
   $o.value = rgbToHex(currentCube[3]);
   $b.value = rgbToHex(currentCube[4]);
   $v.value = rgbToHex(currentCube[5]);
   $g.value = rgbToHex(currentCube[6]);
-  $black.value = rgbToHex(currentCube[0]);
+  $black.value = rgbToHex(currentCube[7]);
 
   logCube(currentCube);
 
@@ -356,7 +416,7 @@ const repaint = () => {
 
 repaint();
 
-const els = [$black, $r, $y, $o, $b, $v, $g, $w];
+const els = [$w, $r, $y, $o, $b, $v, $g, $black];
 
 document.querySelector("[data-edges]")?.addEventListener("input", (e) => {
   const $target = e.target;
@@ -400,17 +460,3 @@ $select.addEventListener("change", (e) => {
     repaint();
   }
 });
-
-const $additive = document.createElement("input");
-$additive.type = "checkbox";
-$additive.checked = additiveColor;
-$additive.id = "additive";
-$additive.addEventListener("change", () => {
-  additiveColor = $additive.checked;
-  repaint();
-});
-const $label = document.createElement("label");
-$label.textContent = "Additive Colors";
-$label.htmlFor = "additive";
-$label.appendChild($additive);
-document.querySelector("body")!.appendChild($label);

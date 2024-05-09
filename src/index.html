@@ -33,6 +33,40 @@
             </div>
           </div>
 
+          <div class="block compare">
+            <div class="converter">
+              <label class="swatch swatch--rgb" data-rgb>
+                <div class="swatch__color"></div>
+                <div class="swatch__label">
+                  <span class="swatch__value">0 0 0</span>
+                  <strong class="swatch__name">Name</strong>
+                </div>
+                <input id="rgb" type="color" class="swatch__input" />
+              </label>
+
+              <div class="swatch swatch--ryb" data-ryb>
+                <div class="swatch__color"></div>
+                <div class="swatch__label">
+                  <span class="swatch__value">0 0 0</span>
+                  <strong class="swatch__name">Name</strong>
+                </div>
+              </div>
+            </div>
+            <div class="block__text">
+              <h2>RYB Conversion</h2>
+              <p>
+                The RYB color model is a subtractive system traditionally used
+                in art and design, characterized by its foundational primary
+                colors: red, yellow, and blue. Through their combination, a rich
+                array of secondary colors emerges, offering a versatile palette.
+                In the emulated RYB color gamut, black and white are reversed
+                relative to the RGB model. This inversion reflects the
+                subtractive nature of RYB, contrasting with the additive process
+                in RGB.
+              </p>
+            </div>
+          </div>
+
           <div class="ryb block">
             <form class="edges" data-edges>
               <svg viewBox="0 0 100 100" class="cube">
@@ -339,12 +373,12 @@
               >
             </div>
             <div class="block__text">
-              <h2>Itten HSL</h2>
+              <h2>RYBitten HSL</h2>
               <p>
-                The Itten HSL wheel is derived by first calculating RGB values,
-                which are then converted to a custom RYB color space. This
-                dual-step process results in a unique color wheel that reflects
-                the principles of Johannes Itten's chromatic circle.
+                The RYBItten HSL wheel is derived by first calculating RGB
+                values, which are then converted to a custom RYB color space.
+                This dual-step process results in a unique color wheel that
+                reflects the principles of Johannes Itten's chromatic circle.
               </p>
               <p>
                 Utilizing the HSL model allows for seamless integration with
@@ -352,7 +386,9 @@
                 pathway for artists, designers, and developers to experiment
                 with vibrant, customized palettes. This approach ensures
                 compatibility with a wide range of tools while maintaining the
-                aesthetic characteristics of the RYB color space.
+                aesthetic characteristics of the RYB color space. For ease of
+                use, the lightness value is inverted to behave like a
+                intuitively.
               </p>
             </div>
           </div>

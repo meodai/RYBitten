@@ -1,7 +1,7 @@
 import { RYB_ITTEN } from "./cubes";
 export { cubes } from "./cubes";
 
-import { ColorCoords, ColorCube } from "./cubes";
+import { ColorCoords } from "./cubes";
 export type { ColorCoords, ColorCube, CubesMap } from "./cubes";
 
 type CubeCoords = [
@@ -69,22 +69,14 @@ const trilerp: Trilerp = (
 
 export function ryb2rgb(
   coords: ColorCoords,
-  { cube = RYB_ITTEN, easingFn = easingSmoothstep, additive = false } = {},
+  { cube = RYB_ITTEN, easingFn = easingSmoothstep } = {},
 ): ColorCoords {
-  let localCube = cube;
-  if (additive) {
-    localCube = [...cube] as ColorCube;
-    const last = localCube.pop();
-    const first = localCube.shift();
-    localCube.unshift(last!);
-    localCube.push(first!);
-  }
   const r = easingFn(coords[0]);
   const g = easingFn(coords[1]);
   const b = easingFn(coords[2]);
-  const reds = localCube.map((it) => it[0]) as CubeCoords;
-  const greens = localCube.map((it) => it[1]) as CubeCoords;
-  const blues = localCube.map((it) => it[2]) as CubeCoords;
+  const reds = cube.map((it) => it[0]) as CubeCoords;
+  const greens = cube.map((it) => it[1]) as CubeCoords;
+  const blues = cube.map((it) => it[2]) as CubeCoords;
   return [
     trilerp(...reds, r, g, b),
     trilerp(...greens, r, g, b),
@@ -137,8 +129,13 @@ export function hslToRgb(hsl: ColorCoords): ColorCoords {
 
 export function rybHsl2rgb(
   hsl: ColorCoords,
-  { cube = RYB_ITTEN, easingFn = easingSmoothstep, additive = false } = {},
+  {
+    cube = RYB_ITTEN,
+    easingFn = easingSmoothstep,
+    invertLightness = true,
+  } = {},
 ): ColorCoords {
-  const rgbColor = hslToRgb(hsl);
-  return ryb2rgb(rgbColor, { cube, easingFn, additive });
+  const l = invertLightness ? 1 - hsl[2] : hsl[2];
+  const rgbColor = hslToRgb([hsl[0], hsl[1], l]);
+  return ryb2rgb(rgbColor, { cube, easingFn });
 }
