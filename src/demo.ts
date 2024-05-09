@@ -281,7 +281,11 @@ function setSwatchColor(rgb: ColorCoords, bypassTimer = false) {
 }
 
 // generate a well saturated color
-let swatchColorHSL = [Math.random() * 360, 0.2 + Math.random() * .8, 0.85 + Math.random() * .1] as ColorCoords;
+let swatchColorHSL = [
+  Math.random() * 360,
+  0.2 + Math.random() * 0.8,
+  0.85 + Math.random() * 0.1,
+] as ColorCoords;
 
 $swatchRGBinput.addEventListener("input", (e) => {
   const $target = e.target;
