@@ -32,6 +32,7 @@ const rgbToHex = (rgb: ColorCoords): string => {
 };
 
 function tuneH(h: number): number {
+  //return h;
   return Math.pow(h, 2 / 3);
 }
 
@@ -45,7 +46,7 @@ const getColorsHSL = (
   new Array(amount).fill(0).map((_, i) => {
     const h = oldScool
       ? hFn(1 - i / amount) * 360 + 120
-      : hFn(i / amount) * 360;
+      : hFn((i + 1) / amount) * 360;
     return formatCSS(
       rybHsl2rgb([h, s, l], {
         cube: currentCube,
@@ -187,7 +188,7 @@ const colorStairArrToGradient = (starisArr: string[][]): string => {
             : colors
                 .map(
                   (c, i) =>
-                    `${c} ${(i / colors.length) * 100}% ${((i + 1) / colors.length) * 100}%`,
+                    `${c} ${(i / (colors.length - 1)) * 100}% ${((i + 1) / (colors.length - 1)) * 100}%`,
                 )
                 .join()
         })`),
