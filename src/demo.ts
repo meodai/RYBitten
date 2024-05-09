@@ -31,11 +31,6 @@ const rgbToHex = (rgb: ColorCoords): string => {
     .join("")}`;
 };
 
-function tuneH(h: number): number {
-  //return h;
-  return Math.pow(h, 2 / 3);
-}
-
 const getColorsHSL = (
   amount = 12,
   s = 1,
@@ -331,7 +326,7 @@ const repaint = () => {
 
   for (let i = 0; i < 36; i++) {
     const color = formatCSS(
-      rybHsl2rgb([tuneH((i + 1) / 36) * 360, 1, 0.5], {
+      rybHsl2rgb([((i + 1) / 36) * 360, 1, 0.5], {
         cube: currentCube,
       }),
     );
