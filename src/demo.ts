@@ -292,13 +292,10 @@ $swatchRGBinput.addEventListener("input", (e) => {
   setSwatchColor(hexToRgb(value));
 });
 
+setSwatchColor(rybHsl2rgb(swatchColorHSL), true);
+
 const repaint = () => {
-  setSwatchColor(
-    rybHsl2rgb(swatchColorHSL, {
-      cube: currentCube,
-    }),
-    true,
-  );
+  setSwatchColor(hexToRgb($swatchRGBinput.value));
 
   const colors = getColorsHSL(36, 1, 0.5, (h) => h, false);
 

@@ -581,7 +581,6 @@ h2 {
   padding: 0.25em 0 0;
 }
 
-
 .smoothwheel {
   width: 60vw;
   aspect-ratio: 1;
@@ -595,8 +594,12 @@ h2 {
   opacity: 0.5;
   */
 
-  background: radial-gradient(closest-side, var(--black), rgba(0, 0, 0, 0), var(--white) 80%),
-              conic-gradient(from 0deg, var(--gradient));
+  background: radial-gradient(
+      closest-side,
+      var(--black),
+      rgba(0, 0, 0, 0),
+      var(--white) 80%
+    ),
+    conic-gradient(from 0deg, var(--gradient));
   display: none;
-  
 }
