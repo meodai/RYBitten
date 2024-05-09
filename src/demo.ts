@@ -260,7 +260,7 @@ function setSwatchColor(rgb: ColorCoords, bypassTimer = false) {
   const time = bypassTimer ? 0 : 1000;
   swatchTimer = setTimeout(() => {
     // get both names
-    fetch(`https://api.color.pizza/v1/${hex.slice(1)}`, {
+    fetch(`https://api.color.pizza/v1/?values=${hex.slice(1)}&list=bestOf`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -269,7 +269,7 @@ function setSwatchColor(rgb: ColorCoords, bypassTimer = false) {
           data.colors[0].name;
       });
 
-    fetch(`https://api.color.pizza/v1/${hexRYB.slice(1)}`, {
+    fetch(`https://api.color.pizza/v1/?values=${hexRYB.slice(1)}&list=bestOf`, {
       method: "GET",
     })
       .then((res) => res.json())
