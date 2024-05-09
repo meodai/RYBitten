@@ -462,43 +462,49 @@ h2 {
   display: flex;
   gap: 10%;
   flex-wrap: wrap;
+  max-width: 40rem;
 }
 
 .ramp {
-  flex: 0 0 10em;
+  flex: 0 0 calc(25% - 10%);
 }
 
 .ramp__step {
   position: relative;
   background: var(--c);
-  box-shadow: 0 0 0 0.1em var(--white);
+  box-shadow: 0 0 0 0.05em var(--white);
   transform: rotate(calc(var(--rnd) * 5deg))
     translateX(calc(var(--rnd) * 0.5em));
 
-  height: calc(0.75rem + var(--rnd2) * 1.5rem);
+  height: calc(0.5rem + var(--rnd2) * 1.5rem);
   overflow: hidden;
   transition: 400ms height cubic-bezier(0.3, 0.7, 0, 1) 100ms;
-
-  span {
-    padding: 4rem 0.5rem 0;
-    display: block;
-  }
-
-  span + span {
-    font-size: 0.6em;
-    padding: 0 0.5rem 1rem;
-  }
+  overflow: hidden;
 }
 
-.ramp__step:nth-child(8),
-.ramp__step:nth-child(9),
-.ramp__step:nth-child(10) {
-  color: var(--white);
+.ramp__label {
+  position: absolute;
+  top: 6.5rem;
+  left: 1px;
+  right: 1px;
+
+  transform: translateY(0);
+
+  font-size: 0.6em;
+  background: var(--white);
+  padding: 0.25em 0.5em;
+  transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 150ms;
+  span {
+    display: block;
+  }
 }
 
 .ramp__step:hover {
   z-index: 1;
   height: 6.5rem;
+  .ramp__label {
+    transform: translateY(calc(-100% - 1px));
+  }
 }
 
 .ramp-list h2 {

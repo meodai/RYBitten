@@ -145,8 +145,10 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
       ${ramp
         .map((hex) => {
           return `<div class="ramp__step" style="--c: ${hex}; --rnd: ${-1 + Math.random() * 2}; --rnd2: ${Math.random()};">
-            <span>${namesForHexes[hex]}</span>
-            <span>${hex}</span>
+            <div class="ramp__label">
+              <span>${namesForHexes[hex]}</span>
+              <span>${hex}</span>
+            </div>
           </div>`;
         })
         .join("")}
