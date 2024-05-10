@@ -525,7 +525,6 @@ for (const [key, obj] of cubes) {
   $input.type = "radio";
   $input.name = "preset";
   $input.value = key;
-  $input.checked = key === "itten-normalized";
   $label.appendChild($input);
 
   const div = `
@@ -539,6 +538,12 @@ for (const [key, obj] of cubes) {
   $li.appendChild($label);
   $presetsList.appendChild($li);
 }
+
+(
+  $presetsList.querySelector(
+    "input[value='itten-normalized']",
+  ) as HTMLInputElement
+).checked = true;
 
 $presetsList.addEventListener(
   "change",

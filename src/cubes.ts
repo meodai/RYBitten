@@ -193,7 +193,7 @@ cubes.set("itten", {
 });
 
 cubes.set("itten-normalized", {
-  title: "Chromatic Circle (Normalized)",
+  title: "Chromatic Circle (Paper-white)",
   author: "Johannes Itten",
   year: 1961,
   reference:

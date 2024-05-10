@@ -146,7 +146,7 @@ rybHsl2rgb([0, 1, 0.5], cube);
 | Key | Title | Year | Reference |
 | --- | --- | --- | --- |
 | itten | Johannes Itten: Chromatic Circle | 1961 | [reference](references/farbkreis_extended.png) |
-| itten-normalized | Johannes Itten: Chromatic Circle (Normalized) | 1961 | [reference](references/Johannes-Itten-The-chromatic-circle-some-exercises-on-the-contrast-of-pure-colors.webp) |
+| itten-normalized | Johannes Itten: Chromatic Circle (Paper-white) | 1961 | [reference](references/Johannes-Itten-The-chromatic-circle-some-exercises-on-the-contrast-of-pure-colors.webp) |
 | bezold | Wilhelm von Bezold: Farbentafel | 1874 | [reference](references/Bezold_Farbentafel_1874.jpg) |
 | boutet | Claude Boutet: Twelve-color color circles | 1708 | [reference](references/Boutet_1708_color_circles.jpg) |
 | hett | J. A. H. Hett: RGV Color Wheel | 1908 | [reference](references/RGV_color_wheel_1908.jpg) |
