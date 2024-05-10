@@ -156,6 +156,7 @@ rybHsl2rgb([0, 1, 0.5], cube);
 | goethe | Goethe: Farbenkreis | 1809 | [reference](references/Goethe_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens_1809.jpg) |
 | munsell | Munsell Color System | 1905 | [reference](references/munsell-atlas-11.jpg) |
 | hayer | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg) |
+| bormann | Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course" | 1931 | [reference](references/bormann.png) |
 
 #### Featured Artist Spectrum
 

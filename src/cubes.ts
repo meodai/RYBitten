@@ -141,6 +141,17 @@ export const RYB_HAYER: ColorCube = [
   [44 / 255, 44 / 255, 37 / 255],
 ];
 
+export const RYB_BORMANN: ColorCube = [
+  [240 / 255, 236 / 255, 235 / 255],
+  [247 / 255, 65 / 255, 51 / 255],
+  [243 / 255, 187 / 255, 6 / 255],
+  [251 / 255, 130 / 255, 2 / 255],
+  [37 / 255, 71 / 255, 169 / 255],
+  [176 / 255, 121 / 255, 177 / 255],
+  [2 / 255, 117 / 255, 111 / 255],
+  [41 / 255, 42 / 255, 45 / 255],
+];
+
 // contemporary
 
 export const RYB_IPPSKETCH: ColorCube = [
@@ -234,6 +245,14 @@ cubes.set("hayer", {
   year: 1826,
   reference: "Color_diagram_Charles_Hayter.jpg",
   cube: RYB_HAYER,
+});
+
+cubes.set("bormann", {
+  title:
+    "Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course",
+  year: 1931,
+  reference: "bormann.png",
+  cube: RYB_BORMANN,
 });
 
 cubes.set("ippsketch", {
