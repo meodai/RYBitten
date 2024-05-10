@@ -536,6 +536,7 @@ h2 {
   display: block;
   box-shadow: 0 0 0 0.05rem var(--black);
   padding: 0.3rem;
+  padding-bottom: 0;
   width: 6rem;
   background: var(--white);
 }
@@ -571,6 +572,10 @@ h2 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.swatch__name {
+  padding-bottom: 0.25rem;
 }
 
 .swatch__value {
