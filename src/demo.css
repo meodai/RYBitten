@@ -473,9 +473,7 @@ h2 {
   position: relative;
   transform: rotate(calc(var(--rnd) * 5deg))
     translateX(calc(var(--rnd) * 0.5em));
-
   height: calc(0.5rem + var(--rnd2) * 1.5rem);
-
   transition: 400ms height cubic-bezier(0.3, 0.7, 0, 1) 100ms;
 }
 
@@ -515,6 +513,7 @@ h2 {
   }
 }
 
+.ramp__step--active,
 .ramp__step:hover {
   height: 7rem;
   .ramp__label {
@@ -525,6 +524,20 @@ h2 {
   }
   .ramp__inner {
     transform: rotate(calc(var(--rnd) * -5deg)) scale(1);
+  }
+}
+
+.ramp:has(:hover) .ramp__step--active:not(:hover) {
+  height: calc(0.5rem + var(--rnd2) * 1.5rem);
+
+  .ramp__label {
+    transform: translateY(0);
+    span {
+      opacity: 0;
+    }
+  }
+  .ramp__inner {
+    transform: rotate(0) scale(0.8);
   }
 }
 

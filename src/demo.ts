@@ -140,11 +140,13 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
   const $wrapper = document.querySelector("[data-ramps]") as HTMLElement;
   $wrapper.innerHTML = ramps
     .map((ramp, i) => {
+      const activeIndex = 1 + Math.floor(Math.random() * (ramp.length - 2));
       return `<div class="ramp">
       <h2>${romanNumerals[i + 1]}</h2>
       ${ramp
-        .map((hex) => {
-          return `<div class="ramp__step" style="--c: ${hex}; --rnd: ${-1 + Math.random() * 2}; --rnd2: ${Math.random()};">
+        .map((hex, j) => {
+          const activeClass = j === activeIndex ? "ramp__step--active" : "";
+          return `<div class="ramp__step ${activeClass}" style="--c: ${hex}; --rnd: ${-1 + Math.random() * 2}; --rnd2: ${Math.random()};">
             <div class="ramp__inner">
               <div class="ramp__label">
                 <span>${namesForHexes[hex]}</span>
