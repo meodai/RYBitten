@@ -152,6 +152,17 @@ export const RYB_BORMANN: ColorCube = [
   [41 / 255, 42 / 255, 45 / 255],
 ];
 
+export const RYB_ALBERS: ColorCube = [
+  [231 / 255, 235 / 255, 237 / 255],
+  [229 / 255, 30 / 255, 38 / 255],
+  [255 / 255, 198 / 255, 12 / 255],
+  [245 / 255, 119 / 255, 34 / 255],
+  [17 / 255, 97 / 255, 170 / 255],
+  [139 / 255, 47 / 255, 146 / 255],
+  [1 / 255, 167 / 255, 98 / 255],
+  [0 / 255, 0 / 255, 1 / 255],
+];
+
 // contemporary
 
 export const RYB_IPPSKETCH: ColorCube = [
@@ -253,6 +264,13 @@ cubes.set("bormann", {
   year: 1931,
   reference: "bormann.png",
   cube: RYB_BORMANN,
+});
+
+cubes.set("albers", {
+  title: "Josef Albers: Interaction of Color",
+  year: 1942,
+  reference: "albers-color-harmony.jpg",
+  cube: RYB_ALBERS,
 });
 
 cubes.set("ippsketch", {
