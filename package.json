@@ -7,6 +7,7 @@
   ],
   "main": "./dist/rybitten.umd.cjs",
   "module": "./dist/rybitten.js",
+  "types": "./dist/main.d.ts",
   "exports": {
     "import": "./dist/rybitten.js",
     "require": "./dist/rybitten.umd.cjs",
