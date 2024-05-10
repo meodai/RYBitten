@@ -471,15 +471,27 @@ h2 {
 
 .ramp__step {
   position: relative;
-  background: var(--c);
-  box-shadow: 0 0 0 0.05em var(--white);
   transform: rotate(calc(var(--rnd) * 5deg))
     translateX(calc(var(--rnd) * 0.5em));
 
   height: calc(0.5rem + var(--rnd2) * 1.5rem);
-  overflow: hidden;
+
   transition: 400ms height cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+}
+
+.ramp__step + .ramp__step {
+  margin-top: -0.25em;
+}
+
+.ramp__inner {
+  position: absolute;
+  height: min(100%, 6.5rem);
+  width: 100%;
+  background: var(--c);
+  box-shadow: 0 0 0 0.05em var(--white);
   overflow: hidden;
+  transform: rotate(0) scale(0.8);
+  transition: 400ms transform cubic-bezier(0.3, 0.7, 0, 1) 250ms;
 }
 
 .ramp__label {
@@ -500,10 +512,12 @@ h2 {
 }
 
 .ramp__step:hover {
-  z-index: 1;
-  height: 6.5rem;
+  height: 7rem;
   .ramp__label {
     transform: translateY(calc(-100% - 1px));
+  }
+  .ramp__inner {
+    transform: rotate(calc(var(--rnd) * -5deg)) scale(1);
   }
 }
 
