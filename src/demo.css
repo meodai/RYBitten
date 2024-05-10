@@ -491,7 +491,7 @@ h2 {
   box-shadow: 0 0 0 0.05em var(--white);
   overflow: hidden;
   transform: rotate(0) scale(0.8);
-  transition: 400ms transform cubic-bezier(0.3, 0.7, 0, 1) 250ms;
+  transition: 400ms transform cubic-bezier(0.3, 0.7, 0, 1) 350ms;
 }
 
 .ramp__label {
@@ -505,9 +505,13 @@ h2 {
   font-size: 0.6em;
   background: var(--white);
   padding: 0.25em 0.5em;
-  transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 150ms;
+  transition: 200ms transform ease-out 400ms;
   span {
     display: block;
+  }
+  span + span {
+    opacity: 0;
+    transition: 200ms opacity ease-out 600ms;
   }
 }
 
@@ -515,6 +519,9 @@ h2 {
   height: 7rem;
   .ramp__label {
     transform: translateY(calc(-100% - 1px));
+    span {
+      opacity: 1;
+    }
   }
   .ramp__inner {
     transform: rotate(calc(var(--rnd) * -5deg)) scale(1);
