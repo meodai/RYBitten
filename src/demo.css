@@ -541,6 +541,10 @@ h2 {
   background: var(--white);
 }
 
+label.swatch {
+  cursor: pointer;
+}
+
 .swatch--ryb {
   top: 0;
   right: 0;
