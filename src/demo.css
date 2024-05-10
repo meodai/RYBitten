@@ -37,10 +37,97 @@ a:visited {
 
 .nav {
   position: fixed;
-  width: 5vw;
+  width: 20vw;
   top: 0;
   bottom: 0;
   right: 0;
+
+  box-shadow: 0 0 0 0.15em var(--white);
+  z-index: 10;
+
+  background: var(--white);
+  padding-left: 5vw;
+
+  transform: translateX(20vw);
+  transition: 200ms transform cubic-bezier(0.3, 0.7, 0, 1);
+
+  ul,
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul {
+    box-shadow: inset 0 0 0 0.05em var(--black);
+    flex: 0 0 calc(100vh - 20vw);
+    overflow-y: auto;
+  }
+
+  li + li {
+    border-top: 0.05em solid var(--black);
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    display: flex;
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 0.8em;
+
+    div {
+      margin-left: 0.5em;
+    }
+  }
+
+  label:has(input:checked) {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  strong {
+    display: block;
+    border-top: 0.05em solid var(--black);
+  }
+
+  h3 {
+    margin: 0;
+
+    span {
+      position: relative;
+      display: inline-block;
+      top: -0.25em;
+      font-size: 0.6em;
+    }
+  }
+}
+
+.nav:hover {
+  transform: translateX(0);
+}
+
+.nav__inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.navcube {
+  height: 25vw;
+  flex: 0 0 25vw;
+  background: var(--white);
+}
+
+.nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 5vw;
+
   background: linear-gradient(0deg, var(--gradient)),
     linear-gradient(0deg, var(--gradientHard));
   background-size:
@@ -50,8 +137,6 @@ a:visited {
   background-position:
     0 0,
     100% 0;
-
-  box-shadow: 0 0 0 0.15em var(--white);
 }
 
 .main {

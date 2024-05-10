@@ -225,6 +225,15 @@ const $v = document.querySelector('[data-c="v"]') as HTMLInputElement;
 const $g = document.querySelector('[data-c="g"]') as HTMLInputElement;
 const $black = document.querySelector('[data-c="0"]') as HTMLInputElement;
 
+const $w2 = document.querySelector('[data-c2="w"]') as HTMLInputElement;
+const $r2 = document.querySelector('[data-c2="r"]') as HTMLInputElement;
+const $y2 = document.querySelector('[data-c2="y"]') as HTMLInputElement;
+const $o2 = document.querySelector('[data-c2="o"]') as HTMLInputElement;
+const $b2 = document.querySelector('[data-c2="b"]') as HTMLInputElement;
+const $v2 = document.querySelector('[data-c2="v"]') as HTMLInputElement;
+const $g2 = document.querySelector('[data-c2="g"]') as HTMLInputElement;
+const $black2 = document.querySelector('[data-c2="0"]') as HTMLInputElement;
+
 $w.parentElement!.style.setProperty("--c", `var(--white)`);
 $r.parentElement!.style.setProperty("--c", `var(--red)`);
 $y.parentElement!.style.setProperty("--c", `var(--yellow)`);
@@ -233,6 +242,15 @@ $b.parentElement!.style.setProperty("--c", `var(--blue)`);
 $v.parentElement!.style.setProperty("--c", `var(--pink)`);
 $g.parentElement!.style.setProperty("--c", `var(--green)`);
 $black.parentElement!.style.setProperty("--c", `var(--black)`);
+
+$w2.parentElement!.style.setProperty("--c", `var(--white)`);
+$r2.parentElement!.style.setProperty("--c", `var(--red)`);
+$y2.parentElement!.style.setProperty("--c", `var(--yellow)`);
+$o2.parentElement!.style.setProperty("--c", `var(--orange)`);
+$b2.parentElement!.style.setProperty("--c", `var(--blue)`);
+$v2.parentElement!.style.setProperty("--c", `var(--pink)`);
+$g2.parentElement!.style.setProperty("--c", `var(--green)`);
+$black2.parentElement!.style.setProperty("--c", `var(--black)`);
 
 const lightnessSteps = 9;
 
@@ -405,6 +423,15 @@ const repaint = () => {
   $g.value = rgbToHex(currentCube[6]);
   $black.value = rgbToHex(currentCube[7]);
 
+  $w2.value = rgbToHex(currentCube[0]);
+  $r2.value = rgbToHex(currentCube[1]);
+  $y2.value = rgbToHex(currentCube[2]);
+  $o2.value = rgbToHex(currentCube[3]);
+  $b2.value = rgbToHex(currentCube[4]);
+  $v2.value = rgbToHex(currentCube[5]);
+  $g2.value = rgbToHex(currentCube[6]);
+  $black2.value = rgbToHex(currentCube[7]);
+
   logCube(currentCube);
 
   const stairs = colorStairs(4, 10);
@@ -420,6 +447,7 @@ const repaint = () => {
 repaint();
 
 const els = [$w, $r, $y, $o, $b, $v, $g, $black];
+const els2 = [$w2, $r2, $y2, $o2, $b2, $v2, $g2, $black2];
 
 document.querySelector("[data-edges]")?.addEventListener("input", (e) => {
   const $target = e.target;
@@ -428,6 +456,7 @@ document.querySelector("[data-edges]")?.addEventListener("input", (e) => {
   }
   const value = $target.value;
   const $tarInEls = els.find(($el) => $el.isEqualNode($target));
+
   if (!$tarInEls) {
     return;
   }
@@ -436,8 +465,32 @@ document.querySelector("[data-edges]")?.addEventListener("input", (e) => {
     currentCube[index] = hexToRgb(value);
     repaint();
   }
+  // mirror the color change on els2
+  const $tarInEls2 = els2[index];
+  $tarInEls2.value = value;
 });
 
+document.querySelector("[data-edges2]")?.addEventListener("input", (e) => {
+  const $target = e.target;
+  if (!($target instanceof HTMLInputElement)) {
+    return;
+  }
+  const value = $target.value;
+  const $tarInEls = els2.find(($el) => $el.isEqualNode($target));
+  if (!$tarInEls) {
+    return;
+  }
+  const index = els2.indexOf($tarInEls);
+  if (index > -1) {
+    currentCube[index] = hexToRgb(value);
+    repaint();
+  }
+  // mirror the color change on els
+  const $tarInEls1 = els[index];
+  $tarInEls1.value = value;
+});
+
+/*
 const $select = document.createElement("select");
 // create an option for each of the cubes
 for (const [key, obj] of cubes) {
@@ -462,4 +515,44 @@ $select.addEventListener("change", (e) => {
     currentCube = cube.cube;
     repaint();
   }
-});
+});*/
+
+const $presetsList = document.querySelector("[data-presets]") as HTMLElement;
+for (const [key, obj] of cubes) {
+  const $li = document.createElement("li") as HTMLElement;
+  const $label = document.createElement("label") as HTMLLabelElement;
+  const $input = document.createElement("input") as HTMLInputElement;
+  $input.type = "radio";
+  $input.name = "preset";
+  $input.value = key;
+  $input.checked = key === "itten-normalized";
+  $label.appendChild($input);
+
+  const div = `
+    <div>
+      <h3>${obj.title} <span>${obj.year}</span></h3>
+      <strong>${obj.author}</strong>
+    </div>
+  `;
+
+  $label.innerHTML += div;
+  $li.appendChild($label);
+  $presetsList.appendChild($li);
+}
+
+$presetsList.addEventListener(
+  "change",
+  (e) => {
+    const $target = e.target;
+    if (!($target instanceof HTMLInputElement)) {
+      return;
+    }
+    const value = $target.value;
+    const cube = cubes.get(value);
+    if (cube) {
+      currentCube = cube.cube;
+      repaint();
+    }
+  },
+  true,
+);

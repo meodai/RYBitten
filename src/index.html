@@ -11,7 +11,71 @@
   </head>
   <body>
     <div class="layout">
-      <nav class="nav"></nav>
+      <nav class="nav">
+        <div class="nav__inner">
+          <ul data-presets></ul>
+          <div class="navcube">
+            <form class="edges" data-edges2>
+              <svg viewBox="0 0 100 100" class="cube">
+                <g>
+                  <line x1="33" y1="3" x2="6" y2="30" />
+                  <line x1="66" y1="90" x2="93" y2="63" />
+                  <rect
+                    x="33"
+                    y="3"
+                    width="60"
+                    height="60"
+                    class="cube__back"
+                  />
+                  <rect
+                    x="6"
+                    y="30"
+                    width="60"
+                    height="60"
+                    class="cube__front"
+                  />
+                  <polyline
+                    points="33,30 33,63 93,63"
+                    class="cube__coverline"
+                  />
+                </g>
+              </svg>
+              <label class="g">
+                <b>green</b>
+                <span><input data-c2="g" type="color" /></span>
+              </label>
+              <label class="b">
+                <b>blue</b>
+                <span><input data-c2="b" type="color" /></span>
+              </label>
+              <label class="black">
+                <b>black</b>
+                <span><input data-c2="0" type="color" /></span>
+              </label>
+              <label class="v">
+                <b>pink</b>
+                <span><input data-c2="v" type="color" /></span>
+              </label>
+              <label class="y">
+                <b>yellow</b>
+                <span><input data-c2="y" type="color" /></span>
+              </label>
+              <label class="w">
+                <b>white</b>
+                <span><input data-c2="w" type="color" /></span>
+              </label>
+              <label class="o">
+                <b>orange</b>
+                <span><input data-c2="o" type="color" /></span>
+              </label>
+              <label class="r">
+                <b>red</b>
+                <span><input data-c2="r" type="color" /></span>
+              </label>
+            </form>
+          </div>
+        </div>
+      </nav>
       <div class="main">
         <main>
           <div class="intro block">

@@ -2,7 +2,13 @@ export type ColorCoords = [number, number, number];
 export type ColorCube = ColorCoords[] & { length: 8 };
 export type CubesMap = Map<
   string,
-  { title: string; reference: string; year: number; cube: ColorCube }
+  {
+    title: string;
+    author: string;
+    reference: string;
+    year: number;
+    cube: ColorCube;
+  }
 >;
 
 export const RYB_ITTEN: ColorCube = [
@@ -179,14 +185,16 @@ export const RYB_IPPSKETCH: ColorCube = [
 const cubes: CubesMap = new Map();
 
 cubes.set("itten", {
-  title: "Johannes Itten: Chromatic Circle",
+  title: "Chromatic Circle",
+  author: "Johannes Itten",
   year: 1961,
   reference: "farbkreis_extended.png",
   cube: RYB_ITTEN,
 });
 
 cubes.set("itten-normalized", {
-  title: "Johannes Itten: Chromatic Circle (Normalized)",
+  title: "Chromatic Circle (Normalized)",
+  author: "Johannes Itten",
   year: 1961,
   reference:
     "Johannes-Itten-The-chromatic-circle-some-exercises-on-the-contrast-of-pure-colors.webp",
@@ -194,49 +202,56 @@ cubes.set("itten-normalized", {
 });
 
 cubes.set("itten-neutral", {
-  title: "Johannes Itten: Nathan Gossett & Baoquan Chen",
+  title: "Nathan Gossett & Baoquan Chen",
+  author: "Johannes Itten",
   year: 1961,
   reference: "itten-ryb.pdf",
   cube: RYB_ITTEN_NEUTRAL,
 });
 
 cubes.set("bezold", {
-  title: "Wilhelm von Bezold: Farbentafel",
+  title: "Farbentafel",
+  author: "Wilhelm von Bezold",
   year: 1874,
   reference: "Bezold_Farbentafel_1874.jpg",
   cube: RYB_BEZOLD,
 });
 
 cubes.set("boutet", {
-  title: "Claude Boutet: Twelve-color color circles ",
+  title: "Twelve-color color circles ",
+  author: "Claude Boutet",
   year: 1708,
   reference: "Boutet_1708_color_circles.jpg",
   cube: RYB_BOUTET,
 });
 
 cubes.set("hett", {
-  title: "J. A. H. Hett: RGV Color Wheel",
+  title: "RGV Color Wheel",
+  author: "J. A. H. Hett",
   year: 1908,
   reference: "RGV_color_wheel_1908",
   cube: RYB_HETT,
 });
 
 cubes.set("schiffermueller", {
-  title: "Ignaz Schiffermüller: Versuch eines Farbensystems",
+  title: "Versuch eines Farbensystems",
+  author: "Ignaz Schiffermüller",
   year: 1772,
   reference: "020_schiffermueller1.jpg",
   cube: RYB_SCHIFFERMUELLER,
 });
 
 cubes.set("harris", {
-  title: "Harris: The Natural System of Colours",
+  title: "The Natural System of Colours",
+  author: "Moses Harris",
   year: 1766,
   reference: "Moses_Harris_The_Natural_System_of_Colours.jpg",
   cube: RYB_HARRIS,
 });
 
 cubes.set("goethe", {
-  title: "Goethe: Farbenkreis",
+  title: "Farbenkreis",
+  author: "Johann Wolfgang von Goethe",
   year: 1809,
   reference:
     "Goethe_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens_1809.jpg",
@@ -245,43 +260,47 @@ cubes.set("goethe", {
 
 cubes.set("munsell", {
   title: "Munsell Color System",
+  author: "Albert Henry Munsell",
   year: 1905,
   reference: "munsell-atlas-11.jpg",
   cube: RYB_MUNSELL,
 });
 
 cubes.set("hayer", {
-  title:
-    "Charles Hayter:  New Practical Treatise on the Three Primitive Colours",
+  title: "New Practical Treatise on the Three Primitive Colours",
+  author: "Charles Hayter",
   year: 1826,
   reference: "Color_diagram_Charles_Hayter.jpg",
   cube: RYB_HAYER,
 });
 
 cubes.set("bormann", {
-  title:
-    "Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course",
+  title: "Gouache tint study for Josef Alber's Preliminary Course",
+  author: "Heinrich-Siegfried Bormann",
   year: 1931,
   reference: "bormann.png",
   cube: RYB_BORMANN,
 });
 
 cubes.set("albers", {
-  title: "Josef Albers: Interaction of Color",
+  title: "Interaction of Color",
+  author: "Josef Albers",
   year: 1942,
   reference: "albers-color-harmony.jpg",
   cube: RYB_ALBERS,
 });
 
 cubes.set("ippsketch", {
-  title: "Ippsketch: Imposter Syndrome",
+  title: "Imposter Syndrome",
+  author: "Ippsketch",
   year: 2021,
   reference: "ippsketch.png",
   cube: RYB_IPPSKETCH,
 });
 
 cubes.set("rgb", {
-  title: "James Clerk Maxwell: Inverted RGB",
+  title: "Inverted RGB",
+  author: "James Clerk Maxwell",
   year: 1860,
   reference: "rgb-cube.png",
   cube: [
