@@ -13,6 +13,38 @@ const formatCSS = (rgb: ColorCoords): string => {
   return `rgb(${Math.round(rgb[0] * 255)} ${Math.round(rgb[1] * 255)} ${Math.round(rgb[2] * 255)})`;
 };
 
+/*
+function sRGBtoLin(colorChannel: number): number {
+  // Send this function a decimal sRGB gamma encoded color value
+  // between 0.0 and 1.0, and it returns a linearized value.
+
+  if ( colorChannel <= 0.04045 ) {
+    return colorChannel / 12.92;
+  } else {
+    return Math.pow((( colorChannel + 0.055)/1.055),2.4);
+  }
+}
+
+function rgbToLuminance(rgb: ColorCoords): number {
+  // Convert RGB to luminance (Y component)
+  // https://en.wikipedia.org/wiki/Relative_luminance
+  const [r, g, b] = rgb.map(sRGBtoLin);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function YtoLstar(Y: number): number {
+  // Send this function a luminance value between 0.0 and 1.0,
+  // and it returns L* which is "perceptual lightness"
+  if ( Y <= (216/24389)) {       // The CIE standard states 0.008856 but 216/24389 is the intent for 0.008856451679036
+    return Y * (24389/27);  // The CIE standard states 903.3, but 24389/27 is the intent, making 903.296296296296296
+  }
+  return Math.pow(Y,(1/3)) * 116 - 16;
+}
+
+function rgbToLstar(rgb: ColorCoords): number {
+  return YtoLstar(rgbToLuminance(rgb));
+}*/
+
 const hexToRgb = (hex: string): ColorCoords => {
   const bigint = parseInt(hex.slice(1), 16);
   const r = (bigint >> 16) & 255;
@@ -339,7 +371,18 @@ const repaint = () => {
     "--gradientHard",
     colorsToHardStopGradients(colors),
   );
+
   document.documentElement.style.setProperty("--gradient", colors.join());
+  /*
+  document.documentElement.style.setProperty(
+    "--gradient",
+    colors.map(c => {
+      const [r, g, b] = c.match(/\d+/g)!.map(Number);
+      const lstar = rgbToLstar([r/255, g/255, b/255]);
+      console.log(lstar)
+      return `rgb(${Math.floor(lstar * 2.5)} ${Math.floor(lstar * 2.5)} ${Math.floor(lstar * 2.5)})`;
+    }).join(),
+  );*/
 
   for (let i = 0; i <= lightnessSteps; i++) {
     const colors = getColorsHSL(36, 0.4, 0.2 + (i / lightnessSteps) * 0.7);

@@ -169,6 +169,20 @@ export const RYB_ALBERS: ColorCube = [
   [0 / 255, 0 / 255, 1 / 255],
 ];
 
+//Michel Eugène Chevreul / Cercle_chromatique / Cercle_chromatique_Chevreul_2.jpg
+export const RYB_CHEVREUL: ColorCube = [
+  [241 / 255, 236 / 255, 230 / 255],
+  [185 / 255, 34 / 255, 17 / 255],
+  [231 / 255, 200 / 255, 52 / 255],
+  [232 / 255, 90 / 255, 26 / 255],
+  [26 / 255, 70 / 255, 79 / 255],
+  [82 / 255, 15 / 255, 47 / 255],
+  [67 / 255, 111 / 255, 33 / 255],
+  [29 / 255, 28 / 255, 28 / 255],
+];
+
+// 1er cercle chromatique
+
 // contemporary
 
 export const RYB_IPPSKETCH: ColorCube = [
@@ -180,6 +194,17 @@ export const RYB_IPPSKETCH: ColorCube = [
   [94 / 255, 89 / 255, 161 / 255],
   [86 / 255, 139 / 255, 70 / 255],
   [38 / 255, 38 / 255, 38 / 255],
+];
+
+export const RYB_RYAN: ColorCube = [
+  [237 / 255, 235 / 255, 236 / 255],
+  [242 / 255, 146 / 255, 109 / 255],
+  [245 / 255, 234 / 255, 143 / 255],
+  [247 / 255, 194 / 255, 115 / 255],
+  [89 / 255, 118 / 255, 212 / 255],
+  [237 / 255, 191 / 255, 243 / 255],
+  [153 / 255, 201 / 255, 113 / 255],
+  [50 / 255, 63 / 255, 66 / 255],
 ];
 
 const cubes: CubesMap = new Map();
@@ -290,12 +315,28 @@ cubes.set("albers", {
   cube: RYB_ALBERS,
 });
 
+cubes.set("chevreul", {
+  title: "Cercle chromatique",
+  author: "Michel Eugène Chevreul",
+  year: 1839,
+  reference: "Cercle_chromatique_Chevreul_2.jpg",
+  cube: RYB_CHEVREUL,
+});
+
 cubes.set("ippsketch", {
   title: "Imposter Syndrome",
   author: "Ippsketch",
   year: 2021,
   reference: "ippsketch.png",
   cube: RYB_IPPSKETCH,
+});
+
+cubes.set("ryan", {
+  title: "Ryan",
+  author: "Ryan",
+  year: 2024,
+  reference: "ryan.png",
+  cube: RYB_RYAN,
 });
 
 cubes.set("rgb", {
