@@ -332,7 +332,7 @@ cubes.set("ippsketch", {
 });
 
 cubes.set("ryan", {
-  title: "Ryan",
+  title: "Compositions Palette",
   author: "Ryan",
   year: 2024,
   reference: "ryan.png",
