@@ -183,6 +183,17 @@ export const RYB_CHEVREUL: ColorCube = [
 
 // 1er cercle chromatique
 
+export const RYB_JAPSCHOOL: ColorCube = [
+  [215 / 255, 208 / 255, 180 / 255],
+  [202 / 255, 0 / 255, 17 / 255],
+  [220 / 255, 170 / 255, 0 / 255],
+  [229 / 255, 76 / 255, 32 / 255],
+  [0 / 255, 126 / 255, 157 / 255],
+  [137 / 255, 37 / 255, 79 / 255],
+  [0 / 255, 110 / 255, 60 / 255],
+  [31 / 255, 27 / 255, 28 / 255],
+];
+
 // contemporary
 
 export const RYB_IPPSKETCH: ColorCube = [
@@ -322,6 +333,16 @@ cubes.set("chevreul", {
   reference: "Cercle_chromatique_Chevreul_2.jpg",
   cube: RYB_CHEVREUL,
 });
+
+cubes.set("japschool", {
+  title: "Japanese Textbook",
+  author: "Japanese School",
+  year: 1930,
+  reference: "japschool.png",
+  cube: RYB_JAPSCHOOL,
+});
+
+// mordern
 
 cubes.set("ippsketch", {
   title: "Imposter Syndrome",
