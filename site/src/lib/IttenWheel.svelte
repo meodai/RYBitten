@@ -1,49 +1,47 @@
 <script lang="ts">
   import {currentColors} from '../store';
-  const { cube } = currentColors;
 
-  export let rings: number = 4;
+  export let hasOutline = false;
 
-  // error if number is higher than 4
-  if (rings > 4) {
-    throw new Error('rings must be 4 or lower');
-  }
-
-  const varsForLayer = [
-    '--stops-3', 
-    '--stops-3-alt', 
-    '--stops-12', 
-    '--stops-24',
-    '--stops-48'
+  export let ringWeights: number[] = [
+    1, 1, 1, 2
+  ];
+  export let varsForLayer = [
+    '--stops-192',
+    '--stops-96',
+    '--stops-48',
+    '--stops-24', 
+    '--stops-12',
+    '--stops-3-alt',
+    '--stops-3',
   ];
 
-  const ringWeights = [
-    2, // ring--center 
-    1,
-    1, 
-    1, // most outer ring
-  ].slice(0, rings);
+  // create new varsForLayer without the --stops-3 and --stops-3-alt
+  $: slicedVarsForLayers = varsForLayer.slice(0,-2).reverse().slice(0, ringWeights.length-1).reverse();
+  $: outerRins = ringWeights.length - 1;
+  let sliceAjust = [12, 24, 48, 96, 192];
+  $: sliceAjustAdjusted = sliceAjust.slice(0, ringWeights.length-1).reverse();
 
-  const ringWeightsSum = ringWeights.reduce((a, b) => a + b, 0);
-  const ringWeightsNormalized = ringWeights.map(w => w / ringWeightsSum);
+  $: console.clear()
 
+  $: ringWeightsSum = ringWeights.reduce((a, b) => a + b, 0);
+  $: ringWeightsNormalized = ringWeights.map(w => w / ringWeightsSum);
+  $: ringWeightsCumulative = ringWeightsNormalized.reduce((acc, w, i) => {
+    acc.push(acc[i] + w);
+    return acc;
+  }, [0]).slice(0, -1);
 </script>
 
-<div class="ittenWheel">
-  {#if rings > 2}
-    {#each Array.from({length: rings - 1}) as _, i}
-      <div class="ittenWheel__ring" style="
-        --i: {i/(rings-1)};
-        --weight: {ringWeightsNormalized[rings-2-i]};
-        --bg: var({varsForLayer[i]});
-      ">
-        {ringWeightsNormalized[rings-(i+1)]}
+<div class="ittenWheel {hasOutline ? 'ittenWheel--outline' : ''}">
+  {#if outerRins > 0}
+    {#each ringWeightsCumulative as weight, i}
+      <div class="ittenWheel__ring" style="--r: {sliceAjustAdjusted[i]}; --weight: {weight}; --bg: var({slicedVarsForLayers[i]})">
       </div>
     {/each}
   {/if}
 
-  <div class="ittenWheel__ring ittenWheel__ring--center {rings == 1 ? 'ittenWheel__ring--empty': ''}" style="--weight: {ringWeightsNormalized[0]};">
-    <div class="ittenWheel__ring ittenWheel__center" style="--weight: 1;">
+  <div class="ittenWheel__ring ittenWheel__ring--center {ringWeights.length < 1 ? 'ittenWheel__ring--empty': ''}" style="--weight: {ringWeights.length > 1 ? ringWeightsCumulative[ringWeightsCumulative.length - 1] : 0}; --bg: var(--stops-3-alt);">
+    <div class="ittenWheel__ring ittenWheel__center" style="--weight: 0;--bg: var(--stops-3);">
     </div>
   </div>
 </div>
@@ -55,15 +53,19 @@
     height: 10rem;
   }
 
+  .ittenWheel--outline .ittenWheel__ring {
+    box-shadow: 0 0 0 0.1rem white;
+  }
+
   .ittenWheel__ring {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: calc(100% * var(--weight));
+    width: calc(100% - var(--weight) * 100%);
     transform: translate(-50%, -50%);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: conic-gradient(var(--bg));
+    background: conic-gradient(from calc(360deg/var(--r,0)/-2) at 50% 50%, var(--bg));
   }
 
   .ittenWheel__ring--center {
@@ -75,7 +77,7 @@
   }
 
   .ittenWheel__center {
-    background: conic-gradient(from -60deg at 50% 50%,var(--stops-3));
+    background: conic-gradient(from -60deg at 50% 50%, var(--stops-3));
     clip-path: polygon(50% 0%,6% 75%,94% 75%);
   }
 </style>

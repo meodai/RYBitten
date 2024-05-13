@@ -45,10 +45,18 @@
   </div>
   <main>
     <h1>Vite + Svelte</h1>
-    <IttenWheel rings={1} />
-    <IttenWheel rings={2} />
-    <IttenWheel rings={3} />
-    <IttenWheel rings={4} />
+    <IttenWheel ringWeights={[]} />
+    <IttenWheel ringWeights={[1]} />
+    <IttenWheel ringWeights={[1,1.75]} />
+    <IttenWheel ringWeights={[1,1,1.8]} />
+    <IttenWheel ringWeights={[1,1,1,2.5]} />
+
+
+    <IttenWheel ringWeights={[]} hasOutline={true} />
+    <IttenWheel ringWeights={[1]} hasOutline={true} />
+    <IttenWheel ringWeights={[1,1.75]} hasOutline={true} />
+    <IttenWheel ringWeights={[1,1,1.8]} hasOutline={true} />
+    <IttenWheel ringWeights={[1,1,1,2.5]} hasOutline={true} />
 
     <div class="card">
       <h2>Current Colors</h2>
