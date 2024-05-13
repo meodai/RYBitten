@@ -1,6 +1,5 @@
 import { formatCSS } from "./formatCSS";
 import { rybHsl2rgb, cubes } from "rybitten";
-import type { ColorCoords } from "rybitten";
 
 export const getColorsHSL = (
   amount = 12,

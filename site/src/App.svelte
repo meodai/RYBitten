@@ -4,6 +4,9 @@
   import {getColorsHSL} from './lib/fn/getColorsHSL';
   import {colorsToGradient} from './lib/fn/colorsToGradient';
 
+  import { formatCSS } from "./lib/fn/formatCSS";
+  import { ryb2rgb, cubes } from "rybitten";
+
   import {currentColors} from './store';
   const { cube } = currentColors;
 
@@ -31,6 +34,8 @@
       oldScool: true,
       cube: $cube,
     }), true),
+    '--black': formatCSS(ryb2rgb([1,1,1], {cube: $cube})),
+    '--white': formatCSS(ryb2rgb([0,0,0], {cube: $cube})),
   };
 
   $: currentStylesString = Object.entries(currentStyles)
@@ -71,4 +76,13 @@
 </div>
 
 <style>
+  .layout {
+    --bg: var(--white);
+    --onBg: var(--black);
+    --line: var(--onBg);
+    --lineInverse: var(--bg);
+
+    background: var(--bg);
+    color: var(--onBg);
+  }
 </style>

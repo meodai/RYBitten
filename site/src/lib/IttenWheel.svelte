@@ -35,13 +35,13 @@
 <div class="ittenWheel {hasOutline ? 'ittenWheel--outline' : ''}">
   {#if outerRins > 0}
     {#each ringWeightsCumulative as weight, i}
-      <div class="ittenWheel__ring" style="--r: {sliceAjustAdjusted[i]}; --weight: {weight}; --bg: var({slicedVarsForLayers[i]})">
+      <div class="ittenWheel__ring" style="--r: {sliceAjustAdjusted[i]}; --weight: {weight}; --cbg: var({slicedVarsForLayers[i]})">
       </div>
     {/each}
   {/if}
 
-  <div class="ittenWheel__ring ittenWheel__ring--center {ringWeights.length < 1 ? 'ittenWheel__ring--empty': ''}" style="--weight: {ringWeights.length > 1 ? ringWeightsCumulative[ringWeightsCumulative.length - 1] : 0}; --bg: var(--stops-3-alt);">
-    <div class="ittenWheel__ring ittenWheel__center" style="--weight: 0;--bg: var(--stops-3);">
+  <div class="ittenWheel__ring ittenWheel__ring--center {ringWeights.length < 1 ? 'ittenWheel__ring--empty': ''}" style="--weight: {ringWeights.length > 1 ? ringWeightsCumulative[ringWeightsCumulative.length - 1] : 0}; --cbg: var(--stops-3-alt);">
+    <div class="ittenWheel__ring ittenWheel__center" style="--weight: 0;--cbg: var(--stops-3);">
     </div>
   </div>
 </div>
@@ -54,7 +54,7 @@
   }
 
   .ittenWheel--outline .ittenWheel__ring {
-    box-shadow: 0 0 0 0.1rem white;
+    box-shadow: 0 0 0 0.1rem var(--lineInverse);
   }
 
   .ittenWheel__ring {
@@ -65,7 +65,7 @@
     transform: translate(-50%, -50%);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: conic-gradient(from calc(360deg/var(--r,0)/-2) at 50% 50%, var(--bg));
+    background: conic-gradient(from calc(360deg/var(--r,0)/-2) at 50% 50%, var(--cbg));
   }
 
   .ittenWheel__ring--center {
