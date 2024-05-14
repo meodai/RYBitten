@@ -1,6 +1,4 @@
 <script lang="ts">
-  import {currentColors} from '../store';
-
   export let hasOutline = false;
 
   export let ringWeights: number[] = [
@@ -32,7 +30,7 @@
   }, [0]).slice(0, -1);
 </script>
 
-<div class="ittenWheel {hasOutline ? 'ittenWheel--outline' : ''}">
+<div class="ittenWheel {hasOutline ? 'ittenWheel--outline' : ''} {!ringWeights.length ? 'ittenWheel--triangle' : ''}">
   {#if outerRins > 0}
     {#each ringWeightsCumulative as weight, i}
       <div class="ittenWheel__ring" style="--r: {sliceAjustAdjusted[i]}; --weight: {weight}; --cbg: var({slicedVarsForLayers[i]})">
@@ -49,12 +47,12 @@
 <style> 
   .ittenWheel {
     position: relative;
-    width: 10rem;
-    height: 10rem;
+    width: var(--widthLogo, 100%);
+    aspect-ratio: 1;
   }
 
   .ittenWheel--outline .ittenWheel__ring {
-    box-shadow: 0 0 0 0.1rem var(--lineInverse);
+    box-shadow: 0 0 0 calc(2 * var(--lineWidth)) var(--lineInverse);
   }
 
   .ittenWheel__ring {
@@ -78,6 +76,6 @@
 
   .ittenWheel__center {
     background: conic-gradient(from -60deg at 50% 50%, var(--stops-3));
-    clip-path: polygon(50% 0%,6% 75%,94% 75%);
+    clip-path: polygon(50% 0%,6.75% 75%,93.25% 75%);
   }
 </style>

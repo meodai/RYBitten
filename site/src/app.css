@@ -27,16 +27,16 @@
 }
 
 @font-face {
-  font-family: 'Apple Garamond Light';
+  font-family: 'Apple Garamond';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100;
   src: local('Apple Garamond Light'), url('AppleGaramond-Light.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'Apple Garamond Light';
+  font-family: 'Apple Garamond';
   font-style: italic;
-  font-weight: 400;
+  font-weight: 100;
   src: local('Apple Garamond Light'), url('AppleGaramond-LightItalic.woff') format('woff');
 }
 /*
@@ -54,6 +54,7 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background: #202126;
 }
 
 /*
@@ -100,16 +101,35 @@ h6 {
 }
 
 :root {
-  font-family: 'Apple Garamond';
-  line-height: 1.5;
-  font-weight: 400;
+  line-height: 1.4;
+  font-weight: 100;
 
   color-scheme: light dark;
 
   font-family: 'Apple Garamond', Times, serif;
+  font-size: calc(.65em + 1vmin);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --lineWidth: 0.05rem;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+}
+
+h2 {
+  font-size: 3rem;
+  max-width: 30ch;
+  line-height: .95;
+}
+
+h1 + p,
+h2 + p,
+h3 + p {
+  margin-top: 2em;
 }
