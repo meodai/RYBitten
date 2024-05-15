@@ -1,6 +1,6 @@
 <script lang="ts">
   import IttenWheel from './lib/IttenWheel.svelte';
-  import Swatch from './lib/Swatch.svelte';
+  import SwatchPair from './lib/SwatchPair.svelte';
 
   import { getColorsHSL } from './lib/fn/getColorsHSL';
   import { colorsToGradient } from './lib/fn/colorsToGradient';
@@ -67,13 +67,8 @@
 
     <section class="section section--itten section--split">
       <figure class="section__left">
-        <div class="illustration swatches">
-          <div class="swatches__swatch">
-            <Swatch name="Black" color={[1,1,1]} />
-          </div>
-          <div class="swatches__swatch">
-            <Swatch name="White" color={[0,0,0]} />
-          </div>
+        <div class="illustration">
+          <SwatchPair rybcolor={[1,1,1]} />
         </div>
       </figure>
       <div class="section__right">
@@ -261,19 +256,4 @@
     position: relative;
     aspect-ratio: 1;
   }
-  .swatches {
-
-  }
-  .swatches__swatch {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-left: -2.75rem;
-    margin-top: -2.75rem;
-  }
-  .swatches__swatch + .swatches__swatch {
-    margin-left: 2.75rem;
-    margin-top: 2.75rem;
-  } 
 </style>
