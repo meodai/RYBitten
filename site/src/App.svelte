@@ -1,6 +1,7 @@
 <script lang="ts">
   import IttenWheel from './lib/IttenWheel.svelte';
   import SwatchPair from './lib/SwatchPair.svelte';
+  import Cube from './lib/Cube.svelte';
 
   import { getColorsHSL } from './lib/fn/getColorsHSL';
   import { colorsToGradient } from './lib/fn/colorsToGradient';
@@ -8,41 +9,46 @@
   import { formatCSS } from "./lib/fn/formatCSS";
   import { ryb2rgb, cubes } from "rybitten";
 
-  import {currentColors} from './store';
+  import { currentColors } from './store';
   const { cube } = currentColors;
+
+  let currentCube = $cube
+  cube.subscribe((value) => {
+    currentCube = value;
+  });
 
   $: currentStyles = {
     '--stops-3': colorsToGradient(
       getColorsHSL(3, 1, 0.5, {
         oldScool: true,
-        cube: $cube,
+        cube: currentCube,
       }), true),
     '--stops-3-alt': colorsToGradient(
       getColorsHSL(6, 1, 0.5, {
         oldScool: true,
-        cube: $cube,
+        cube: currentCube,
       }).filter((_:string, i:number) => i % 2), true),
     '--stops-12': colorsToGradient(
       getColorsHSL(12, 1, 0.5, {
         oldScool: true,
-        cube: $cube,
+        cube: currentCube,
       }), true),
     '--stops-24': colorsToGradient(getColorsHSL(24, 1, 0.5, {
       oldScool: true,
-      cube: $cube,
+      cube: currentCube,
       }), true),
     '--stops-48': colorsToGradient(getColorsHSL(48, 1, 0.5, {
       oldScool: true,
-      cube: $cube,
+      cube: currentCube,
     }), true),
-    '--black': formatCSS(ryb2rgb([1,1,1], {cube: $cube})),
-    '--white': formatCSS(ryb2rgb([0,0,0], {cube: $cube})),
+    '--black': formatCSS(ryb2rgb([1,1,1], {cube: currentCube})),
+    '--white': formatCSS(ryb2rgb([0,0,0], {cube: currentCube})),
   };
 
   $: currentStylesString = Object.entries(currentStyles)
     .map(([key, value]) => `${key}: ${value};`).join('');
 
-  $: cubeString = JSON.stringify($cube);
+  $: cubeString = JSON.stringify(currentCube);
 </script>
 
 <div class="layout" style={currentStylesString}>
@@ -65,7 +71,7 @@
       </div>
     </div>
 
-    <section class="section section--itten section--split">
+    <section class="section section--split">
       <figure class="section__left">
         <div class="illustration">
           <SwatchPair rybcolor={[1,1,1]} />
@@ -74,6 +80,37 @@
       <div class="section__right">
         <h2>RYB Conversion</h2>
         <p>The RYB color model is a subtractive system traditionally used in art and design, characterized by its foundational primary colors: red, yellow, and blue. Through their combination, a rich array of secondary colors emerges, offering a versatile palette. In the emulated RYB color gamut, black and white are reversed relative to the RGB model. This inversion reflects the subtractive nature of RYB, contrasting with the additive process in RGB.</p>
+      </div>
+    </section>
+
+    <section class="section section--split">
+      <figure class="section__left">
+        <div class="illustration">
+          <div class="illustration__cube">
+            <Cube />
+          </div>
+        </div>
+      </figure>
+      <div class="section__right">
+        <h2>RYB Colorspace</h2>
+        <p>
+          This library employs trilinear interpolation to convert between
+          RGB and RYB color spaces, allowing for a flexible and
+          imaginative approach to color representation that remains
+          compatible with the RGB model.
+        </p>
+        <p>
+          The RGB/RYB cube is meticulously calibrated to resemble Johannes
+          Itten's
+          <a
+            href="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/#jp-carousel-809511"
+            >chromatic circle</a
+          >. By adjusting the edges of the cube, you can observe how color
+          shifts and create custom color spaces tailored to your artistic
+          vision. This flexibility offers a unique perspective for
+          designers, artists, and developers seeking to explore new
+          dimensions of color.
+        </p>
       </div>
     </section>
     <!--
@@ -255,5 +292,14 @@
   .illustration {
     position: relative;
     aspect-ratio: 1;
+  }
+
+  .illustration__cube {
+    width: 50vmin;
+    aspect-ratio: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>
