@@ -3,6 +3,7 @@
   import HslWheel from './lib/HSLWheel.svelte';
   import SwatchPair from './lib/SwatchPair.svelte';
   import Cube from './lib/Cube.svelte';
+  import NamedSwatches from './lib/NamedSwatches.svelte';
 
   import { getColorsHSL } from './lib/fn/getColorsHSL';
   import { colorsToGradient } from './lib/fn/colorsToGradient';
@@ -164,11 +165,24 @@
     <IttenWheel ringWeights={[1,1,1,2.5]} hasOutline={true} />
     -->
 
+    <section class="section">
+      <div class="section__top">
+        <h2>RYBitten Swatches</h2>
+        <p>
+          The RYBitten color library offers a range of swatches that reflect the unique characteristics of the RYB color space. By combining primary and secondary colors, you can create vibrant palettes that evoke the spirit of traditional art and design. These swatches are designed to be compatible with a wide range of tools and applications, providing a versatile resource for artists, designers, and developers.
+        </p>
+      </div>
+      <figure class="section__bottom">
+        <NamedSwatches />
+      </figure>
+    </section>
+
     <div class="section">
       <h2>Current Colors</h2>
       {cubeString}
     </div>
   </main>
+
   <div class="layout__footer">
 
   </div>
