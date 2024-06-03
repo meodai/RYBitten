@@ -20,8 +20,6 @@
   let sliceAjust = [12, 24, 48, 96, 192];
   $: sliceAjustAdjusted = sliceAjust.slice(0, ringWeights.length-1).reverse();
 
-  $: console.clear()
-
   $: ringWeightsSum = ringWeights.reduce((a, b) => a + b, 0);
   $: ringWeightsNormalized = ringWeights.map(w => w / ringWeightsSum);
   $: ringWeightsCumulative = ringWeightsNormalized.reduce((acc, w, i) => {

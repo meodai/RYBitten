@@ -227,6 +227,7 @@
   transform: translate(0.2rem, 0.2rem);
   line-height: 1;
   font-size: 0.8em;
+  font-weight: 100;
 }
 
 .edges .g {

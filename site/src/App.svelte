@@ -1,5 +1,6 @@
 <script lang="ts">
   import IttenWheel from './lib/IttenWheel.svelte';
+  import HslWheel from './lib/HSLWheel.svelte';
   import SwatchPair from './lib/SwatchPair.svelte';
   import Cube from './lib/Cube.svelte';
 
@@ -43,6 +44,9 @@
     }), true),
     '--black': formatCSS(ryb2rgb([1,1,1], {cube: currentCube})),
     '--white': formatCSS(ryb2rgb([0,0,0], {cube: currentCube})),
+    '--red': formatCSS(ryb2rgb([1,0,0], {cube: currentCube})),
+    '--yellow': formatCSS(ryb2rgb([1,1,0], {cube: currentCube})),
+    '--blue': formatCSS(ryb2rgb([0,0,1], {cube: currentCube})),
   };
 
   $: currentStylesString = Object.entries(currentStyles)
@@ -113,6 +117,38 @@
         </p>
       </div>
     </section>
+
+    <section class="section section--split">
+      <figure class="section__left">
+        <div class="illustration">
+          <div class="illustration__wheel">
+            <IttenWheel ringWeights={[1,1,1,2.5]} />
+          </div>
+        </div>
+      </figure>
+      <div class="section__right">
+        <h2>Color Wheel</h2>
+        <p>
+          The RYBItten HSL wheel is derived by first calculating RGB values, which are then converted to a custom RYB color space. This dual-step process results in a unique color wheel that reflects the principles of Johannes Itten's chromatic circle.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--split">
+      <figure class="section__left">
+        <div class="illustration">
+          <div class="illustration__wheel">
+            <HslWheel />
+          </div>
+        </div>
+      </figure>
+      <div class="section__right">
+        <h2>RYBitten HSL</h2>
+        <p>
+          Utilizing the HSL model allows for seamless integration with existing color generation libraries, providing an accessible pathway for artists, designers, and developers to experiment with vibrant, customized palettes. This approach ensures compatibility with a wide range of tools while maintaining the aesthetic characteristics of the RYB color space. For ease of use, the lightness value is inverted to behave intuitively.
+        </p>
+      </div>
+    </section>
     <!--
     <IttenWheel ringWeights={[]} />
     <IttenWheel ringWeights={[1]} />
@@ -128,14 +164,10 @@
     <IttenWheel ringWeights={[1,1,1,2.5]} hasOutline={true} />
     -->
 
-    <div class="card">
+    <div class="section">
       <h2>Current Colors</h2>
       {cubeString}
     </div>
-
-    <p class="read-the-docs">
-      Click on the Vite and Svelte logos to learn more
-    </p>
   </main>
   <div class="layout__footer">
 
@@ -251,6 +283,15 @@
   .section--split p {
     max-width: 50ch;
   }
+  .section--split p + p {
+    margin-top: 1em;
+  }
+  /*
+  .section--split p::first-letter {
+    initial-letter: 2;
+    margin-inline-end: 1ex;
+    font-weight: 100;
+  }*/
 
 
   .intro {
@@ -294,12 +335,18 @@
     aspect-ratio: 1;
   }
 
-  .illustration__cube {
+  .illustration__cube,
+  .illustration__wheel {
     width: 50vmin;
     aspect-ratio: 1;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .illustration__wheel {
+    box-sizing: border-box;
+    padding: 7%;
   }
 </style>

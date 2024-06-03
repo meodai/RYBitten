@@ -18,9 +18,9 @@ class CurrentColors {
 
   constructor(
   ) {
-    this.currentPreset = writable(cubes.get('itten')!);
+    this.currentPreset = writable(cubes.get('itten-normalized')!);
     this.isCustom = writable(false);
-    this.customCube = writable([...cubes.get('itten')!.cube] as ColorCube);
+    this.customCube = writable([...cubes.get('itten-normalized')!.cube] as ColorCube);
   }
   
   get cube () {
@@ -38,8 +38,6 @@ class CurrentColors {
   set preset (preset: string) {
     this.currentPreset.set(cubes.get(preset)!);
   }
-
-  
 
   get presets () {
     return cubes;
