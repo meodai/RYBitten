@@ -5,7 +5,6 @@
 
   import { currentColors } from '../store';
   import type { ColorCube } from "rybitten";
-
   const { cube } = currentColors;
 
   export let ramps = 18;
@@ -48,7 +47,7 @@
   ];
 
   const getRamps = (amount = 18, stepsPerRamp = 9) => {
-    return new Array(amount - 1).fill(0).map((_, i) => {
+    const ramps = new Array(amount - 1).fill(0).map((_, i) => {
       const h = i / (amount - 1);
       const steps = new Array(stepsPerRamp).fill(0).map((_, j) => {
         const l = (j + 1) / (stepsPerRamp + 1);
@@ -57,7 +56,19 @@
         });
       });
       return steps;
-    })
+    });
+
+    /*
+    // add black and white
+    const black = new Array(stepsPerRamp).fill(0).map((_, j) => {
+      const l = (j + 1) / (stepsPerRamp + 1);
+      return rybHsl2rgb([0, 0, 1 - l], {
+        cube: currentCube,
+      });
+    });
+    */
+
+    return ramps
   };
 
   let currentRamps = getRamps(ramps, stepsPerRamp);

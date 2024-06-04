@@ -1,5 +1,6 @@
 <script lang="ts">
   import IttenWheel from './lib/IttenWheel.svelte';
+  import ColorCloth from './lib/ColorCloth.svelte';
   import HslWheel from './lib/HSLWheel.svelte';
   import SwatchPair from './lib/SwatchPair.svelte';
   import Cube from './lib/Cube.svelte';
@@ -177,10 +178,15 @@
       </figure>
     </section>
 
+    <figure class="section">
+      <ColorCloth />
+    </figure>
     <div class="section">
       <h2>Current Colors</h2>
       {cubeString}
     </div>
+
+
   </main>
 
   <div class="layout__footer">
