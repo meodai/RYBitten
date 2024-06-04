@@ -203,6 +203,11 @@
 
     color: var(--onBg);
   }
+
+  ::selection {
+    background: var(--onBg);
+    color: var(--bg);
+  }
   .layout::before,
   .layout::after {
     content: '';
