@@ -113,8 +113,8 @@
 <div class="namedSwatches">
   <div class="namedSwatches__list">
     {#each currentRamps as ramp, i}
-      <h2 class="namedSwatches__title">{romanNumerals[i + 1]}</h2>
       <div class="namedSwatches__ramp" style="--ramp: {i + 1}">
+        <h2 class="namedSwatches__title">{romanNumerals[i + 1]}</h2>
         {#each ramp as color, j}
           <button class="namedSwatches__step" style="--rnd: {-1 + Math.random() * 2}; --rnd2: {Math.random()}; --c: {color};" on:click={() => setActiveIndex(i,j)}>
             <div class="namedSwatches__swatch">
@@ -131,12 +131,15 @@
   .namedSwatches__list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 3rem;
+    justify-content: center;
+    padding: 5%; 
   }
   .namedSwatches__title {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 2rem;
     margin: 0;
+    text-align: center;
+    margin: 0 0 3rem;
   }
 
   .namedSwatches__step {
@@ -160,12 +163,12 @@
     --swatchHeight: calc(4 + var(--rnd2) * 3);
     padding: 0;
 
-    transition: 400ms transform cubic-bezier(0.3, 0.7, 0, 1), 300ms padding cubic-bezier(0.3, 0.7, 0, 1);
+    transition: 400ms transform cubic-bezier(0.3, 0.7, 0, 1), 500ms padding cubic-bezier(0.3, 0.7, 0, 1) 450ms;
   }
 
   .namedSwatches__step:not(:has(.swatch--collapsed)) .namedSwatches__swatch {
     z-index: 1;
     transform: rotate(0) translateX(0);
-    padding: 0 0 2rem;
+    padding: 1.75rem 0;
   }
 </style>

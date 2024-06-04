@@ -25,8 +25,12 @@
     width: 10rem;
     background-color: var(--bg);
     overflow: hidden;
-    transition: 400ms box-shadow cubic-bezier(0.3, 0.7, 0, 1) 100ms, 400ms padding cubic-bezier(0.3, 0.7, 0, 1) 100ms;
     box-sizing: border-box;
+    color: var(--onBg);
+    transition: 400ms box-shadow cubic-bezier(0.3, 0.7, 0, 1) 100ms, 
+                400ms padding cubic-bezier(0.3, 0.7, 0, 1) 100ms,
+                100ms color linear;
+    
   }
   .swatch__color {
     aspect-ratio: 1;
@@ -53,12 +57,18 @@
     font-size: 1.25rem;
     transform: translateY(0%);
     transition: 200ms opacity linear 650ms, 400ms transform cubic-bezier(0.3, 0.7, 0, 1) 600ms;
-
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-bottom: 0.2ex;
+    text-overflow: ellipsis;
   }
 
   .swatch--collapsed {
     padding: 0;
     box-shadow: 0 0 0 var(--lineWidth) var(--bg);
+    color: var(--bg);
   }
 
   .swatch--collapsed .swatch__color {

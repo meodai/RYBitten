@@ -264,7 +264,7 @@
     margin-left: 0.25rem;
   }
   .layout__main {
-    padding: var(--size); 
+    padding: var(--size) calc(var(--bezel-x) * .55); 
     background: var(--bg);
   }
 
@@ -311,6 +311,13 @@
     margin-inline-end: 1ex;
     font-weight: 100;
   }*/
+
+  .section__top {
+    max-width: 70ch;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 10vmin;
+  }
 
 
   .intro {
