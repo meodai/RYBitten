@@ -67,7 +67,7 @@
 
   .swatch--collapsed {
     padding: 0;
-    box-shadow: 0 0 0 var(--lineWidth) var(--bg);
+    box-shadow: 0 0 0 calc(var(--lineWidth) * 2) var(--bg);
     color: var(--bg);
   }
 
