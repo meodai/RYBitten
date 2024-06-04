@@ -171,4 +171,11 @@
     transform: rotate(0) translateX(0);
     padding: 1.75rem 0;
   }
+
+  .namedSwatches__step:has(.swatch--collapsed):hover {
+    z-index: 2;
+    --borderColor: var(--bg);
+  }
+
+  
 </style>

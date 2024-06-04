@@ -13,8 +13,8 @@
 <aside class="swatch{isCollapsed ? ' swatch--collapsed' : ''}" style="--c: {colorCSS}">
   <div class="swatch__color"></div>
   <header class="swatch__label">
-    <span class="swatch__value">{colorString}</span>
     <h4 class="swatch__name">{name}</h4>
+    <span class="swatch__value">{colorString}</span>
   </header>
 </aside>
 
@@ -29,7 +29,8 @@
     color: var(--onBg);
     transition: 400ms box-shadow cubic-bezier(0.3, 0.7, 0, 1) 100ms, 
                 400ms padding cubic-bezier(0.3, 0.7, 0, 1) 100ms,
-                100ms color linear;
+                100ms color linear,
+                100ms background-color linear;
     
   }
   .swatch__color {
@@ -40,23 +41,28 @@
   .swatch__label {
     font-size: 1.5rem;
     line-height: 1;
-    transition: 200ms transform ease-out 500ms, 300ms height cubic-bezier(0.3, 0.7, 0, 1) 500ms;
-    height: 1.75rem;
+    transition: 200ms transform ease-out 500ms, 
+                300ms height cubic-bezier(0.3, 0.7, 0, 1) 500ms;
+    height: 2rem;
   }
   .swatch__value {
     opacity: 1;
     display: block;
     font-size: .6rem;
+    margin-top: .3ex;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 200;
-    margin-top: 0.4rem;
-    transition: 200ms opacity linear 500ms, 200ms margin-top cubic-bezier(0.3, 0.7, 0, 1) 500ms;
+    transform: translateY(0%);
+    transition: 200ms opacity linear 600ms,
+                300ms transform cubic-bezier(0.3, 0.7, 0, 1) 600ms;
   }
   .swatch__name {
     opacity: 1;
     font-size: 1.25rem;
-    transform: translateY(0%);
-    transition: 200ms opacity linear 650ms, 400ms transform cubic-bezier(0.3, 0.7, 0, 1) 600ms;
+    transition: 200ms opacity linear 600ms, 
+                200ms margin-top cubic-bezier(0.3, 0.7, 0, 1) 500ms;
+
+    margin-top: 0.25rem;
     display: block;
     width: 100%;
     overflow: hidden;
@@ -67,8 +73,9 @@
 
   .swatch--collapsed {
     padding: 0;
-    box-shadow: 0 0 0 calc(var(--lineWidth) * 2) var(--bg);
-    color: var(--bg);
+    box-shadow: 0 0 0 calc(var(--lineWidth) * 2) var(--borderColor, var(--c));
+    color: var(--c);
+    background: var(--c);
   }
 
   .swatch--collapsed .swatch__color {
@@ -83,10 +90,10 @@
 
   .swatch--collapsed .swatch__value {
     opacity: 0;
-    margin-top: 0;
+    transform: translateY(100%);
   }
   .swatch--collapsed .swatch__name {
     opacity: 0;
-    transform: translateY(100%);
+    margin-top: 0;
   }
 </style>
