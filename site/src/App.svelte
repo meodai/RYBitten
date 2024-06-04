@@ -1,6 +1,6 @@
 <script lang="ts">
   import IttenWheel from './lib/IttenWheel.svelte';
-  import ColorCloth from './lib/ColorCloth.svelte';
+  import Nav from './lib/Nav.svelte';
   import HslWheel from './lib/HSLWheel.svelte';
   import SwatchPair from './lib/SwatchPair.svelte';
   import Cube from './lib/Cube.svelte';
@@ -15,7 +15,8 @@
   import { currentColors } from './store';
   const { cube } = currentColors;
 
-  let currentCube = $cube
+  let currentCube = $cube;
+  
   cube.subscribe((value) => {
     currentCube = value;
   });
@@ -64,6 +65,11 @@
     </div>
     <h1 class="logo">RYBitten</h1>
   </div>
+
+  <aside class="layout__sidebar" aria-label="Color Presets">
+    <Nav />
+  </aside>
+
   <main class="layout__main">
     <div class="section section--intro intro">
       <div class="intro__inner">
@@ -76,6 +82,10 @@
         </blockquote>
       </div>
     </div>
+
+    <!--figure class="section">
+      <ColorCloth />
+    </figure-->
 
     <section class="section section--split">
       <figure class="section__left">
@@ -177,10 +187,6 @@
         <NamedSwatches />
       </figure>
     </section>
-
-    <figure class="section">
-      <ColorCloth />
-    </figure>
     <div class="section">
       <h2>Current Colors</h2>
       {cubeString}
