@@ -32,6 +32,8 @@ export let t = 0;
 let canvas: HTMLCanvasElement | null, 
     ctx: CanvasRenderingContext2D | null;
 
+
+let timer = 0;
 const handleResize = () => {
   w = window.innerWidth;
   h = window.innerHeight;
@@ -43,14 +45,14 @@ const handleResize = () => {
   canvas.width = w * pixelRatio;
   canvas.height = h * pixelRatio;
   ctx?.scale(pixelRatio, pixelRatio);
-
-  draw();
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    draw();
+  }, 100);
 };
 
 const draw = () => {
   if (!ctx) return;
-
-  ctx.clearRect(0, 0, w, h);
 
   const offscreenCanvas = new OffscreenCanvas(w * pixelRatio, h * pixelRatio);
   const offscreenCtx = offscreenCanvas.getContext('2d');
@@ -81,6 +83,7 @@ const draw = () => {
     offscreenCtx.fillRect(x, y, size, size);
   }
 
+  ctx.clearRect(0, 0, w, h);
   ctx.drawImage(offscreenCanvas, 0, 0, w * pixelRatio, h * pixelRatio, 0, 0, w, h);
 }
 
