@@ -16,7 +16,7 @@
   const { cube } = currentColors;
 
   let currentCube = $cube;
-  
+
   cube.subscribe((value) => {
     currentCube = value;
   });
@@ -41,6 +41,10 @@
       oldScool: true,
       cube: currentCube,
       }), true),
+    '--stops-24--smooth': colorsToGradient(getColorsHSL(24, 1, 0.5, {
+      oldScool: true,
+      cube: currentCube,
+      }), false),
     '--stops-48': colorsToGradient(getColorsHSL(48, 1, 0.5, {
       oldScool: true,
       cube: currentCube,
@@ -56,9 +60,11 @@
     .map(([key, value]) => `${key}: ${value};`).join('');
 
   $: cubeString = JSON.stringify(currentCube);
+
+  let showSidebar = false;
 </script>
 
-<div class="layout" style={currentStylesString}>
+<div class="layout{showSidebar ? ' layout--showSidebar' : ''}" style={currentStylesString}>
   <div class="layout__header">
     <div class="layout__logo">
       <IttenWheel ringWeights={[]} />
@@ -67,7 +73,14 @@
   </div>
 
   <aside class="layout__sidebar" aria-label="Color Presets">
-    <Nav />
+    <div class="layout__sidebarbody">
+      <Nav />
+    </div>
+    <button 
+      class="layout__sidebardeco" 
+      aria-label="toggle sidebar"
+      on:click={() => showSidebar = !showSidebar}
+    ></button>
   </aside>
 
   <main class="layout__main">
@@ -232,7 +245,6 @@
 
   .layout::before {
     left: var(--size-x);
-
     border-right: var(--lineWidth) solid var(--line);
   }
 
@@ -386,5 +398,77 @@
   .illustration__wheel {
     box-sizing: border-box;
     padding: 7%;
+  }
+
+  .layout__sidebar {
+    position: fixed;
+    top: var(--size);
+    right: 0;
+    bottom: var(--size);
+    background: var(--bg);
+    z-index: 10;
+    width: max(30dvw, 20rem);
+    transform: translateX(100%);
+    transition: transform 330ms cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+  }
+
+  .layout__sidebarbody {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+
+  .layout--showSidebar .layout__sidebar {
+    transform: translateX(0);
+  }
+
+  .layout__sidebardeco {
+    border: none;
+    padding: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--size-x);
+    background: var(--onBg);
+    background-image: linear-gradient(var(--stops-24)),
+                      linear-gradient(var(--stops-24--smooth));
+    background-size: calc(50% + 0.2px) 100%;
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+
+    transform: translateX(-100%);
+    transition: width 300ms cubic-bezier(0.3, 0.7, 0, 1) 250ms,
+                left 300ms cubic-bezier(0.3, 0.7, 0, 1) 250ms;
+
+    cursor: pointer;
+  }
+
+  .layout--showSidebar .layout__sidebardeco {
+    width: calc(var(--size-x) * 2);
+    left: 100%;
+    transition: width 300ms cubic-bezier(0.3, 0.7, 0, 1) 250ms,
+                left 300ms cubic-bezier(0.3, 0.7, 0, 1) 0ms;
+  }
+
+  .section {
+    width: 100%;
+    transition: 300ms width cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+  }
+  .section__right {
+    background: var(--bg);
+    transition: 250ms transform cubic-bezier(0.3, 0.7, 0, 1) 150ms;
+    transform: translateX(0);
+  }
+
+  .layout--showSidebar .section {
+    width: calc(100% - 20rem);
+  }
+
+  .layout--showSidebar .section__right {
+    transform: translateX(-2rem);
   }
 </style>
