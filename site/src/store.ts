@@ -15,12 +15,14 @@ class CurrentColors {
   public currentPreset: Writable<CubesMapEntry>;
   public isCustom: Writable<boolean>;
   public customCube: Writable<ColorCube>;
+  public currentPresetUid: string;
 
   constructor(
   ) {
     this.currentPreset = writable(cubes.get('itten-normalized')!);
     this.isCustom = writable(false);
     this.customCube = writable([...cubes.get('itten-normalized')!.cube] as ColorCube);
+    this.currentPresetUid = 'itten-normalized';
   }
   
   get cube () {
@@ -37,14 +39,15 @@ class CurrentColors {
   }
 
   set cube (cube: ColorCube) {
-    console.log(cube);
     this.customCube.set(cube);
     this.isCustom.set(true);
+    this.currentPresetUid = 'custom';
   }
 
   set preset (preset: string) {
     this.currentPreset.set(cubes.get(preset)!);
     this.isCustom.set(false);
+    this.currentPresetUid = preset;
   }
 
   get presets () {

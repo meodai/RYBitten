@@ -1,18 +1,17 @@
 <script lang="ts">
   import { currentColors } from '../store';
   import { cubes } from "rybitten";
-  
 
-  let currentPresetId = currentColors.preset;
+  let currentPresetId = currentColors.currentPresetUid;
 
   const setCurrentPreset = (presetName: string) => {
     currentColors.preset = presetName;
     currentPresetId = presetName;
   };
 
-  currentColors.isCustom.subscribe((isit) => {
-    if (isit) {
-      currentPresetId = "custom";
+  currentColors.isCustom.subscribe((value) => {
+    if (value) {
+      currentPresetId = 'custom';
     }
   });
 </script>
