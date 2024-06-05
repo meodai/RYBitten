@@ -25,7 +25,8 @@ class CurrentColors {
   
   get cube () {
     return derived(
-      [this.currentPreset, this.customCube, this.isCustom], ([$currentPreset, $customCube, $isCustom]) => {
+      [this.currentPreset, this.customCube, this.isCustom], 
+      ([$currentPreset, $customCube, $isCustom]) => {
         if ($isCustom) {
           return $customCube;
         } else {
@@ -35,8 +36,15 @@ class CurrentColors {
     );
   }
 
+  set cube (cube: ColorCube) {
+    console.log(cube);
+    this.customCube.set(cube);
+    this.isCustom.set(true);
+  }
+
   set preset (preset: string) {
     this.currentPreset.set(cubes.get(preset)!);
+    this.isCustom.set(false);
   }
 
   get presets () {

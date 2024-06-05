@@ -2,9 +2,10 @@
   import { currentColors } from '../store';
   import { rgbToHex } from './fn/rgbToHex';
   import { hexToRgb } from './fn/hexToRgb';
-  const { cube, isCustom, customCube } = currentColors;
+  const { cube } = currentColors;
 
   import type { ColorCube, ColorCoords } from "rybitten";
+  import { cubicOut } from 'svelte/easing';
   
   type ColorNames = 'white' | 'red' | 'yellow' | 'orange' | 'blue' | 'violet' | 'green' | 'black';
   type CSSColorNames = '--white' | '--red' | '--yellow' | '--orange' | '--blue' | '--violet' | '--green' | '--black';
@@ -69,8 +70,7 @@
     
     const colorIndex = colorNameIndex[color];
     const newCube = $cube.map((c: ColorCoords, i: number) => i === colorIndex ? hexToRgb(value) : c) as ColorCube;
-    isCustom.set(true);
-    customCube.set(newCube);
+    currentColors.cube = newCube;
   }
 </script>
 

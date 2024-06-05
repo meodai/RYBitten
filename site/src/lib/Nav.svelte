@@ -1,6 +1,7 @@
 <script lang="ts">
   import { currentColors } from '../store';
   import { cubes } from "rybitten";
+  
 
   let currentPresetId = currentColors.preset;
 
@@ -8,6 +9,12 @@
     currentColors.preset = presetName;
     currentPresetId = presetName;
   };
+
+  currentColors.isCustom.subscribe((isit) => {
+    if (isit) {
+      currentPresetId = "custom";
+    }
+  });
 </script>
 
 <div class="nav">
