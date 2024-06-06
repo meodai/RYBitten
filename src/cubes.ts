@@ -194,6 +194,19 @@ export const RYB_JAPSCHOOL: ColorCube = [
   [31 / 255, 27 / 255, 28 / 255],
 ];
 
+// Marvel Newsprint 1982
+
+export const RYB_MARVEL_NEWS: ColorCube = [
+  [233 / 255, 199 / 255, 173 / 255],
+  [214 / 255, 76 / 255, 127 / 255],
+  [238 / 255, 204 / 255, 124 / 255],
+  [230 / 255, 174 / 255, 115 / 255],
+  [86 / 255, 141 / 255, 146 / 255],
+  [118 / 255, 83 / 255, 97 / 255],
+  [196 / 255, 192 / 255, 118 / 255],
+  [60 / 255, 52 / 255, 40 / 255],
+];
+
 // contemporary
 
 export const RYB_IPPSKETCH: ColorCube = [
@@ -340,6 +353,14 @@ cubes.set("japschool", {
   year: 1930,
   reference: "japschool.png",
   cube: RYB_JAPSCHOOL,
+});
+
+cubes.set("marvel-news", {
+  title: "Marvel Comics 64-Color Chart on Newsprint",
+  author: "Marvel Comics",
+  year: 1982,
+  reference: "marvel-news.png",
+  cube: RYB_MARVEL_NEWS,
 });
 
 // mordern

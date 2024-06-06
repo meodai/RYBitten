@@ -18,7 +18,7 @@
 </script>
 
 <div class="nav">
-  <h3 class="nav__title">Presets</h3>
+  <h3 class="nav__title">Gamut Presets</h3>
   <ol class="nav__list">
     {#each cubes as [cubename, cubeProps]}
       <li class="nav__item{currentPresetId === cubename ? ' nav__item--active' : '' }">
@@ -131,13 +131,7 @@
   }
 
 
-  .layout--showSidebar.nav__presettitle {
-    background: red;
-  }
-
-
   .nav__cube {
-
     border-left: var(--lineWidth) solid var(--onBg);
     border-top: var(--lineWidth) solid var(--onBg);
     padding: 0;

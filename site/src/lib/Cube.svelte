@@ -77,15 +77,15 @@
 <form class="edges" data-edges style="{cssStyleString}">
   <svg viewBox="0 0 100 100" class="cube">
     <g>
-      <line x1="33" y1="3" x2="6" y2="30"  vector-effect="non-scaling-stroke" />
-      <line x1="66" y1="90" x2="93" y2="63"  vector-effect="non-scaling-stroke" />
+      <line x1="33" y1="3" x2="6" y2="30" vector-effect="non-scaling-stroke" />
+      <line x1="66" y1="90" x2="93" y2="63" vector-effect="non-scaling-stroke" />
       <rect
         x="33"
         y="3"
         width="60"
         height="60"
         class="cube__back"
-         vector-effect="non-scaling-stroke"
+        vector-effect="non-scaling-stroke"
       />
       <rect
         x="6"
@@ -93,12 +93,12 @@
         width="60"
         height="60"
         class="cube__front"
-        vector-effect="non-scaling-stroke"
+      vector-effect="non-scaling-stroke"
       />
       <polyline
         points="33,30 33,63 93,63"
         class="cube__coverline"
-        vector-effect="non-scaling-stroke"
+      vector-effect="non-scaling-stroke"
       />
     </g>
   </svg>

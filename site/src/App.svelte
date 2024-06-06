@@ -32,6 +32,11 @@
         oldScool: true,
         cube: currentCube,
       }).filter((_:string, i:number) => i % 2), true),
+    '--stops-8': colorsToGradient(
+      getColorsHSL(8, 1, 0.5, {
+        oldScool: true,
+        cube: currentCube,
+      }), true),
     '--stops-12': colorsToGradient(
       getColorsHSL(12, 1, 0.5, {
         oldScool: true,
@@ -65,13 +70,23 @@
   $: cubeString = JSON.stringify(currentCube);
 
   let showSidebar = false;
+  let isDevMode = $devMode;
 
   const toggleDevMode = () => {
     devMode.update((value) => !value);
+    isDevMode = !isDevMode;
   };
 </script>
 
-<div class="layout{showSidebar ? ' layout--showSidebar' : ''}" style={currentStylesString}>
+<div 
+  class="layout{
+    showSidebar ? ' layout--showSidebar' : ''
+  }{
+    isDevMode ? ' layout--dev' : ''
+  }" 
+  aria-live="polite" aria-relevant="additions"
+  style={currentStylesString}
+>
   <div class="layout__header">
     <div class="layout__logo">
       <IttenWheel ringWeights={[]} />
@@ -79,13 +94,7 @@
     <h1 class="logo">RYBitten</h1>
 
     <div class="layout__controls">
-      <button 
-        class="nav__button" 
-        aria-label="toggle dev mode"
-        on:click={toggleDevMode}
-      >
-        <span>Code</span> / <span>Play</span>
-      </button>
+
 
       <button 
         class="nav__button" 
@@ -93,7 +102,15 @@
         on:click={() => showSidebar = !showSidebar}
         title="Presets"
       >
-        <span>Presets</span>
+        <svg class="navicon" viewBox="0 0 100 100">
+          <g stroke="currentColor" transform-origin="50 50" transform="rotate(-22.5)">
+            <circle cx="50" cy="50" r="50" vector-effect="non-scaling-stroke" />
+            <line x1="0" y1="50" x2="100" y2="50" transform="rotate(-45)" transform-origin="50 50" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="50" x2="100" y2="50" transform="rotate(45)" transform-origin="50 50" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="50" x2="100" y2="50" transform="rotate(90)" transform-origin="50 50" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="50" x2="100" y2="50" transform-origin="50 50" vector-effect="non-scaling-stroke"/>
+          </g>
+        </svg>
       </button>
     </div>
   </div>
@@ -115,10 +132,15 @@
         <div class="intro__visual">
           <IttenWheel ringWeights={[1,2.5]} hasOutline={true} />
         </div>
-        <blockquote cite="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/">
-          <p>Play becomes joy, joy becomes work, work becomes play.</p>
-          <footer>—Johannes Itten, <cite>Bauhaus</cite></footer>
-        </blockquote>
+        <div class="content-toggle">
+          <blockquote class="content-toggle__dev">
+            <p>Implementation of pseudo RYB color conversions derived from Johannes Itten's color wheel.</p>
+          </blockquote>
+          <blockquote  class="content-toggle__learn" cite="https://encyclopedia.design/2023/03/06/johannes-itten-swiss-expressionist-painter-designer-teacher-writer/">
+            <p>Play becomes joy, joy becomes work, work becomes play.</p>
+            <footer>—Johannes Itten, <cite>Bauhaus</cite></footer>
+          </blockquote>
+        </div>
       </div>
     </div>
 
@@ -200,20 +222,6 @@
         </p>
       </div>
     </section>
-    <!--
-    <IttenWheel ringWeights={[]} />
-    <IttenWheel ringWeights={[1]} />
-    <IttenWheel ringWeights={[1,1.75]} />
-    <IttenWheel ringWeights={[1,1,1.8]} />
-    <IttenWheel ringWeights={[1,1,1,2.5]} />
-
-
-    <IttenWheel ringWeights={[]} hasOutline={true} />
-    <IttenWheel ringWeights={[1]} hasOutline={true} />
-    <IttenWheel ringWeights={[1,1.75]} hasOutline={true} />
-    <IttenWheel ringWeights={[1,1,1.8]} hasOutline={true} />
-    <IttenWheel ringWeights={[1,1,1,2.5]} hasOutline={true} />
-    -->
 
     <section class="section">
       <div class="section__top">
@@ -230,12 +238,16 @@
       <h2>Current Colors</h2>
       {cubeString}
     </div>
-
-
   </main>
 
   <div class="layout__footer">
-
+    <button 
+      class="nav__button nav__button--toggledev"
+      aria-label="toggle dev mode"
+      on:click={toggleDevMode}
+    >
+      Switch to <span><i>code</i><i>learn</i></span>
+    </button>
   </div>
 </div>
 
@@ -254,6 +266,13 @@
 
     color: var(--onBg);
   }
+
+
+  .layout--dev {
+    --bg: var(--black);
+    --onBg: var(--white);
+  }
+
 
   .layout::before,
   .layout::after {
@@ -532,4 +551,125 @@
   .sample--bl::before {
     background: var(--black);
   }
+
+  .nav__button--toggledev span {
+    overflow: hidden;
+    width: 2.1em;
+    display: inline-flex;
+    white-space: nowrap;
+    padding: 0.1em 0.5em;
+    margin-bottom: -.7em;
+    margin-left: -.9em;
+  }
+
+
+  .nav__button--toggledev i {
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+    font-style: normal;
+    position: relative;
+    overflow: hidden;
+    padding: 0.1em 0.5em;
+    width: max-content;
+    flex: 0 0 max-content;
+  }
+
+  .nav__button--toggledev i::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: var(--onBg);
+    transform: scaleY(0);
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+    transform-origin: 0 100%;
+  }
+
+  .nav__button--toggledev:hover i::before {
+    transform: scaleY(1) scaleX(1.25);
+    z-index: -1;
+  }
+
+  .nav__button--toggledev:hover i {
+    color: var(--bg);
+  }
+
+  .layout--dev .nav__button--toggledev i {
+    transform: translateX(-100%);
+  }
+
+  .layout--dev .nav__button--toggledev i:first-child {
+    opacity: 0;
+  }
+
+  .navicon {
+    width: 1em;
+    height: 1em;
+    position: relative;
+    border-radius: 50%;
+    padding: var(--lineWidth);
+  }
+
+  .navicon g,
+  .navicon line,
+  .navicon circle {
+    stroke: currentColor;
+    stroke-width: calc(var(--lineWidth) * .6);
+    fill: none;
+  }
+
+  .navicon:hover {
+    background: conic-gradient(from -22.5deg at 50% 50%, var(--stops-8));
+  }
+
+  .content-toggle {
+    position: relative;
+  }
+
+  .intro .content-toggle__dev {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%;
+    opacity: 0;
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1),
+                300ms opacity linear;
+  }
+
+  .content-toggle__learn {
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 50ms,
+                100ms opacity linear 50ms;
+
+  }
+
+  .layout--dev .intro .content-toggle__dev {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  .layout--dev .intro .content-toggle__learn {
+
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+
 </style>
+
+
+<!--
+<IttenWheel ringWeights={[]} />
+<IttenWheel ringWeights={[1]} />
+<IttenWheel ringWeights={[1,1.75]} />
+<IttenWheel ringWeights={[1,1,1.8]} />
+<IttenWheel ringWeights={[1,1,1,2.5]} />
+
+
+<IttenWheel ringWeights={[]} hasOutline={true} />
+<IttenWheel ringWeights={[1]} hasOutline={true} />
+<IttenWheel ringWeights={[1,1.75]} hasOutline={true} />
+<IttenWheel ringWeights={[1,1,1.8]} hasOutline={true} />
+<IttenWheel ringWeights={[1,1,1,2.5]} hasOutline={true} />
+-->
