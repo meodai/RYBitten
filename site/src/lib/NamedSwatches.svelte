@@ -104,6 +104,8 @@
       },
     );
     const data = await response.json();
+
+    console.log(data)
     
     currentRamps.forEach((ramp, i) => {
       ramp.forEach((color, j) => {
@@ -117,7 +119,6 @@
   cube.subscribe((value:ColorCube) => {
     currentCube = value;
     currentRamps = getRamps(ramps, stepsPerRamp);
-    //fetchNames();
   });
 </script>
 
@@ -157,11 +158,7 @@
     position: relative;
     padding: 0;
     margin: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
     display: block;
-    text-align: inherit;
   }
 
   .namedSwatches__step + .namedSwatches__step {
@@ -187,6 +184,4 @@
     z-index: 2;
     --borderColor: var(--bg);
   }
-
-  
 </style>

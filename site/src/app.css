@@ -133,3 +133,16 @@ h2 + p,
 h3 + p {
   margin-top: 2em;
 }
+
+button {
+  all: unset;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+}
+
+::selection {
+  background: var(--yellow);
+  color: color-mix(in sRGB, var(--blue) 50%, var(--blue));
+}

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Cube from './Cube.svelte';
   import { currentColors } from '../store';
   import { cubes } from "rybitten";
 
@@ -17,7 +18,7 @@
 </script>
 
 <div class="nav">
-  <!--h3>Presets</h3-->
+  <h3 class="nav__title">Presets</h3>
   <ol class="nav__list">
     {#each cubes as [cubename, cubeProps]}
       <li class="nav__item{currentPresetId === cubename ? ' nav__item--active' : '' }">
@@ -31,6 +32,9 @@
       </li>
     {/each}
   </ol>
+  <div class="nav__cube">
+    <Cube />
+  </div>
 </div>
 
 <style>
@@ -39,21 +43,32 @@
     color: var(--onBg);
   }
 
+  .nav__title {
+    position: absolute;
+    top: calc(var(--lineWidth) * -1);
+    right: 0;
+    left: 0;
+    font-size: 1.25rem;
+    line-height: 1;
+    font-weight: 100;
+    padding: 0 var(--size-x);
+    margin: 0;
+    height: var(--size);
+    border-left: var(--lineWidth) solid var(--onBg);
+    border-bottom: var(--lineWidth) solid var(--onBg);
+    line-height: var(--size);
+  }
+
   .nav__list {
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-top: var(--size);
   }
   .nav__button {
     position: relative;
     display: block;
     width: 100%;
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: inherit;
-    font: inherit;
-    text-align: left;
     padding: var(--size-x);
     overflow: hidden;
   }
@@ -113,5 +128,19 @@
   .nav__presetyear {
     font-size: .4em;
     font-family: "IBM Plex Mono", monospace;
+  }
+
+
+  .layout--showSidebar.nav__presettitle {
+    background: red;
+  }
+
+
+  .nav__cube {
+
+    border-left: var(--lineWidth) solid var(--onBg);
+    border-top: var(--lineWidth) solid var(--onBg);
+    padding: 0;
+    padding-right: calc(var(--size-x) * 2);
   }
 </style>

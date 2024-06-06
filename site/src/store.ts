@@ -1,8 +1,10 @@
-import { derived, get, writable } from "svelte/store";
+import { derived, writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 
 import { cubes } from "rybitten";
 import type { ColorCube } from "rybitten";
+
+const devMode = writable(false);
 
 type CubesMapEntry = {
   title: string;
@@ -56,3 +58,4 @@ class CurrentColors {
 }
 
 export const currentColors = new CurrentColors();
+export { devMode };
