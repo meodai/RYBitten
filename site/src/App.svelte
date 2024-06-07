@@ -266,6 +266,8 @@
     --size-x: calc(.55 * var(--size));
     --bezel-x: calc(var(--size-x) + var(--size) * .45);
 
+    --sidebarWidth: max(30dvw, 20rem);
+
     color: var(--onBg);
   }
 
@@ -457,7 +459,7 @@
     bottom: 0;
     background: var(--bg);
     z-index: 20;
-    width: max(30dvw, 20rem);
+    width: var(--sidebarWidth);
     transform: translateX(100%);
     transition: transform 430ms cubic-bezier(0.3, 0.7, 0, 1) 0ms;
   }
@@ -611,6 +613,12 @@
     position: relative;
     border-radius: 50%;
     padding: var(--lineWidth);
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 0ms;
+  }
+
+  .layout--showSidebar .navicon {
+    transform: translateX(calc(-1 * var(--sidebarWidth) + 100%)) rotate(180deg);
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 300ms;
   }
 
   .navicon g,
