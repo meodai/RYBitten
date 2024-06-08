@@ -20,6 +20,17 @@
 <div class="nav">
   <h3 class="nav__title">Gamut Presets</h3>
   <ol class="nav__list">
+    <li class="nav__item nav__item--custom{currentPresetId === 'custom' ? ' nav__item--active' : '' }">
+      <button on:click={() => setCurrentPreset('custom')} class="nav__button">
+        <strong class="nav__presettitle">Custom</strong>
+        <strong class="nav__presetauthor">Create your own</strong>
+      </button>
+
+      <div class="nav__itemcube">
+        <Cube key="sidebarcube" />
+      </div>
+      
+    </li>
     {#each cubes as [cubename, cubeProps]}
       <li class="nav__item{currentPresetId === cubename ? ' nav__item--active' : '' }">
         <button on:click={() => setCurrentPreset(cubename)} class="nav__button">
@@ -32,9 +43,9 @@
       </li>
     {/each}
   </ol>
-  <div class="nav__cube">
+  <!--div class="nav__cube">
     <Cube />
-  </div>
+  </div-->
 </div>
 
 <style>

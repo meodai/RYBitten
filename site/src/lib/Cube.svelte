@@ -3,12 +3,13 @@
   import { rgbToHex } from './fn/rgbToHex';
   import { hexToRgb } from './fn/hexToRgb';
   const { cube } = currentColors;
-
   import type { ColorCube, ColorCoords } from "rybitten";
-  import { cubicOut } from 'svelte/easing';
+
+  export let showInterpolation = true;
   
   type ColorNames = 'white' | 'red' | 'yellow' | 'orange' | 'blue' | 'violet' | 'green' | 'black';
   type CSSColorNames = '--white' | '--red' | '--yellow' | '--orange' | '--blue' | '--violet' | '--green' | '--black';
+
 
   let colors = {
     white: rgbToHex($cube[0]),
@@ -72,35 +73,78 @@
     const newCube = $cube.map((c: ColorCoords, i: number) => i === colorIndex ? hexToRgb(value) : c) as ColorCube;
     currentColors.cube = newCube;
   }
+
+
+  const cubeW = 60;
+  const cubeH = 60;
+
+  const cubeCoords = {
+    white: [6, 90],
+    red: [66, 90],
+    yellow: [6, 30],
+    orange: [66, 30],
+    blue: [33, 63],
+    violet: [93, 63],
+    green: [33, 3],
+    black: [93, 3],
+  } as Record<ColorNames, [number, number]>;
+
+  const referenceColors = {
+    white: [255, 255, 255],
+    red: [255, 0, 0],
+    yellow: [255, 255, 0],
+    orange: [255, 165, 0],
+    blue: [0, 0, 255],
+    violet: [128, 0, 128],
+    green: [0, 255, 0],
+    black: [0, 0, 0],
+  } as Record<ColorNames, [number, number, number]>;
 </script>
 
 <form class="edges" data-edges style="{cssStyleString}">
   <svg viewBox="0 0 100 100" class="cube">
     <g>
-      <line x1="33" y1="3" x2="6" y2="30" vector-effect="non-scaling-stroke" />
-      <line x1="66" y1="90" x2="93" y2="63" vector-effect="non-scaling-stroke" />
+      <line 
+        x1="{cubeCoords.green[0]}" y1="{cubeCoords.green[1]}" 
+        x2="{cubeCoords.yellow[0]}" y2="{cubeCoords.yellow[1]}" 
+        vector-effect="non-scaling-stroke"
+      />
+      <line 
+        x1="{cubeCoords.red[0]}" y1="{cubeCoords.red[1]}" 
+        x2="{cubeCoords.violet[0]}" y2="{cubeCoords.violet[1]}" 
+        vector-effect="non-scaling-stroke" 
+      />
       <rect
-        x="33"
-        y="3"
-        width="60"
-        height="60"
+        x="{cubeCoords.green[0]}"
+        y="{cubeCoords.green[1]}"
+        width="{cubeW}"
+        height="{cubeH}"
         class="cube__back"
         vector-effect="non-scaling-stroke"
       />
       <rect
-        x="6"
-        y="30"
-        width="60"
-        height="60"
+        x="{cubeCoords.yellow[0]}"
+        y="{cubeCoords.yellow[1]}"
+        width="{cubeW}"
+        height="{cubeH}"
         class="cube__front"
-      vector-effect="non-scaling-stroke"
+        vector-effect="non-scaling-stroke"
       />
       <polyline
         points="33,30 33,63 93,63"
         class="cube__coverline"
-      vector-effect="non-scaling-stroke"
+        vector-effect="non-scaling-stroke"
       />
     </g>
+    {#if showInterpolation}
+      <g>
+        <line 
+          x1="{cubeCoords.green[0] + referenceColors.green[0]}" y1="{cubeCoords.green[1]}" 
+          x2="{cubeCoords.yellow[0]}" y2="{cubeCoords.yellow[1]}" 
+          vector-effect="non-scaling-stroke"
+        />
+      </g>
+    {/if}
   </svg>
   <label class="g" style="--c: var(--green)" >
     <b>green</b>

@@ -83,25 +83,22 @@
 
   let namesForRampColors = [];
 
-  $: namesForRampColors = currentRamps.map((ramp, i) => {
-    return ramp.map((color, j) => {
-      return `—`;
-    });
-  });
+  $: {
+    namesForRampColors = currentRamps.map((ramp, i) => ramp.map((color, j) => `—`));
+  }
 
   let allHexes = [];
 
-  $: allHexes = currentRamps.flat().map(color => {
-    return rgbToHex(color);
-  });
+  let abortController:null|AbortController = null; 
 
   const fetchNames = async () => {
     if (!allHexes.length) return;
+    if (abortController) abortController.abort();
+    abortController = new AbortController();
+    const { signal } = abortController;
     const response = await fetch(
       `https://api.color.pizza/v1/?values=${allHexes.map(c => c.substring(1)).join()}&list=bestOf&noduplicates=true`,
-      {
-        method: "GET",
-      },
+      { signal },
     );
     const data = await response.json();
 
@@ -114,11 +111,14 @@
     });
   };
 
-  $: allHexes && fetchNames();
+  let timeout = 0;
 
   cube.subscribe((value:ColorCube) => {
     currentCube = value;
     currentRamps = getRamps(ramps, stepsPerRamp);
+    allHexes = currentRamps.flat().map(color => rgbToHex(color));
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(fetchNames, 300);
   });
 </script>
 
