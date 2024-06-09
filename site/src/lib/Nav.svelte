@@ -6,7 +6,7 @@
   let currentPresetId = currentColors.currentPresetUid;
 
   const setCurrentPreset = (presetName: string) => {
-    currentColors.preset = presetName;
+    currentColors.setPreset(presetName);
     currentPresetId = presetName;
   };
 
@@ -25,9 +25,10 @@
         <strong class="nav__presettitle">Custom</strong>
         <strong class="nav__presetauthor">Create your own</strong>
       </button>
-
-      <div class="nav__itemcube">
-        <Cube key="sidebarcube" />
+      <div class="nav__details nav__details--square">
+        <div class="nav__itemcube">
+          <Cube />
+        </div>
       </div>
       
     </li>
@@ -119,6 +120,30 @@
     transform: translateX(0);
   }
 
+  .nav__details {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .nav__details--square {
+    height: 0rem;
+    transition: height 400ms cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+  }
+
+  .nav__item--active .nav__details--square {
+    height: 18rem;
+  }
+
+  .nav__itemcube {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 20rem;
+    width: 20rem;
+  }
+
   .nav__presettitle {
     display: block;
     font-size: 1.5rem;
@@ -150,8 +175,8 @@
   }
 
   .nav__itemcube {
+    box-sizing: border-box;
     padding: var(--size-x);
-    padding-right: calc(var(--size-x) * 2);
   }
 
 </style>

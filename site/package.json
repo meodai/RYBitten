@@ -19,7 +19,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "rybitten": "^0.9.0",
+    "rybitten": "^0.10.0",
     "simplex-noise": "^4.0.1"
   }
 }

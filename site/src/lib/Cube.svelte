@@ -4,11 +4,11 @@
   import { hexToRgb } from './fn/hexToRgb';
   const { cube } = currentColors;
   import type { ColorCube, ColorCoords } from "rybitten";
-
-  export let showInterpolation = true;
   
   type ColorNames = 'white' | 'red' | 'yellow' | 'orange' | 'blue' | 'violet' | 'green' | 'black';
   type CSSColorNames = '--white' | '--red' | '--yellow' | '--orange' | '--blue' | '--violet' | '--green' | '--black';
+
+  export let iconMode = false;
 
   const colorNames = [
     {
@@ -79,7 +79,7 @@
         "name": "yellow",
         "rgb": [255/255, 255/255, 0]
     }
-] as { name: string, rgb: ColorCoords}[];
+  ] as { name: string, rgb: ColorCoords}[];
 
   let colors = {
     white: $cube[0],
@@ -90,7 +90,7 @@
     violet: $cube[5],
     green: $cube[6],
     black: $cube[7],
-  } as Record<ColorNames, ColorCoords[]>;
+  } as Record<ColorNames, ColorCoords>;
 
   cube.subscribe((value) => {
     colors = {
@@ -141,7 +141,7 @@
     
     const colorIndex = colorNameIndex[color];
     const newCube = $cube.map((c: ColorCoords, i: number) => i === colorIndex ? hexToRgb(value) : c) as ColorCube;
-    currentColors.cube = newCube;
+    currentColors.setCube(newCube);
   }
 
 
@@ -221,15 +221,6 @@
         vector-effect="non-scaling-stroke"
       />
     </g>
-    {#if showInterpolation}
-      <g>
-        <line 
-          x1="{cubeCoords.green[0] + referenceColors.green[0]}" y1="{cubeCoords.green[1]}" 
-          x2="{cubeCoords.yellow[0]}" y2="{cubeCoords.yellow[1]}" 
-          vector-effect="non-scaling-stroke"
-        />
-      </g>
-    {/if}
   </svg>
   <label class="g" style="--c: var(--green)" >
     <b>green</b>

@@ -1,6 +1,5 @@
 import { derived, writable } from "svelte/store";
 import type { Writable } from "svelte/store";
-
 import { cubes } from "rybitten";
 import type { ColorCube } from "rybitten";
 
@@ -13,49 +12,38 @@ type CubesMapEntry = {
   cube: ColorCube;
 };
 
-class CurrentColors {
-  public currentPreset: Writable<CubesMapEntry>;
-  public isCustom: Writable<boolean>;
-  public customCube: Writable<ColorCube>;
-  public currentPresetUid: string;
+const currentColors = (() => {
+  const defaultPreset = cubes.get('itten-normalized');
+  if (!defaultPreset) throw new Error("Default preset 'itten-normalized' not found.");
 
-  constructor(
-  ) {
-    this.currentPreset = writable(cubes.get('itten-normalized')!);
-    this.isCustom = writable(false);
-    this.customCube = writable([...cubes.get('itten-normalized')!.cube] as ColorCube);
-    this.currentPresetUid = 'itten-normalized';
-  }
-  
-  get cube () {
-    return derived(
-      [this.currentPreset, this.customCube, this.isCustom], 
-      ([$currentPreset, $customCube, $isCustom]) => {
-        if ($isCustom) {
-          return $customCube;
-        } else {
-          return $currentPreset.cube;
-        }
-      }
-    );
+  const currentPreset = writable(defaultPreset);
+  const isCustom = writable(false);
+  const customCube = writable([...defaultPreset.cube] as ColorCube);
+  let currentPresetUid = 'itten-normalized';
+
+  const cube = derived(
+    [currentPreset, customCube, isCustom],
+    ([$currentPreset, $customCube, $isCustom]) => $isCustom ? $customCube : $currentPreset.cube
+  );
+
+  function setPreset(preset: string) {
+    const presetCube = cubes.get(preset);
+    if (presetCube) {
+      currentPreset.set(presetCube);
+      isCustom.set(false);
+      currentPresetUid = preset;
+    } else {
+      console.error(`Preset ${preset} not found.`);
+    }
   }
 
-  set cube (cube: ColorCube) {
-    this.customCube.set(cube);
-    this.isCustom.set(true);
-    this.currentPresetUid = 'custom';
+  function setCube(newCube: ColorCube) {
+    customCube.set(newCube);
+    isCustom.set(true);
+    currentPresetUid = 'custom';
   }
 
-  set preset (preset: string) {
-    this.currentPreset.set(cubes.get(preset)!);
-    this.isCustom.set(false);
-    this.currentPresetUid = preset;
-  }
+  return { currentPreset, isCustom, customCube, currentPresetUid, cube, setPreset, setCube, presets: cubes };
+})();
 
-  get presets () {
-    return cubes;
-  }
-}
-
-export const currentColors = new CurrentColors();
-export { devMode };
+export { currentColors, devMode };

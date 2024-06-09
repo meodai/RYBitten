@@ -69,9 +69,11 @@
     .map(([key, value]) => `${key}: ${value};`).join('');
 
   $: cubeString = 
-    `[[` + currentCube.map(pair => {
-      return pair.map(vec => vec * 255 + '/255').join(',');
-    }).join('],\n    [') + ']]';
+    `[
+  [` + currentCube.map(pair => {
+    return pair.map(vec => vec * 255 + '/255').join(',');
+  }).join('],\n  [') + `],
+]`;
 
   let showSidebar = false;
   let isDevMode = $devMode;
@@ -240,7 +242,8 @@
     </section>
     <div class="section">
       <h2>Current Colors</h2>
-      {cubeString}
+      <code><pre>{cubeString}</pre></code>
+      
       <PictureExtract />
     </div>
   </main>
@@ -668,6 +671,10 @@
     opacity: 0;
   }
 
+  code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6em;
+  }
 
 </style>
 
