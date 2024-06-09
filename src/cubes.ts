@@ -231,6 +231,17 @@ export const RYB_RYAN: ColorCube = [
   [50 / 255, 63 / 255, 66 / 255],
 ];
 
+export const RYB_TEN: ColorCube = [
+  [255 / 255, 251 / 255, 230 / 255],
+  [238 / 255, 86 / 255, 46 / 255],
+  [249 / 255, 213 / 255, 50 / 255],
+  [252 / 255, 132 / 255, 4 / 255],
+  [43 / 255, 103 / 255, 175 / 255],
+  [246 / 255, 137 / 255, 163 / 255],
+  [171 / 255, 205 / 255, 94 / 255],
+  [5 / 255, 5 / 255, 5 / 255],
+];
+
 const cubes: CubesMap = new Map();
 
 cubes.set("itten", {
@@ -379,6 +390,14 @@ cubes.set("ryan", {
   year: 2024,
   reference: "ryan.png",
   cube: RYB_RYAN,
+});
+
+cubes.set("ten", {
+  title: "Ten",
+  author: "Roni Kaufman",
+  year: 2022,
+  reference: "ten.png",
+  cube: RYB_TEN,
 });
 
 cubes.set("rgb", {

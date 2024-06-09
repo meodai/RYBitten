@@ -1,16 +1,8 @@
 import { derived, writable } from "svelte/store";
-import type { Writable } from "svelte/store";
 import { cubes } from "rybitten";
 import type { ColorCube } from "rybitten";
 
 const devMode = writable(false);
-
-type CubesMapEntry = {
-  title: string;
-  reference: string;
-  year: number;
-  cube: ColorCube;
-};
 
 const currentColors = (() => {
   const defaultPreset = cubes.get('itten-normalized');
