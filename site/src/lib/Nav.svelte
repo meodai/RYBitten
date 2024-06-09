@@ -1,5 +1,7 @@
 <script lang="ts">
   import Cube from './Cube.svelte';
+  import PictureExtract from './PictureExtract.svelte';
+
   import { currentColors } from '../store';
   import { cubes } from "rybitten";
 
@@ -32,6 +34,9 @@
           <Cube iconMode={true} />
         </div>
       </button>
+      <div class="nav__extract">
+        <PictureExtract />
+      </div>
       <div class="nav__details nav__details--square">
         <div class="nav__itemcube">
           <Cube />
@@ -39,9 +44,9 @@
       </div>
       
     </li>
-    {#each cubes as [cubename, cubeProps], i}
-      <li class="nav__item{currentPresetId === cubename ? ' nav__item--active' : '' }" style="--i: {i/cubes.size}">
-        <button on:click={() => setCurrentPreset(cubename)} class="nav__button">
+    {#each cubes as [cubeName, cubeProps], i}
+      <li class="nav__item{currentPresetId === cubeName ? ' nav__item--active' : '' }" style="--i: {i/cubes.size}">
+        <button on:click={() => setCurrentPreset(cubeName)} class="nav__button">
           <strong class="nav__presettitle">
             {cubeProps.title}
             <span class="nav__presetyear">{cubeProps.year}</span>
@@ -109,7 +114,29 @@
     display: none;
   }
 
+  .nav__extract {
+    position: absolute;
+    top: 2.6rem;
+    right: 1.25rem;
+    font-size: .75em;
+    transform: translateY(-50%) translateY(-5rem);
+    opacity: 0;
+    transition: transform 400ms cubic-bezier(0.3, 0.7, 0, 1) 0ms, opacity 400ms linear 0ms;
+
+
+    font-weight: 200;
+    font-size: .76em;
+    z-index: 1;
+  }
+
+  .nav__item--active .nav__extract {
+    opacity: 1;
+    transform: translateY(-50%) translateY(0);
+    transition: transform 400ms cubic-bezier(0.3, 0.7, 0, 1) 300ms, opacity 400ms linear 200ms;
+  }
+
   .nav__item {
+    overflow: hidden;
     border-left: var(--lineWidth) solid var(--onBg);
     border-bottom: var(--lineWidth) solid var(--onBg);
     transition: transform 400ms cubic-bezier(0.3, 0.7, 0, 1);

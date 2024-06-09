@@ -5,7 +5,6 @@
   import SwatchPair from './lib/SwatchPair.svelte';
   import Cube from './lib/Cube.svelte';
   import NamedSwatches from './lib/NamedSwatches.svelte';
-  import PictureExtract from './lib/PictureExtract.svelte';
 
   import { getColorsHSL } from './lib/fn/getColorsHSL';
   import { colorsToGradient } from './lib/fn/colorsToGradient';
@@ -245,8 +244,6 @@
     <div class="section">
       <h2>Current Colors</h2>
       <code><pre>{cubeString}</pre></code>
-      
-      <PictureExtract />
     </div>
   </main>
 

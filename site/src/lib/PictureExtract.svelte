@@ -118,8 +118,9 @@
 </script>
 
 <div class="pictureExtarct">
-  <label on:drop={drop} on:dragenter={dragOver} on:dragover={dragOver}>
-    <input type="file" accept="image/*" on:change={change} bind:this={input} />
+  <label class="pictureExtarct__label" on:drop={drop} on:dragenter={dragOver} on:dragover={dragOver}>
+    <span>Extract from picture</span>
+    <input type="file" accept="image/*" on:change={change} bind:this={input} required/>
   </label>
   <div class="pictureExtarct__image">
     <canvas bind:this={canvas} />
@@ -129,11 +130,64 @@
   </div>
 </div>
 
-<style>  
-  .pictureExtarct__image {
+<style>
+  .pictureExtarct__label {
     position: relative;
+    display: block;
     width: max-content;
+    border-left: var(--lineWidth) solid var(--onBg);
+    padding: 0.75em 1.25em;
+    cursor: pointer;
   }
+
+  .pictureExtarct__label::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:  var(--onBg);
+    z-index: 1;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1);
+  }
+
+  .pictureExtarct__label span {
+    position: relative;
+    z-index: 2;
+  }
+
+  .pictureExtarct__label:hover::before {
+    transform: scaleX(1);
+  }
+
+  .pictureExtarct__label:hover span {
+    color: var(--bg);
+  }
+
+  .pictureExtarct__label input {
+    display: none;
+  }
+  .pictureExtarct {
+    position: relative;
+  }
+  .pictureExtarct__image {
+    position: absolute;
+    top: calc(100% + 2em);
+    right: 0;
+    width: 150%;
+    outline: var(--lineWidth) solid var(--onBg);
+    outline-offset: 0.25em;
+    opacity: 0;
+    pointer-events: none;
+    transition: 200ms opacity linear, 300ms transform cubic-bezier(0.3, 0.7, 0, 1);
+    transform: translateY(2rem);
+  }
+
+  .pictureExtarct:hover:has(:valid) .pictureExtarct__image {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .pictureExtarct__marker {
     position: absolute;
     padding: 0.25em;
