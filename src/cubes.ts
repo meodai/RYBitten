@@ -386,7 +386,7 @@ cubes.set("japschool", {
 });
 
 cubes.set("marvel-news", {
-  title: "Marvel Comics 64-Color Chart on Newsprint",
+  title: "64 Color Chart on Newsprint",
   author: "Marvel Comics",
   year: 1982,
   reference: "marvel-news.png",
