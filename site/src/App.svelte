@@ -125,7 +125,7 @@
 
   <aside class="layout__sidebar" aria-label="Color Presets">
     <div class="layout__sidebarbody">
-      <Nav />
+      <Nav isOpen={showSidebar} />
     </div>
     <button 
       class="layout__sidebardeco" 

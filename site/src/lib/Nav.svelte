@@ -3,8 +3,10 @@
   import { currentColors } from '../store';
   import { cubes } from "rybitten";
 
-  let currentPresetId = currentColors.currentPresetUid;
+  export let isOpen = false;
 
+  let currentPresetId = currentColors.currentPresetUid;
+  
   const setCurrentPreset = (presetName: string) => {
     if (presetName !== 'custom') {
       currentColors.setPreset(presetName);
@@ -19,7 +21,7 @@
   });
 </script>
 
-<div class="nav">
+<div class="nav{isOpen ? ' nav--open' : ''}">
   <h3 class="nav__title">Gamut Presets</h3>
   <ol class="nav__list">
     <li class="nav__item nav__item--custom{currentPresetId === 'custom' ? ' nav__item--active' : '' }">
@@ -37,8 +39,8 @@
       </div>
       
     </li>
-    {#each cubes as [cubename, cubeProps]}
-      <li class="nav__item{currentPresetId === cubename ? ' nav__item--active' : '' }">
+    {#each cubes as [cubename, cubeProps], i}
+      <li class="nav__item{currentPresetId === cubename ? ' nav__item--active' : '' }" style="--i: {i/cubes.size}">
         <button on:click={() => setCurrentPreset(cubename)} class="nav__button">
           <strong class="nav__presettitle">
             {cubeProps.title}
@@ -111,6 +113,7 @@
     border-left: var(--lineWidth) solid var(--onBg);
     border-bottom: var(--lineWidth) solid var(--onBg);
     transition: transform 400ms cubic-bezier(0.3, 0.7, 0, 1);
+    transform: translateX(0);
   }
 
   .nav__item:last-of-type {
@@ -118,6 +121,10 @@
   }
 
   .nav__item--active {
+    transform: translateX(calc(-1 * var(--size-x)));
+  }
+
+  .nav--open .nav__item--active {
     transform: translateX(calc(-1 * var(--size-x)));
   }
 
@@ -185,6 +192,26 @@
   .nav__presetyear {
     font-size: .4em;
     font-family: "IBM Plex Mono", monospace;
+  }
+
+  .nav__presettitle,
+  .nav__presetauthor {
+    transform: translateX(4rem);
+    transition: 50ms transform cubic-bezier(0.3, 0.7, 0, 1), 50ms opacity linear;
+    transition-delay: 0ms, 0ms;
+    opacity: 0;
+  }
+
+  .nav--open .nav__presetauthor,
+  .nav--open .nav__presettitle {
+    transform: translateX(0);
+    transition: 500ms transform cubic-bezier(0.3, 0.7, 0, 1), 200ms opacity linear;
+    transition-delay: calc(200ms + var(--i) * 300ms), calc(200ms + var(--i) * 300ms);
+    opacity: 1;
+  }
+
+  .nav--open .nav__presetauthor {
+    transition-delay: calc(220ms + var(--i) * 300ms), calc(220ms + var(--i) * 300ms);
   }
 
 
