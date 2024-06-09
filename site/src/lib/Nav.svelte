@@ -88,6 +88,7 @@
     width: 100%;
     padding: var(--size-x);
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .nav__button::after {
@@ -100,6 +101,10 @@
     border-left: var(--lineWidth) solid var(--onBg);
     transform: translateX(100%);
     transition: transform 300ms cubic-bezier(0.3, 0.7, 0, 1) 200ms;
+  }
+
+  .nav__item--custom .nav__button::after {
+    display: none;
   }
 
   .nav__item {
@@ -124,6 +129,7 @@
   .nav__item--active .nav__button::after {
     transform: translateX(0);
   }
+
 
   .nav__details {
     position: relative;
@@ -195,7 +201,7 @@
   .nav__buttonicon {
     position: absolute;
     top: 50%;
-    right: calc(4.2 * var(--size-x));
+    right: calc(2.2 * var(--size-x));
     width: 3rem;
     height: 3rem;
     transform: translateY(-50%);
