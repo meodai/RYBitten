@@ -169,6 +169,17 @@ export const RYB_ALBERS: ColorCube = [
   [0 / 255, 0 / 255, 1 / 255],
 ];
 
+export const RYB_LOHSE: ColorCube = [
+  [236 / 255, 237 / 255, 241 / 255],
+  [200 / 255, 75 / 255, 49 / 255],
+  [235 / 255, 207 / 255, 13 / 255],
+  [228 / 255, 168 / 255, 21 / 255],
+  [39 / 255, 108 / 255, 176 / 255],
+  [188 / 255, 57 / 255, 104 / 255],
+  [122 / 255, 176 / 255, 62 / 255],
+  [4 / 255, 4 / 255, 4 / 255],
+];
+
 //Michel Eugène Chevreul / Cercle_chromatique / Cercle_chromatique_Chevreul_2.jpg
 export const RYB_CHEVREUL: ColorCube = [
   [241 / 255, 236 / 255, 230 / 255],
@@ -348,6 +359,14 @@ cubes.set("albers", {
   year: 1942,
   reference: "albers-color-harmony.jpg",
   cube: RYB_ALBERS,
+});
+
+cubes.set("lohse", {
+  title: "Kunsthalle Bern Poster",
+  author: "Richard Paul Lohse",
+  year: 1970,
+  reference: "lohse.png",
+  cube: RYB_LOHSE,
 });
 
 cubes.set("chevreul", {
