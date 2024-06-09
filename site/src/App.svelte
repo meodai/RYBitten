@@ -68,11 +68,13 @@
   $: currentStylesString = Object.entries(currentStyles)
     .map(([key, value]) => `${key}: ${value};`).join('');
 
+  const pad0 = (num: number) => num.toString().padStart(3, ` `);
+
   $: cubeString = 
     `[
-  [` + currentCube.map(pair => {
-    return pair.map(vec => vec * 255 + '/255').join(',');
-  }).join('],\n  [') + `],
+  [ ` + currentCube.map(pair => {
+    return pair.map(vec => pad0(vec * 255) + ' / 255').join(', ');
+  }).join(' ],\n  [ ') + ` ],
 ]`;
 
   let showSidebar = false;
