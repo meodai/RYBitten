@@ -85,7 +85,9 @@
       ctx.drawImage(img, 0, 0, newWidth, newHeight);
       const imageData = ctx.getImageData(0, 0, newWidth, newHeight);
       const matches = closestColors(imageData);
-      currentColors.cube = matches.map((match) => match.closestColor.map(c => c / 255)) as ColorCube;
+      currentColors.setCube(
+        matches.map((match) => match.closestColor.map(c => c / 255)) as ColorCube
+      );
       markerPositionsOnImage = matches.map((match) => {
         return {
         x: match.xyPosition[0] / img.width,

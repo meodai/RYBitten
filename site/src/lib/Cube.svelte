@@ -186,7 +186,7 @@
   }
 </script>
 
-<form class="edges" data-edges style="{cssStyleString}">
+<form class="edges{iconMode ? ' edges--icon' : ''}" data-edges style="{cssStyleString}">
   <svg viewBox="0 0 100 100" class="cube">
     <g>
       <line 
@@ -303,9 +303,12 @@
   flex: 0 0 var(--w);
 }
 
+.edges--icon {
+  margin: 0;
+}
+
 .edges span {
   display: block;
-  background: var(--c);
   background: var(--white);
   width: 0.5rem;
   height: 0.5rem;
@@ -320,6 +323,15 @@
     200ms background linear;
 }
 
+.edges--icon span {
+  width: 0.25rem;
+  height: 0.25rem;
+  background: var(--c);
+  box-shadow:
+    0 0 0 var(--lineWidth) var(--black),
+    0 0 0 calc(var(--lineWidth) * 2) var(--c);
+}
+
 .edges input {
     appearance: none;
     padding: 0;
@@ -332,6 +344,10 @@
   position: absolute;
   transform: translate(-50%, -50%);
   cursor: pointer;
+}
+
+.edges--icon label {
+  pointer-events: none;
 }
 
 .edges label:hover span {
@@ -351,6 +367,10 @@
   line-height: 1;
   font-size: 0.8em;
   font-weight: 100;
+}
+
+.edges--icon b {
+  display: none;
 }
 
 .edges .g {

@@ -6,7 +6,9 @@
   let currentPresetId = currentColors.currentPresetUid;
 
   const setCurrentPreset = (presetName: string) => {
-    currentColors.setPreset(presetName);
+    if (presetName !== 'custom') {
+      currentColors.setPreset(presetName);
+    }
     currentPresetId = presetName;
   };
 
@@ -24,6 +26,9 @@
       <button on:click={() => setCurrentPreset('custom')} class="nav__button">
         <strong class="nav__presettitle">Custom</strong>
         <strong class="nav__presetauthor">Create your own</strong>
+        <div class="nav__buttonicon">
+          <Cube iconMode={true} />
+        </div>
       </button>
       <div class="nav__details nav__details--square">
         <div class="nav__itemcube">
@@ -139,9 +144,19 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(.75);
     height: 20rem;
     width: 20rem;
+    box-sizing: border-box;
+    padding: var(--size-x);
+    transition: transform 400ms cubic-bezier(0.3, 0.7, 0, 1) 0ms, opacity 200ms linear 0ms;
+    opacity: 0;
+  }
+
+  .nav__item--active .nav__itemcube {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 400ms cubic-bezier(0.3, 0.7, 0, 1) 200ms, opacity 400ms linear 0ms;
   }
 
   .nav__presettitle {
@@ -175,8 +190,20 @@
   }
 
   .nav__itemcube {
-    box-sizing: border-box;
-    padding: var(--size-x);
+  }
+
+  .nav__buttonicon {
+    position: absolute;
+    top: 50%;
+    right: calc(4.2 * var(--size-x));
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-50%);
+    transition: transform 400ms cubic-bezier(0.3, 0.7, 0, 1) 100ms;
+  }
+
+  .nav__item--active .nav__buttonicon {
+    transform: translateY(-50%) translateY(200%);
   }
 
 </style>
