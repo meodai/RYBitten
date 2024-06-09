@@ -615,18 +615,43 @@
     opacity: 0;
   }
 
+  .nav__button {
+    position: relative;
+    display: block;
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 0ms;
+  }
+  .nav__button::after {
+    content: '';
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%) translateY(var(--lineWidth)) scale(.6);
+    width: .75em;
+    height: .75em;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 0 0 0 var(--lineWidth) var(--line);
+    pointer-events: none;
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1);
+    display: none;
+  }
+
+  .nav__button:hover::after {
+    transform: translate(-50%, 50%) translateY(var(--lineWidth)) scale(1);
+  }
+
+
+  .layout--showSidebar .nav__button {
+    transform: translateX(calc(-1 * var(--sidebarWidth) + 100%)) rotate(180deg);
+    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 300ms;
+  }
+
   .navicon {
-    width: 1em;
-    height: 1em;
+    width: 1.2em;
+    height: 1.2em;
     position: relative;
     border-radius: 50%;
     padding: var(--lineWidth);
-    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 0ms;
-  }
-
-  .layout--showSidebar .navicon {
-    transform: translateX(calc(-1 * var(--sidebarWidth) + 100%)) rotate(180deg);
-    transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 300ms;
   }
 
   .navicon g,
