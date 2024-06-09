@@ -10,29 +10,99 @@
   type ColorNames = 'white' | 'red' | 'yellow' | 'orange' | 'blue' | 'violet' | 'green' | 'black';
   type CSSColorNames = '--white' | '--red' | '--yellow' | '--orange' | '--blue' | '--violet' | '--green' | '--black';
 
+  const colorNames = [
+    {
+        "name": "black",
+        "rgb": [0, 0, 0]
+    },
+    {
+        "name": "blue",
+        "rgb": [0, 0, 255/255]
+    },
+    {
+        "name": "cyan",
+        "rgb": [0, 255/255, 255/255]
+    },
+    {
+        "name": "green",
+        "rgb": [0, 255/255, 0/255]
+    },
+    {
+        "name": "teal",
+        "rgb": [0, 128/255, 128/255]
+    },
+    {
+        "name": "turquoise",
+        "rgb": [64/255, 224/255, 208/255]
+    },
+    {
+        "name": "indigo",
+        "rgb": [75/255, 0, 130/255]
+    },
+    {
+        "name": "violet",
+        "rgb": [238/255, 130/255, 238/255]
+    },
+    {
+        "name": "beige",
+        "rgb": [245/255, 245/255, 220/255]
+    },
+    {
+        "name": "fuchsia",
+        "rgb": [255/255, 0/255, 255/255]
+    },
+    {
+        "name": "gold",
+        "rgb": [255/255, 215/255, 0]
+    },
+    {
+        "name": "magenta",
+        "rgb": [255/255, 0, 255/255]
+    },
+    {
+        "name": "orange",
+        "rgb": [25/255, 165/255, 0]
+    },
+    {
+        "name": "pink",
+        "rgb": [255/255, 192/255, 203/255]
+    },
+    {
+        "name": "red",
+        "rgb": [255/255, 0, 0]
+    },
+    {
+        "name": "white",
+        "rgb": [255/255, 255/255, 255/255]
+    },
+    {
+        "name": "yellow",
+        "rgb": [255/255, 255/255, 0]
+    }
+] as { name: string, rgb: ColorCoords}[];
 
   let colors = {
-    white: rgbToHex($cube[0]),
-    red: rgbToHex($cube[1]),
-    yellow: rgbToHex($cube[2]),
-    orange: rgbToHex($cube[3]),
-    blue: rgbToHex($cube[4]),
-    violet: rgbToHex($cube[5]),
-    green: rgbToHex($cube[6]),
-    black: rgbToHex($cube[7]),
-  } as Record<ColorNames, string>;
+    white: $cube[0],
+    red: $cube[1],
+    yellow: $cube[2],
+    orange: $cube[3],
+    blue: $cube[4],
+    violet: $cube[5],
+    green: $cube[6],
+    black: $cube[7],
+  } as Record<ColorNames, ColorCoords[]>;
 
   cube.subscribe((value) => {
     colors = {
-      white: rgbToHex(value[0]),
-      red: rgbToHex(value[1]),
-      yellow: rgbToHex(value[2]),
-      orange: rgbToHex(value[3]),
-      blue: rgbToHex(value[4]),
-      violet: rgbToHex(value[5]),
-      green: rgbToHex(value[6]),
-      black: rgbToHex(value[7]),
-    } as Record<ColorNames, string>;
+      white: value[0],
+      red: value[1],
+      yellow: value[2],
+      orange: value[3],
+      blue: value[4],
+      violet: value[5],
+      green: value[6],
+      black: value[7],
+    };
   });
 
   const colorNameIndex = {
@@ -47,14 +117,14 @@
   } as Record<ColorNames, number>;
 
   $: cssStyles = {
-    '--white': colors.white,
-    '--red': colors.red,
-    '--yellow': colors.yellow,
-    '--orange': colors.orange,
-    '--blue': colors.blue,
-    '--violet': colors.violet,
-    '--green': colors.green,
-    '--black': colors.black,
+    '--white': rgbToHex(colors.white),
+    '--red': rgbToHex(colors.red),
+    '--yellow': rgbToHex(colors.yellow),
+    '--orange': rgbToHex(colors.orange),
+    '--blue': rgbToHex(colors.blue),
+    '--violet': rgbToHex(colors.violet),
+    '--green': rgbToHex(colors.green),
+    '--black': rgbToHex(colors.black),
   } as Record<CSSColorNames, string>;
 
   $: cssStyleString = Object.entries(cssStyles)
@@ -63,7 +133,7 @@
 
 
   function updateEdge(color:ColorNames, value:string) {
-    colors[color] = value;
+    colors[color] = hexToRgb(value);
     cssStyles[`--${color}`] = value;
     cssStyleString = Object.entries(cssStyles)
       .map(([key, value]) => `${key}: ${value};`)
@@ -99,6 +169,21 @@
     green: [0, 255, 0],
     black: [0, 0, 0],
   } as Record<ColorNames, [number, number, number]>;
+
+  const closestName = (color: ColorCoords) => {
+    const closest = colorNames.reduce((acc, curr) => {
+      const distance = Math.sqrt(
+        Math.pow(curr.rgb[0] - color[0], 2) +
+        Math.pow(curr.rgb[1] - color[1], 2) +
+        Math.pow(curr.rgb[2] - color[2], 2)
+      );
+      if (distance < acc.distance) {
+        return { name: curr.name, distance };
+      }
+      return acc;
+    }, { name: '', distance: Infinity });
+    return closest.name;
+  }
 </script>
 
 <form class="edges" data-edges style="{cssStyleString}">
@@ -149,56 +234,59 @@
   <label class="g" style="--c: var(--green)" >
     <b>green</b>
     <span><input type="color" 
-      bind:value={colors.green} 
+      value={rgbToHex(colors.green)} 
       on:input={(e) => updateEdge('green', e.target?.value)}
     /></span>
   </label>
   <label class="b" style="--c: var(--blue)">
     <b>blue</b>
     <span><input type="color" 
-      bind:value={colors.blue}
+      
+      value={rgbToHex(colors.blue)}
       on:input={(e) => updateEdge('blue', e.target?.value)}
     /></span>
   </label>
   <label class="black" style="--c: var(--black)">
     <b>black</b>
     <span><input type="color" 
-      bind:value={colors.black}
+      value={rgbToHex(colors.black)}
       on:input={(e) => updateEdge('black', e.target?.value)}  
     /></span>
   </label>
   <label class="v" style="--c: var(--violet)">
     <b>pink</b>
     <span><input type="color" 
-      bind:value={colors.violet}
+      value={rgbToHex(colors.violet)}
       on:input={(e) => updateEdge('violet', e.target?.value)}  
     /></span>
   </label>
   <label class="y" style="--c: var(--yellow)">
     <b>yellow</b>
     <span><input type="color"
-      bind:value={colors.yellow}
-      on:input={(e) => updateEdge('yellow', e.target?.value)}  
+      value={rgbToHex(colors.yellow)}
+      on:input={
+        (e) => updateEdge('yellow', e.target?.value)
+      }  
     /></span>
   </label>
   <label class="w" style="--c: var(--white)">
     <b>white</b>
     <span><input type="color"
-      bind:value={colors.white}
+      value={rgbToHex(colors.white)}
       on:input={(e) => updateEdge('white', e.target?.value)}
     /></span>
   </label>
   <label class="o" style="--c: var(--orange)">
     <b>orange</b>
     <span><input type="color" 
-      bind:value={colors.orange}
+      value={rgbToHex(colors.orange)}
       on:input={(e) => updateEdge('orange', e.target?.value)}
     /></span>
   </label>
   <label class="r" style="--c: var(--red)">
     <b>red</b>
     <span><input type="color" 
-      bind:value={colors.red}
+      value={rgbToHex(colors.red)}
       on:input={(e) => updateEdge('red', e.target?.value)}
     /></span>
   </label>

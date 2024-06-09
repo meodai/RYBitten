@@ -68,7 +68,10 @@
   $: currentStylesString = Object.entries(currentStyles)
     .map(([key, value]) => `${key}: ${value};`).join('');
 
-  $: cubeString = JSON.stringify(currentCube);
+  $: cubeString = 
+    `[[` + currentCube.map(pair => {
+      return pair.map(vec => vec * 255 + '/255').join(',');
+    }).join('],\n    [') + ']]';
 
   let showSidebar = false;
   let isDevMode = $devMode;

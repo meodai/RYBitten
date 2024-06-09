@@ -148,4 +148,10 @@
     padding: 0;
     padding-right: calc(var(--size-x) * 2);
   }
+
+  .nav__itemcube {
+    padding: var(--size-x);
+    padding-right: calc(var(--size-x) * 2);
+  }
+
 </style>
