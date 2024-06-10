@@ -4,6 +4,9 @@
   export let ringWeights: number[] = [
     1, 1, 1, 2
   ];
+
+  export let showHexagon = false;
+
   export let varsForLayer = [
     '--stops-192',
     '--stops-96',
@@ -28,10 +31,10 @@
   }, [0]).slice(0, -1);
 </script>
 
-<div class="ittenWheel {hasOutline ? 'ittenWheel--outline' : ''} {!ringWeights.length ? 'ittenWheel--triangle' : ''}">
+<div class="ittenWheel{hasOutline ? ' ittenWheel--outline' : ''}{!ringWeights.length ? ' ittenWheel--triangle' : ''}{showHexagon ? ' ittenWheel--hexagon' : ''}">
   {#if outerRins > 0}
     {#each ringWeightsCumulative as weight, i}
-      <div class="ittenWheel__ring" style="--r: {sliceAjustAdjusted[i]}; --weight: {weight}; --cbg: var({slicedVarsForLayers[i]})">
+      <div class="ittenWheel__ring{i===outerRins ? ' ittenWheel__ring--centerbg' : ''}" style="--r: {sliceAjustAdjusted[i]}; --weight: {weight}; --cbg: var({slicedVarsForLayers[i]})">
       </div>
     {/each}
   {/if}
@@ -68,6 +71,36 @@
     background: conic-gradient(var(--stops-3-alt));
   }
 
+  .ittenWheel--outline .ittenWheel__ring--center::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    clip-path: polygon(50% 0%,6.75% 75%,93.25% 75%);
+    z-index: 1;
+    transform: scale(1.015);
+  }
+
+  .ittenWheel--hexagon .ittenWheel__ring--center {
+    /*
+      --side-length: calc(50% * (1 - var(--weight)) * sqrt(3));
+      --hex-radius = (100%−var(–weight)×100%) / 2
+    */
+    /* hexagon */
+    clip-path: polygon(
+      50% 0%,
+      93.3% 25%,
+      93.3% 75%,
+      50% 100%,
+      6.7% 75%,
+      6.7% 25%
+    );
+  }
+
+  .ittenWheel--hexagon .ittenWheel__ring--centerbg {
+    background: var(--bg);
+  }
+
   .ittenWheel__ring--empty {
     background: none;
   }
@@ -75,5 +108,10 @@
   .ittenWheel__center {
     background: conic-gradient(from -60deg at 50% 50%, var(--stops-3));
     clip-path: polygon(50% 0%,6.75% 75%,93.25% 75%);
+    z-index: 2;
+  }
+
+  .ittenWheel--outline .ittenWheel__center {
+    transform: translate(-50%, -50%) scale(0.99);
   }
 </style>
