@@ -61,7 +61,11 @@ cube.subscribe((value) => {
     perspective: 10000px;
     transform-style: preserve-3d;
     animation: spin 60s linear infinite;
+    animation-play-state: paused;
+  }
 
+  .sphere:hover {
+    animation-play-state: running;
   }
 
   .sphere__segments  {
