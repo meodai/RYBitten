@@ -70,7 +70,7 @@ cube.subscribe((value) => {
 
   .sphere__segments  {
     position: absolute;
-    height: 1rem;
+    height: 3.7%;
     width: 100%;
     top: 50%;
     transform: translateY(-50%) rotateY(-20deg) rotateX(-20deg);
@@ -87,14 +87,14 @@ cube.subscribe((value) => {
     position: absolute;
     width: 100%;
     height: 100%;
-    transform: rotateY(-90deg) translateZ(-.5rem) scaleX(.58);
+    transform: rotateY(-90deg) translateZ(-1.8cqi) scaleX(.58);
     background: linear-gradient(to left, var(--stops-12));
     background-size: 200%;
     background-position: 100% 100%;
   }
 
   .sphere__segments--vertical::before {
-    transform: rotateY(-90deg) rotateX(-90deg) translateZ(.5rem) scaleX(.58);
+    transform: rotateY(-90deg) rotateX(-90deg) translateZ(1.8cqi) scaleX(.58);
   }
 
   .sphere__segment {
