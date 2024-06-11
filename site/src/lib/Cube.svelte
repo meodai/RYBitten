@@ -418,7 +418,7 @@
 }
 
 .cube g {
-  stroke: currentColor;
+  stroke: var(--line, currentColor);
   stroke-width: var(--lineWidth);
   fill: none;
 }
@@ -429,7 +429,7 @@
 
 .cube__coverline {
   fill: none;
-  stroke: var(--black);
+  stroke: var(--line);
   stroke-dasharray: 1.5 1.5;
 }
 </style>

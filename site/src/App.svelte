@@ -6,6 +6,7 @@
   import Cube from './lib/Cube.svelte';
   import NamedSwatches from './lib/NamedSwatches.svelte';
   import Sphere from './lib/Sphere.svelte';
+  import Donut from './lib/Donut.svelte';
 
   import { getColorsHSL } from './lib/fn/getColorsHSL';
   import { colorsToGradient } from './lib/fn/colorsToGradient';
@@ -111,7 +112,7 @@
         title="Presets"
       >
         <svg class="navicon" viewBox="0 0 100 100">
-          <g stroke="currentColor" transform-origin="50 50" transform="rotate(-22.5)">
+          <g stroke="var(--line, currentColor)" transform-origin="50 50" transform="rotate(-22.5)">
             <circle cx="50" cy="50" r="50" vector-effect="non-scaling-stroke" />
             <line x1="0" y1="50" x2="100" y2="50" transform="rotate(-45)" transform-origin="50 50" vector-effect="non-scaling-stroke"/>
             <line x1="0" y1="50" x2="100" y2="50" transform="rotate(45)" transform-origin="50 50" vector-effect="non-scaling-stroke"/>
@@ -267,6 +268,8 @@
             </g>
           </svg>
         </a>
+
+        <Donut />
       
         <!--h2>Current Colors</h2-->
         <code><pre>{cubeString}</pre></code>
@@ -290,7 +293,8 @@
   .layout {
     --bg: var(--white);
     --onBg: var(--black);
-    --line: var(--onBg);
+
+    --line: color-mix(in srgb, var(--onBg) 40%, var(--bg));
     --lineInverse: var(--bg);
 
     height: 100dvh;
@@ -303,6 +307,13 @@
 
     color: var(--onBg);
   }
+
+  @media (min-resolution: 2dppx) {
+    .layout {
+      --line: var(--onBg);
+    }
+  }
+
 
 
   .layout--dev {
@@ -682,7 +693,7 @@
   .navicon g,
   .navicon line,
   .navicon circle {
-    stroke: currentColor;
+    stroke: var(--line, currentColor);
     stroke-width: calc(var(--lineWidth) * .6);
     fill: none;
   }
