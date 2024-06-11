@@ -205,6 +205,18 @@ export const RYB_JAPSCHOOL: ColorCube = [
   [31 / 255, 27 / 255, 28 / 255],
 ];
 
+// Maycock
+export const RYB_MAYCOCK: ColorCube = [
+  [209 / 255, 194 / 255, 173 / 255],
+  [159 / 255, 36 / 255, 31 / 255],
+  [231 / 255, 191 / 255, 6 / 255],
+  [231 / 255, 155 / 255, 7 / 255],
+  [75 / 255, 90 / 255, 200 / 255],
+  [121 / 255, 100 / 255, 188 / 255],
+  [115 / 255, 179 / 255, 63 / 255],
+  [52 / 255, 49 / 255, 40 / 255],
+];
+
 // Marvel Newsprint 1982
 
 export const RYB_MARVEL_NEWS: ColorCube = [
@@ -375,6 +387,14 @@ cubes.set("chevreul", {
   year: 1839,
   reference: "Cercle_chromatique_Chevreul_2.jpg",
   cube: RYB_CHEVREUL,
+});
+
+cubes.set("maycock", {
+  title: "Scale of Normal Colors and their Hues",
+  author: "Mark M. Maycock",
+  year: 1895,
+  reference: "maycock.png",
+  cube: RYB_MAYCOCK,
 });
 
 cubes.set("japschool", {
