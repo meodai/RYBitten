@@ -242,6 +242,18 @@ export const RYB_APPLE90s: ColorCube = [
   [2 / 255, 4 / 255, 6 / 255],
 ];
 
+// Apple Hyper Card User Manual 1989
+export const RYB_APPLE80s: ColorCube = [
+  [254 / 255, 249 / 255, 246 / 255],
+  [248 / 255, 20 / 255, 35 / 255],
+  [237 / 255, 199 / 255, 8 / 255],
+  [254 / 255, 128 / 255, 11 / 255],
+  [48 / 255, 140 / 255, 206 / 255],
+  [182 / 255, 40 / 255, 94 / 255],
+  [135 / 255, 187 / 255, 26 / 255],
+  [29 / 255, 27 / 255, 28 / 255],
+];
+
 // contemporary
 
 export const RYB_IPPSKETCH: ColorCube = [
@@ -431,6 +443,14 @@ cubes.set("apple90s", {
   year: 1990,
   reference: "apple90s.png",
   cube: RYB_APPLE90s,
+});
+
+cubes.set("apple80s", {
+  title: "HyperCard User Manual",
+  author: "Apple",
+  year: 1989,
+  reference: "apple80s.png",
+  cube: RYB_APPLE80s,
 });
 
 // mordern
