@@ -230,6 +230,18 @@ export const RYB_MARVEL_NEWS: ColorCube = [
   [60 / 255, 52 / 255, 40 / 255],
 ];
 
+// Apple 1990 reference manual
+export const RYB_APPLE90s: ColorCube = [
+  [255 / 255, 244 / 255, 216 / 255],
+  [248 / 255, 80 / 255, 46 / 255],
+  [255 / 255, 213 / 255, 44 / 255],
+  [254 / 255, 129 / 255, 5 / 255],
+  [0 / 255, 124 / 255, 197 / 255],
+  [132 / 255, 77 / 255, 139 / 255],
+  [120 / 255, 160 / 255, 66 / 255],
+  [2 / 255, 4 / 255, 6 / 255],
+];
+
 // contemporary
 
 export const RYB_IPPSKETCH: ColorCube = [
@@ -411,6 +423,14 @@ cubes.set("marvel-news", {
   year: 1982,
   reference: "marvel-news.png",
   cube: RYB_MARVEL_NEWS,
+});
+
+cubes.set("apple90s", {
+  title: "Macintosh Reference Manual",
+  author: "Apple",
+  year: 1990,
+  reference: "apple90s.png",
+  cube: RYB_APPLE90s,
 });
 
 // mordern
