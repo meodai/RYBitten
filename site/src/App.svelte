@@ -58,6 +58,7 @@
     }), true),
     '--black': formatCSS(ryb2rgb([1,1,1], {cube: currentCube})),
     '--white': formatCSS(ryb2rgb([0,0,0], {cube: currentCube})),
+
     '--red': formatCSS(ryb2rgb([1,0,0], {cube: currentCube})),
     '--yellow': formatCSS(ryb2rgb([0,1,0], {cube: currentCube})),
     '--orange': formatCSS(ryb2rgb([1,1,0], {cube: currentCube})),
@@ -106,7 +107,7 @@
 
 
       <button 
-        class="nav__button" 
+        class="nav__button nav__button--sidebar" 
         aria-label="toggle sidebar"
         on:click={() => showSidebar = !showSidebar}
         title="Presets"
@@ -314,13 +315,10 @@
     }
   }
 
-
-
   .layout--dev {
     --bg: var(--black);
     --onBg: var(--white);
   }
-
 
   .layout::before,
   .layout::after {
@@ -656,6 +654,15 @@
     display: block;
     transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 0ms;
   }
+
+  .nav__button--sidebar {
+    border-radius: 50%;
+    overflow: clip;
+  }
+  .nav__button--sidebar:hover {
+    background: conic-gradient(from -22.5deg at 50% 50%, var(--stops-8));
+  }
+
   .nav__button::after {
     content: '';
     position: absolute;
@@ -677,7 +684,7 @@
   }
 
 
-  .layout--showSidebar .nav__button {
+  .layout--showSidebar .nav__button--sidebar {
     transform: translateX(calc(-1 * var(--sidebarWidth) + 100%)) rotate(180deg);
     transition: 300ms transform cubic-bezier(0.3, 0.7, 0, 1) 300ms;
   }
@@ -686,7 +693,6 @@
     width: 1.2em;
     height: 1.2em;
     position: relative;
-    border-radius: 50%;
     padding: var(--lineWidth);
   }
 
@@ -702,6 +708,27 @@
     background: conic-gradient(from -22.5deg at 50% 50%, var(--stops-8));
   }
 
+  /*
+  .nav__button--sidebar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from 0deg at 50% 50%, var(--bg) 87.5%, transparent 87.5%);
+
+    animation: stepSpin 5s steps(8, end) infinite;
+  }
+
+  @keyframes stepSpin {
+    0% {
+      transform: rotate(-22.5deg);
+    }
+    15%, 100% {
+      transform: rotate(337.5deg);
+      visibility: hidden;
+    }
+  }
+  */
+  
   .content-toggle {
     position: relative;
   }

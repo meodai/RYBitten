@@ -424,7 +424,7 @@
 }
 
 .cube__front {
-  fill: var(--white);
+  fill: var(--bg);
 }
 
 .cube__coverline {

@@ -30,7 +30,6 @@
     transform: rotateX(45deg);
   }
 
-
   .donut__segments::after {
     content: '';
     inset: 0;
