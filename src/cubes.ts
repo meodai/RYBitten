@@ -217,6 +217,17 @@ export const RYB_MAYCOCK: ColorCube = [
   [52 / 255, 49 / 255, 40 / 255],
 ];
 
+export const RYB_COLORPRINTER: ColorCube = [
+  [250 / 255, 248 / 255, 244 / 255],
+  [255 / 255, 41 / 255, 37 / 255],
+  [251 / 255, 223 / 255, 47 / 255],
+  [253 / 255, 151 / 255, 35 / 255],
+  [31 / 255, 106 / 255, 184 / 255],
+  [159 / 255, 68 / 255, 150 / 255],
+  [80 / 255, 180 / 255, 122 / 255],
+  [36 / 255, 38 / 255, 39 / 255],
+];
+
 // Marvel Newsprint 1982
 
 export const RYB_MARVEL_NEWS: ColorCube = [
@@ -419,6 +430,14 @@ cubes.set("maycock", {
   year: 1895,
   reference: "maycock.png",
   cube: RYB_MAYCOCK,
+});
+
+cubes.set("colorprinter", {
+  title: "The Color Printer",
+  author: "John Earhart",
+  year: 1892,
+  reference: "colorprinter.png",
+  cube: RYB_COLORPRINTER,
 });
 
 cubes.set("japschool", {
