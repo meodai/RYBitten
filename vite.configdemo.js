@@ -6,7 +6,7 @@ export default defineConfig({
   // define the input file being src/index.html
   root: "src",
   build: {
-    outDir: "../demo",
+    outDir: "../dist",
   },
   plugins: [viteSingleFile()],
 });
