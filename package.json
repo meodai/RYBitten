@@ -5,19 +5,19 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/rybitten.cjs",
-  "module": "./dist/rybitten.js",
-  "types": "./dist/main.d.ts",
+  "main": "./rybitten.cjs",
+  "module": "./rybitten.js",
+  "types": "./main.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/rybitten.js",
-      "require": "./dist/rybitten.cjs",
-      "types": "./dist/main.d.ts"
+      "import": "./rybitten.js",
+      "require": "./rybitten.cjs",
+      "types": "./main.d.ts"
     },
     "./cubes": {
-      "import": "./dist/cubes.js",
-      "require": "./dist/cubes.cjs",
-      "types": "./dist/cubes.d.ts"
+      "import": "./cubes.js",
+      "require": "./cubes.cjs",
+      "types": "./cubes.d.ts"
     }
   },
   "scripts": {
