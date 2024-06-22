@@ -6,18 +6,13 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   build: {
     lib: {
-      // Multiple entry points
-      entry: {
-        main: resolve(__dirname, "src/main.ts"),
-        cubes: resolve(__dirname, "src/cubes.ts"),
-      },
+      // Could also be a dictionary or array of multiple entry points
+      entry: resolve(__dirname, "src/main.ts"),
       name: "RYBItten",
-      formats: ["es", "cjs"],
+      // the proper extensions will be added
+      fileName: "rybitten",
     },
-    rollupOptions: {
-    },
+    rollupOptions: {},
   },
-  plugins: [
-    dts(),
-  ],
+  plugins: [dts()],
 });

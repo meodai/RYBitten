@@ -1,24 +1,17 @@
 {
   "name": "rybitten",
-  "version": "0.16.0",
+  "version": "0.14.0",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./rybitten.cjs",
-  "module": "./rybitten.js",
-  "types": "./main.d.ts",
+  "main": "./dist/rybitten.umd.cjs",
+  "module": "./dist/rybitten.js",
+  "types": "./dist/main.d.ts",
   "exports": {
-    ".": {
-      "import": "./rybitten.js",
-      "require": "./rybitten.cjs",
-      "types": "./main.d.ts"
-    },
-    "./cubes": {
-      "import": "./cubes.js",
-      "require": "./cubes.cjs",
-      "types": "./cubes.d.ts"
-    }
+    "import": "./dist/rybitten.js",
+    "require": "./dist/rybitten.umd.cjs",
+    "types": "./dist/main.d.ts"
   },
   "scripts": {
     "dev": "vite --open src/index.html",
