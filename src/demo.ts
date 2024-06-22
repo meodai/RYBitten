@@ -1,7 +1,5 @@
 import "./demo.css";
-import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb } from "./main";
-import { cubes } from "./cubes";
-
+import { ColorCoords, ColorCube, rybHsl2rgb, ryb2rgb, cubes } from "./main";
 //import { generateColorRamp } from "rampensau";
 
 let currentCube: ColorCube = cubes.get("itten-normalized")!.cube;
