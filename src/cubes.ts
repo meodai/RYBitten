@@ -267,6 +267,17 @@ export const RYB_APPLE80s: ColorCube = [
 
 // contemporary
 
+export const RYB_PixelArt: ColorCube = [
+  [ 226 / 255, 216 / 255, 205 / 255 ],
+  [ 224 / 255,  43 / 255,  39 / 255 ],
+  [ 251 / 255, 204 / 255,  38 / 255 ],
+  [ 255 / 255, 138 / 255,   4 / 255 ],
+  [  82 / 255, 103 / 255, 202 / 255 ],
+  [ 199 / 255, 112 / 255, 253 / 255 ],
+  [ 104 / 255, 182 / 255,  90 / 255 ],
+  [  22 / 255,  19 / 255,  11 / 255 ],
+];
+
 export const RYB_IPPSKETCH: ColorCube = [
   [221 / 255, 219 / 255, 211 / 255],
   [196 / 255, 82 / 255, 69 / 255],
@@ -473,6 +484,14 @@ cubes.set("apple80s", {
 });
 
 // mordern
+
+cubes.set("pixelart", {
+  title: "Pixel Art",
+  author: "Tofu",
+  year: 2024,
+  reference: "pixelart.png",
+  cube: RYB_PixelArt,
+});
 
 cubes.set("ippsketch", {
   title: "Imposter Syndrome",
