@@ -5,10 +5,17 @@
 
 <img src="itten-wheel.png" alt="RYBitten Logo" width="400" />
 
-RYBitten is a library for translating colors between RGB and a custom RYB color space. The library uses trilinear interpolation and is manually tuned to emulate Johannes Itten's chromatic circle. It is designed for developers, generative artists and designers who want to experiment with alternative color representations.
+**RYBitten** is a lightweight library for translating colors between RGB and a custom RYB (Red-Yellow-Blue) color space. It’s designed for developers, generative artists, and designers who want to create harmonious, consistent, or randomized color palettes effortlessly. The library emulates Johannes Itten's chromatic circle using trilinear interpolation and customizable options, making it a versatile tool for creative projects.
 
 > "Play becomes joy, joy becomes work, work becomes play."
 > **Johannes Itten, Bauhaus**
+
+## Features ✨
+
+- **Color Conversion**: Effortlessly translate between RGB and a custom RYB space.
+- **Easy Integration**: A tiny library with no dependencies.
+- **Customizable Gamuts**: Experiment with historical color spaces or create your own.
+- **Subtractive Color Model**: Emulates subtractive color.
 
 ## Installation 📦
 
@@ -43,27 +50,29 @@ const { ryb2rgb } = require('rybitten');
 ```javascript
 import { ryb2rgb } from 'rybitten';
 
-const rybColor = [1, 0, 0.5]; // RYB coordinates
+const rybColor = [1, 0, 0.5]; // Example RYB color
 const rgbColor = ryb2rgb(rybColor);
 
-console.log(rgbColor); // Outputs the converted RGB coordinates
+console.log(rgbColor); // Outputs the RGB equivalent
 ```
 
-## Functions 📖
+## API Reference 📖
 
 ### ryb2rgb(coords: ColorCoords, {cube?: ColorCube = RYB_CUBE, easingFn? = smoothstep}): ColorCoords
+
+Convert RYB to RGB using trilinear interpolation.
 
 - `coords`: `[0…1, 0…1, 0…1]` RYB coordinates
 - `options`: (*optional*) An object with the following properties:
   - `cube`: (*optional*): [See the note on the color cube below](#cube) defaults to `RYB_ITTEN`
-  - `easingFn`: (*optional*) A custom easing function for the interpolation, defaults to `smoothstep`
+  - `easingFn`: (*optional*) Custom easing function used for the interpolation, defaults to `smoothstep`
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
 
-Converts RYB coordinates to RGB using trilinear interpolation. The default color cube is manually tuned to represent the RYB color space derived from Johannes Itten's color wheel. But you can pass your own cube if you want to experiment with different color spaces. (When interacting with the RGB cube on the demo page, the custom `RYB_CUBE` is visible in your console.)
-
-**white will turn to black, and black will turn to white.** because the RYB is based on the subtractive color model, where white is the absence of color and black is the presence of all colors.
+**Note**: RYB uses a subtractive color model where black = all colors, white = no colors. **white will turn to black, and black will turn to white.**
 
 ### rybHsl2rgb(hsl: ColorCoords, {cube?: ColorCube = RYB_CUBE, easingFn? = smoothstep}): ColorCoords
+
+Convert HSL to RGB, then apply the RYB space.
 
 - `hsl`: `[0…360, 0…1, 0…1]` HSL coordinates
 - `options`: (*optional*) An object with the following properties:
@@ -74,7 +83,7 @@ Converts RYB coordinates to RGB using trilinear interpolation. The default color
 
 Converts HSL coordinates to RGB, then translates them to the custom RYB color space using ryb2rgb. The HSL coordinates are in the range `[0,360], [0, 1], [0, 1]`. Lightness is inverted to match the RYB color space.
 
-## Interpolation Color Cube 🎛️ {#cube}
+## Interpolation Color Cube 🎛️
 
 The default RYB color cube used for interpolation in `RYBitten` is tuned to mimic Johannes Itten's chromatic circle. By adjusting the cube, you can achieve different effects and customize the RYB to RGB conversion.
 
@@ -108,7 +117,7 @@ const RYB_CUBE = [
 ];
 ```
 
-## Custom Color Gamuts 🎨
+## Custom Gamuts Presets 🧊
 
 The library ships with a curated list of color gamuts that you can use to experiment with different color spaces. The default gamut is based on the work of Johannes Itten. But you can access other gamuts by importing the `CUBES` map.
 
