@@ -1,9 +1,13 @@
 # RYBitten 👄
 
+A color space conversion library for transforming between RGB and RYB (Red-Yellow-Blue) colors.
+
 [![npm version](https://badge.fury.io/js/rybitten.svg)](https://badge.fury.io/js/rybitten)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <img src="itten-wheel.png" alt="RYBitten Logo" width="400" />
+
+## What is RYBitten?
 
 **RYBitten** is a lightweight library for translating colors between RGB and a custom RYB (Red-Yellow-Blue) color space. It’s designed for developers, generative artists, and designers who want to create harmonious, consistent, or randomized color palettes effortlessly. The library emulates Johannes Itten's chromatic circle using trilinear interpolation and customizable options, making it a versatile tool for creative projects.
 
