@@ -1,4 +1,3 @@
-// vite.config.js
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
@@ -6,13 +5,31 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   build: {
     lib: {
-      // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, "src/main.ts"),
-      name: "RYBItten",
-      // the proper extensions will be added
-      fileName: "rybitten",
+      entry: {
+        rybitten: resolve(__dirname, "src/main.ts"),
+        cubes: resolve(__dirname, "src/cubes.ts"),
+      },
+      name: "rybitten",
     },
-    rollupOptions: {},
+    rollupOptions: {
+      external: [],
+      output: [
+        {
+          format: "es",
+          entryFileNames: "[name].mjs",
+          preserveModules: true,
+          exports: "named",
+          inlineDynamicImports: false,
+        },
+        {
+          format: "cjs",
+          entryFileNames: "[name].cjs",
+          preserveModules: true,
+          exports: "named",
+          inlineDynamicImports: false,
+        },
+      ],
+    },
   },
   plugins: [dts()],
 });

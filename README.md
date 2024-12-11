@@ -33,7 +33,8 @@ Or include it directly in your HTML:
 
 ```html
 <script type="module">
-  import { ryb2rgb, rybHsl2rgb, cubes } from "https://esm.sh/rybitten/";
+  import { ryb2rgb, rybHsl2rgb } from "https://esm.sh/rybitten/";
+  import { cubes } from "https://esm.sh/rybitten/cubes"; // Optional gamut presets
 </script>
 ```
 
@@ -133,7 +134,8 @@ Each gamut is an object with the following properties:
 - `cube`: The color cube used for interpolation
 
 ```javascript
-import { cubes, rybHsl2rgb } from 'rybitten';
+import { rybHsl2rgb } from 'rybitten';
+import { cubes } from 'rybitten/cubes';
 
 const cube = cubes.get('munsell');
 

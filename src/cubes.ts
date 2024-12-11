@@ -136,7 +136,7 @@ export const RYB_MUNSELL: ColorCube = [
   [46 / 255, 44 / 255, 38 / 255],
 ];
 
-export const RYB_HAYER: ColorCube = [
+export const RYB_HAYTER: ColorCube = [
   [237 / 255, 213 / 255, 177 / 255],
   [167 / 255, 33 / 255, 28 / 255],
   [245 / 255, 181 / 255, 18 / 255],
@@ -395,12 +395,12 @@ cubes.set("munsell", {
   cube: RYB_MUNSELL,
 });
 
-cubes.set("hayer", {
+cubes.set("hayter", {
   title: "New Practical Treatise on the Three Primitive Colours",
   author: "Charles Hayter",
   year: 1826,
   reference: "Color_diagram_Charles_Hayter.jpg",
-  cube: RYB_HAYER,
+  cube: RYB_HAYTER,
 });
 
 cubes.set("bormann", {
