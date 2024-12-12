@@ -5,7 +5,7 @@ A color space conversion library for transforming between RGB and RYB (Red-Yello
 [![npm version](https://badge.fury.io/js/rybitten.svg)](https://badge.fury.io/js/rybitten)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<img src="screenshots/colorcloth.png" alt="RYBitten Logo" width="600" />
+<img src="screenshots/colorcloth.png" alt="Cloth particles using RYBitten" />
 
 ## What is RYBitten?
 
