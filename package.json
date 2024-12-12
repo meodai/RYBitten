@@ -1,13 +1,18 @@
 {
   "name": "rybitten",
   "version": "0.18.0",
+  "keywords": [
+    "color", "ryb", "colour", "palettes", "palette", "color-manipulation", 
+    "data visualization", "color theory", "color manipulation", "color palettes"
+  ],
+  "description": "A color space conversion library for transforming between RGB and RYB colors.",
+  "author": "meodai",
+  "license": "MIT",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
-  "main": "./dist/rybitten.cjs",
-  "module": "./dist/rybitten.mjs",
-  "types": "./dist/main.d.ts",
   "exports": {
     ".": {
       "import": "./dist/rybitten.mjs",
@@ -19,6 +24,27 @@
       "require": "./dist/cubes.cjs",
       "types": "./dist/cubes.d.ts"
     }
+  },
+  "typesVersions": {
+    "*": {
+      "cubes": [
+        "./dist/cubes.d.ts"
+      ],
+      "*": [
+        "./dist/main.d.ts"
+      ]
+    }
+  },
+  "main": "./dist/rybitten.cjs",
+  "module": "./dist/rybitten.mjs",
+  "types": "./dist/main.d.ts",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meodai/RYBitten.git"
+  },
+  "bugs": {
+    "url": "https://github.com/meodai/RYBitten/issues"
   },
   "scripts": {
     "dev": "vite --open src/index.html",

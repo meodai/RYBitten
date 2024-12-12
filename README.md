@@ -5,7 +5,7 @@ A color space conversion library for transforming between RGB and RYB (Red-Yello
 [![npm version](https://badge.fury.io/js/rybitten.svg)](https://badge.fury.io/js/rybitten)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<img src="itten-wheel.png" alt="RYBitten Logo" width="400" />
+<img src="screenshots/colorcloth.png" alt="RYBitten Logo" width="600" />
 
 ## What is RYBitten?
 
@@ -55,15 +55,14 @@ const { ryb2rgb } = require('rybitten');
 ```javascript
 import { ryb2rgb } from 'rybitten';
 
-const rybColor = [1, 0, 0.5]; // Example RYB color
-const rgbColor = ryb2rgb(rybColor);
+const rgbColor = ryb2rgb([1, 0, 0.5]);
 
 console.log(rgbColor); // Outputs the RGB equivalent
 ```
 
 ## API Reference 📖
 
-### ryb2rgb(coords: ColorCoords, {cube?: ColorCube = RYB_CUBE, easingFn? = smoothstep}): ColorCoords
+### ryb2rgb(coords: ColorCoords, {cube?: ColorCube = RYB_ITTEN, easingFn? = easingSmoothstep}): ColorCoords
 
 Convert RYB to RGB using trilinear interpolation.
 
@@ -75,11 +74,11 @@ Convert RYB to RGB using trilinear interpolation.
 
 **Note**: RYB uses a subtractive color model where black = all colors, white = no colors. **white will turn to black, and black will turn to white.**
 
-### rybHsl2rgb(hsl: ColorCoords, {cube?: ColorCube = RYB_CUBE, easingFn? = smoothstep}): ColorCoords
+### rybHsl2rgb(hsl: [h: number, s: number, l: number], options?): ColorCoords
 
 Convert HSL to RGB, then apply the RYB space.
 
-- `hsl`: `[0…360, 0…1, 0…1]` HSL coordinates
+- `hsl`: Array of `[hue (0…360), saturation (0…1), lightness (0…1)]`
 - `options`: (*optional*) An object with the following properties:
   - `cube`: (*optional*) [See the note on the color cube below](#interpolation-color-cube,
   - `easingFn`: (*optional*) A custom easing function for the interpolation, defaults to `smoothstep`
@@ -154,7 +153,32 @@ console.log(cube);
 rybHsl2rgb([0, 1, 0.5], {cube});
 ```
 
+## TypeScript Support 📝
+
+RYBitten is written in TypeScript and includes type definitions out of the box:
+
+```typescript
+import type { ColorCoords, ColorCube } from 'rybitten';
+```
+
 ### Available Color Gamuts
+
+The library provides a collection of historical and modern color gamuts through the `cubes` Map. Import and use them like this:
+
+```javascript
+import { rybHsl2rgb } from 'rybitten';
+import { cubes } from 'rybitten/cubes';
+
+// Access any gamut by its key
+const munsellCube = cubes.get('munsell').cube;
+const albersCube = cubes.get('albers').cube;
+
+// Use it in color conversion
+const rgbColor = rybHsl2rgb([0, 1, 0.5], { cube: munsellCube });
+
+// Get metadata about the color space
+const { title, author, year, reference } = cubes.get('munsell');
+```
 
 #### Historical Color Spaces
 
@@ -171,6 +195,13 @@ rybHsl2rgb([0, 1, 0.5], {cube});
 | munsell | Munsell Color System | 1905 | [reference](references/munsell-atlas-11.jpg) |
 | hayer | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg) |
 | bormann | Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course" | 1931 | [reference](references/bormann.png) |
+| chevreul | Michel Eugène Chevreul: Chromatic Circle | 1839 | |
+| maycock | Mark M. Maycock's "Scale of Normal Colors and their Hues" | 1895 | |
+| colorprinter | John Earhart's "The Color Printer" | 1892 | |
+| japschool | Japanese School Textbook  | 1930 | [reference](references/textbook-3.jpg) |
+| albers | Josef Albers: Interaction of Color | 1942 | [reference](references/albers-color-harmony.jpg) |
+| lohse |  Richard Paul Lohse's "Kunsthalle Bern Poster"  | 1970 | [reference](references/lohse.png) |
+| rgb | James Clerk Maxwell's "Inverted RGB" | 1860 | |
 
 #### Featured Artist Spectrum
 
@@ -179,7 +210,49 @@ The following color spaces were provided by artists and designers who have contr
 | Key | Title | Year | Reference |
 | --- | --- | --- | --- |
 | [ippsketch](https://ippsketch.com/) | Ippsketch: imposter syndrome | 2022 | [reference](references/ippsketch.png) |
+| ten | Roni Kaufman's "Ten" | 2022 | [reference](references/ten.png) |
 
+## Utility Functions 🛠️
+
+The library exports several utility functions that are used internally for color interpolation.
+But if you are anything like me, you might find them useful for other purposes when working with this library.
+
+### lerp(a: number, b: number, t: number): number
+
+Linear interpolation between two values.
+
+```javascript
+import { lerp } from 'rybitten';
+
+lerp(0, 100, 0.5); // returns 50
+```
+
+
+### blerp(a00: number, a01: number, a10: number, a11: number, tx: number, ty: number): number
+
+Bilinear interpolation between four points in a 2D space. Useful for interpolating values on a rectangular grid.
+
+```javascript
+import { blerp } from 'rybitten';
+
+// Interpolate between four corners of a unit square
+blerp(0, 1, 1, 2, 0.5, 0.5); // returns center value
+```
+
+### trilerp(a000: number, a010: number, a100: number, a110: number, a001: number, a011: number, a101: number, a111: number, tx: number, ty: number, tz: number): number
+
+Trilinear interpolation between eight points in a 3D space. This is the core interpolation function used for the color cube conversion.
+
+```javascript
+import { trilerp } from 'rybitten';
+
+// Interpolate within a color cube
+const value = trilerp(
+  0, 1, 1, 1,  // front face values
+  0, 1, 1, 1,  // back face values
+  0.5, 0.5, 0.5 // position in cube
+);
+```
 
 ## License 📄
 

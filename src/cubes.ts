@@ -1,5 +1,26 @@
+/**
+ * Represents a color in RGB/HSX... space as an array of three numbers.
+ * @typedef {[number, number, number]} ColorCoords
+ */
 export type ColorCoords = [number, number, number];
+
+/**
+ * Represents a color cube with exactly 8 RGB colors for RYB to RGB mapping.
+ * The colors are ordered as: white, red, yellow, orange, blue, violet, green, black
+ * @typedef {ColorCoords[] & { length: 8 }} ColorCube
+ */
 export type ColorCube = ColorCoords[] & { length: 8 };
+
+/**
+ * Map storing historical and modern color cube definitions with their metadata.
+ * @typedef {Map<string, {
+ *   title: string,
+ *   author: string,
+ *   reference: string,
+ *   year: number,
+ *   cube: ColorCube
+ * }>} CubesMap
+ */
 export type CubesMap = Map<
   string,
   {
@@ -11,6 +32,18 @@ export type CubesMap = Map<
   }
 >;
 
+/**
+ * Default RYB color cube based on Johannes Itten's chromatic circle (1961).
+ * Contains 8 key colors in RGB space:
+ * 1. White    - Base color, slightly warm [253/255, 246/255, 237/255]
+ * 2. Red      - Primary [227/255, 36/255, 33/255]
+ * 3. Yellow   - Primary [243/255, 230/255, 0]
+ * 4. Orange   - Secondary [240/255, 142/255, 28/255]
+ * 5. Blue     - Primary [22/255, 153/255, 218/255]
+ * 6. Violet   - Secondary [120/255, 34/255, 170/255]
+ * 7. Green    - Secondary [0, 142/255, 91/255]
+ * 8. Black    - Shade [29/255, 28/255, 28/255]
+ */
 export const RYB_ITTEN: ColorCube = [
   // white
   [253 / 255, 246 / 255, 237 / 255],
@@ -37,7 +70,7 @@ export const RYB_ITTEN: ColorCube = [
   [29 / 255, 28 / 255, 28 / 255],
 ];
 
-export const RYB_ITTEN_ALT: ColorCube = [
+const RYB_ITTEN_ALT: ColorCube = [
   [253 / 255, 246 / 255, 237 / 255],
   [247 / 255, 45 / 255, 41 / 255],
   [253 / 255, 203 / 255, 0 / 255],
@@ -48,7 +81,7 @@ export const RYB_ITTEN_ALT: ColorCube = [
   [29 / 255, 28 / 255, 28 / 255],
 ];
 
-export const RYB_ITTEN_NEUTRAL: ColorCube = [
+const RYB_ITTEN_NEUTRAL: ColorCube = [
   [1, 1, 1],
   [1, 0, 0],
   [1, 1, 0],
@@ -59,7 +92,7 @@ export const RYB_ITTEN_NEUTRAL: ColorCube = [
   [0.2, 0.094, 0.0],
 ];
 
-export const RYB_BEZOLD: ColorCube = [
+const RYB_BEZOLD: ColorCube = [
   [245 / 255, 238 / 255, 226 / 255],
   [170 / 255, 14 / 255, 1 / 255],
   [224 / 255, 178 / 255, 0 / 255],
@@ -70,7 +103,7 @@ export const RYB_BEZOLD: ColorCube = [
   [44 / 255, 37 / 255, 30 / 255],
 ];
 
-export const RYB_BOUTET: ColorCube = [
+const RYB_BOUTET: ColorCube = [
   [254 / 255, 250 / 255, 226 / 255],
   [237 / 255, 55 / 255, 58 / 255],
   [255 / 255, 233 / 255, 111 / 255],
@@ -81,7 +114,7 @@ export const RYB_BOUTET: ColorCube = [
   [24 / 255, 10 / 255, 1 / 255],
 ];
 
-export const RYB_HETT: ColorCube = [
+const RYB_HETT: ColorCube = [
   [255 / 255, 255 / 255, 255 / 255],
   [218 / 255, 105 / 255, 104 / 255],
   [255 / 255, 244 / 255, 122 / 255],
@@ -92,7 +125,7 @@ export const RYB_HETT: ColorCube = [
   [8 / 255, 8 / 255, 8 / 255],
 ];
 
-export const RYB_SCHIFFERMUELLER: ColorCube = [
+const RYB_SCHIFFERMUELLER: ColorCube = [
   [240 / 255, 234 / 255, 214 / 255],
   [204 / 255, 50 / 255, 53 / 255],
   [253 / 255, 222 / 255, 20 / 255],
@@ -103,7 +136,7 @@ export const RYB_SCHIFFERMUELLER: ColorCube = [
   [55 / 255, 39 / 255, 23 / 255],
 ];
 
-export const RYB_HARRIS: ColorCube = [
+const RYB_HARRIS: ColorCube = [
   [249 / 255, 232 / 255, 209 / 255],
   [216 / 255, 43 / 255, 59 / 255],
   [231 / 255, 175 / 255, 2 / 255],
@@ -114,7 +147,7 @@ export const RYB_HARRIS: ColorCube = [
   [14 / 255, 8 / 255, 7 / 255],
 ];
 
-export const RYB_GOETHE: ColorCube = [
+const RYB_GOETHE: ColorCube = [
   [239 / 255, 235 / 255, 225 / 255],
   [182 / 255, 53 / 255, 55 / 255],
   [253 / 255, 203 / 255, 0 / 255],
@@ -125,7 +158,7 @@ export const RYB_GOETHE: ColorCube = [
   [8 / 255, 9 / 255, 13 / 255],
 ];
 
-export const RYB_MUNSELL: ColorCube = [
+const RYB_MUNSELL: ColorCube = [
   [228 / 255, 218 / 255, 197 / 255],
   [181 / 255, 65 / 255, 60 / 255],
   [229 / 255, 193 / 255, 81 / 255],
@@ -136,7 +169,7 @@ export const RYB_MUNSELL: ColorCube = [
   [46 / 255, 44 / 255, 38 / 255],
 ];
 
-export const RYB_HAYTER: ColorCube = [
+const RYB_HAYTER: ColorCube = [
   [237 / 255, 213 / 255, 177 / 255],
   [167 / 255, 33 / 255, 28 / 255],
   [245 / 255, 181 / 255, 18 / 255],
@@ -147,7 +180,7 @@ export const RYB_HAYTER: ColorCube = [
   [44 / 255, 44 / 255, 37 / 255],
 ];
 
-export const RYB_BORMANN: ColorCube = [
+const RYB_BORMANN: ColorCube = [
   [240 / 255, 236 / 255, 235 / 255],
   [247 / 255, 65 / 255, 51 / 255],
   [243 / 255, 187 / 255, 6 / 255],
@@ -158,7 +191,7 @@ export const RYB_BORMANN: ColorCube = [
   [41 / 255, 42 / 255, 45 / 255],
 ];
 
-export const RYB_ALBERS: ColorCube = [
+const RYB_ALBERS: ColorCube = [
   [231 / 255, 235 / 255, 237 / 255],
   [229 / 255, 30 / 255, 38 / 255],
   [255 / 255, 198 / 255, 12 / 255],
@@ -169,7 +202,7 @@ export const RYB_ALBERS: ColorCube = [
   [0 / 255, 0 / 255, 1 / 255],
 ];
 
-export const RYB_LOHSE: ColorCube = [
+const RYB_LOHSE: ColorCube = [
   [236 / 255, 237 / 255, 241 / 255],
   [200 / 255, 75 / 255, 49 / 255],
   [235 / 255, 207 / 255, 13 / 255],
@@ -181,7 +214,7 @@ export const RYB_LOHSE: ColorCube = [
 ];
 
 //Michel Eugène Chevreul / Cercle_chromatique / Cercle_chromatique_Chevreul_2.jpg
-export const RYB_CHEVREUL: ColorCube = [
+const RYB_CHEVREUL: ColorCube = [
   [241 / 255, 236 / 255, 230 / 255],
   [185 / 255, 34 / 255, 17 / 255],
   [231 / 255, 200 / 255, 52 / 255],
@@ -194,7 +227,7 @@ export const RYB_CHEVREUL: ColorCube = [
 
 // 1er cercle chromatique
 
-export const RYB_JAPSCHOOL: ColorCube = [
+const RYB_JAPSCHOOL: ColorCube = [
   [215 / 255, 208 / 255, 180 / 255],
   [202 / 255, 0 / 255, 17 / 255],
   [220 / 255, 170 / 255, 0 / 255],
@@ -206,7 +239,7 @@ export const RYB_JAPSCHOOL: ColorCube = [
 ];
 
 // Maycock
-export const RYB_MAYCOCK: ColorCube = [
+const RYB_MAYCOCK: ColorCube = [
   [209 / 255, 194 / 255, 173 / 255],
   [159 / 255, 36 / 255, 31 / 255],
   [231 / 255, 191 / 255, 6 / 255],
@@ -217,7 +250,7 @@ export const RYB_MAYCOCK: ColorCube = [
   [52 / 255, 49 / 255, 40 / 255],
 ];
 
-export const RYB_COLORPRINTER: ColorCube = [
+const RYB_COLORPRINTER: ColorCube = [
   [250 / 255, 248 / 255, 244 / 255],
   [255 / 255, 41 / 255, 37 / 255],
   [251 / 255, 223 / 255, 47 / 255],
@@ -230,7 +263,7 @@ export const RYB_COLORPRINTER: ColorCube = [
 
 // Marvel Newsprint 1982
 
-export const RYB_MARVEL_NEWS: ColorCube = [
+const RYB_MARVEL_NEWS: ColorCube = [
   [233 / 255, 199 / 255, 173 / 255],
   [214 / 255, 76 / 255, 127 / 255],
   [238 / 255, 204 / 255, 124 / 255],
@@ -242,7 +275,7 @@ export const RYB_MARVEL_NEWS: ColorCube = [
 ];
 
 // Apple 1990 reference manual
-export const RYB_APPLE90s: ColorCube = [
+const RYB_APPLE90s: ColorCube = [
   [255 / 255, 244 / 255, 216 / 255],
   [248 / 255, 80 / 255, 46 / 255],
   [255 / 255, 213 / 255, 44 / 255],
@@ -254,7 +287,7 @@ export const RYB_APPLE90s: ColorCube = [
 ];
 
 // Apple Hyper Card User Manual 1989
-export const RYB_APPLE80s: ColorCube = [
+const RYB_APPLE80s: ColorCube = [
   [254 / 255, 249 / 255, 246 / 255],
   [248 / 255, 20 / 255, 35 / 255],
   [237 / 255, 199 / 255, 8 / 255],
@@ -267,7 +300,7 @@ export const RYB_APPLE80s: ColorCube = [
 
 // contemporary
 
-export const RYB_PixelArt: ColorCube = [
+const RYB_PixelArt: ColorCube = [
   [226 / 255, 216 / 255, 205 / 255],
   [224 / 255, 43 / 255, 39 / 255],
   [251 / 255, 204 / 255, 38 / 255],
@@ -278,7 +311,7 @@ export const RYB_PixelArt: ColorCube = [
   [22 / 255, 19 / 255, 11 / 255],
 ];
 
-export const RYB_IPPSKETCH: ColorCube = [
+const RYB_IPPSKETCH: ColorCube = [
   [221 / 255, 219 / 255, 211 / 255],
   [196 / 255, 82 / 255, 69 / 255],
   [196 / 255, 167 / 255, 80 / 255],
@@ -289,7 +322,7 @@ export const RYB_IPPSKETCH: ColorCube = [
   [38 / 255, 38 / 255, 38 / 255],
 ];
 
-export const RYB_RYAN: ColorCube = [
+const RYB_RYAN: ColorCube = [
   [237 / 255, 235 / 255, 236 / 255],
   [242 / 255, 146 / 255, 109 / 255],
   [245 / 255, 234 / 255, 143 / 255],
@@ -300,7 +333,7 @@ export const RYB_RYAN: ColorCube = [
   [50 / 255, 63 / 255, 66 / 255],
 ];
 
-export const RYB_TEN: ColorCube = [
+const RYB_TEN: ColorCube = [
   [255 / 255, 251 / 255, 230 / 255],
   [238 / 255, 86 / 255, 46 / 255],
   [249 / 255, 213 / 255, 50 / 255],
@@ -310,6 +343,22 @@ export const RYB_TEN: ColorCube = [
   [171 / 255, 205 / 255, 94 / 255],
   [5 / 255, 5 / 255, 5 / 255],
 ];
+
+/**
+ * Collection of historical and contemporary RYB color cube definitions.
+ * Each cube is based on different color theories and historical works.
+ * Includes cubes from:
+ * - Historical color theorists (Itten, Goethe, Munsell, etc.)
+ * - Contemporary sources (Apple manuals, Marvel comics)
+ * - Modern digital artists (Ippsketch, etc.)
+ *
+ * Each entry contains:
+ * - title: Name of the color system/work
+ * - author: Creator of the color system
+ * - year: Year of creation
+ * - reference: Reference image filename
+ * - cube: The actual color values as RGB coordinates
+ */
 
 const cubes: CubesMap = new Map();
 
