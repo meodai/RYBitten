@@ -151,7 +151,7 @@ console.log(cube);
  * }
  */
 
-rybHsl2rgb([0, 1, 0.5], cube);
+rybHsl2rgb([0, 1, 0.5], {cube});
 ```
 
 ### Available Color Gamuts
