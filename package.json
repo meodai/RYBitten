@@ -1,9 +1,17 @@
 {
   "name": "rybitten",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "keywords": [
-    "color", "ryb", "colour", "palettes", "palette", "color-manipulation", 
-    "data visualization", "color theory", "color manipulation", "color palettes"
+    "color",
+    "ryb",
+    "colour",
+    "palettes",
+    "palette",
+    "color-manipulation",
+    "data visualization",
+    "color theory",
+    "color manipulation",
+    "color palettes"
   ],
   "description": "A color space conversion library for transforming between RGB and RYB colors.",
   "author": "meodai",
