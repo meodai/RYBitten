@@ -169,6 +169,17 @@ const RYB_MUNSELL: ColorCube = [
   [46 / 255, 44 / 255, 38 / 255],
 ];
 
+const RYB_MUNSELL_ALT: ColorCube = [
+  [206 / 255, 205 / 255, 209 / 255],
+  [181 / 255, 38 / 255, 54 / 255],
+  [221 / 255, 187 / 255, 23 / 255],
+  [208 / 255, 120 / 255, 37 / 255],
+  [10 / 255, 71 / 255, 129 / 255],
+  [101 / 255, 36 / 255, 66 / 255],
+  [75 / 255, 129 / 255, 131 / 255],
+  [26 / 255, 30 / 255, 47 / 255],
+];
+
 const RYB_HAYTER: ColorCube = [
   [237 / 255, 213 / 255, 177 / 255],
   [167 / 255, 33 / 255, 28 / 255],
@@ -442,6 +453,14 @@ cubes.set("munsell", {
   year: 1905,
   reference: "munsell-atlas-11.jpg",
   cube: RYB_MUNSELL,
+});
+
+cubes.set("munsell-alt", {
+  title: "A Grammar of Color",
+  author: "Cleland, T. M. & Albert Henry Munsell",
+  year: 1921,
+  reference: "munsell-alt.jpg",
+  cube: RYB_MUNSELL_ALT,
 });
 
 cubes.set("hayter", {
