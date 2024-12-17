@@ -199,6 +199,7 @@ const { title, author, year, reference } = cubes.get('munsell');
 | maycock | Mark M. Maycock's "Scale of Normal Colors and their Hues" | 1895 | |
 | colorprinter | John Earhart's "The Color Printer" | 1892 | |
 | japschool | Japanese School Textbook  | 1930 | [reference](references/textbook-3.jpg) |
+| kindergarten1890 | Milton Bradley's Kindergarten Occupation Material | 1890 | [reference](references/kindergarten-1890.jpg) |
 | albers | Josef Albers: Interaction of Color | 1942 | [reference](references/albers-color-harmony.jpg) |
 | lohse |  Richard Paul Lohse's "Kunsthalle Bern Poster"  | 1970 | [reference](references/lohse.png) |
 | rgb | James Clerk Maxwell's "Inverted RGB" | 1860 | |

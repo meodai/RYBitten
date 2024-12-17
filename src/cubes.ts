@@ -249,6 +249,17 @@ const RYB_JAPSCHOOL: ColorCube = [
   [31 / 255, 27 / 255, 28 / 255],
 ];
 
+const RYB_KIDERGARTEN1890: ColorCube = [
+  [236 / 255, 231 / 255, 213 / 255],
+  [188 / 255, 32 / 255, 43 / 255],
+  [233 / 255, 201 / 255, 0 / 255],
+  [197 / 255, 72 / 255, 30 / 255],
+  [50 / 255, 42 / 255, 115 / 255],
+  [116 / 255, 48 / 255, 101 / 255],
+  [69 / 255, 118 / 255, 61 / 255],
+  [56 / 255, 44 / 255, 42 / 255],
+];
+
 // Maycock
 const RYB_MAYCOCK: ColorCube = [
   [209 / 255, 194 / 255, 173 / 255],
@@ -525,6 +536,14 @@ cubes.set("japschool", {
   year: 1930,
   reference: "japschool.png",
   cube: RYB_JAPSCHOOL,
+});
+
+cubes.set("kindergarten1890", {
+  title: "Kindergarten Workbook",
+  author: "Milton Bradley",
+  year: 1890,
+  reference: "kindergarten1890.jpg",
+  cube: RYB_KIDERGARTEN1890,
 });
 
 cubes.set("marvel-news", {
