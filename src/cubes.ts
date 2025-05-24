@@ -147,6 +147,43 @@ const RYB_HARRIS: ColorCube = [
   [14 / 255, 8 / 255, 7 / 255],
 ];
 
+const RYB_HARRISC82: ColorCube = [
+  // white
+  [241 / 255, 236 / 255, 213 / 255],
+
+  // red
+  [235 / 255, 66 / 255, 35 / 255],
+
+  // yellow
+  [253 / 255, 236 / 255, 1 / 255],
+
+  // orange
+  [254 / 255, 130 / 255, 39 / 255],
+
+  // blue
+  [3 / 255, 7 / 255, 171 / 255],
+
+  // pink / but often violet in old color wheels
+  [74 / 255, 50 / 255, 86 / 255],
+
+  // green
+  [55 / 255, 131 / 255, 74 / 255],
+
+  // black
+  [2 / 255, 1 / 255, 0 / 255],
+];
+
+const RYB_HARRISC82_ALT: ColorCube = [
+  [238 / 255, 232 / 255, 206 / 255],
+  [222 / 255, 62 / 255, 29 / 255],
+  [247 / 255, 225 / 255, 7 / 255],
+  [254 / 255, 130 / 255, 39 / 255],
+  [4 / 255, 6 / 255, 139 / 255],
+  [74 / 255, 50 / 255, 86 / 255],
+  [56 / 255, 131 / 255, 75 / 255],
+  [2 / 255, 1 / 255, 0 / 255],
+];
+
 const RYB_GOETHE: ColorCube = [
   [239 / 255, 235 / 255, 225 / 255],
   [182 / 255, 53 / 255, 55 / 255],
@@ -447,6 +484,22 @@ cubes.set("harris", {
   year: 1766,
   reference: "Moses_Harris_The_Natural_System_of_Colours.jpg",
   cube: RYB_HARRIS,
+});
+
+cubes.set("harrisc82", {
+  title: "The Natural System of Colours",
+  author: "Moses Harris / C82",
+  year: 1766,
+  reference: "harrisc82.png",
+  cube: RYB_HARRISC82,
+});
+
+cubes.set("harrisc82alt", {
+  title: "The Natural System of Colours",
+  author: "Moses Harris / C82",
+  year: 1766,
+  reference: "harrisc82alt.png",
+  cube: RYB_HARRISC82_ALT,
 });
 
 cubes.set("goethe", {
