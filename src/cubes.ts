@@ -403,6 +403,17 @@ const RYB_TEN: ColorCube = [
   [5 / 255, 5 / 255, 5 / 255],
 ];
 
+const RYB_CLAYTON: ColorCube = [
+  [246 / 255, 248 / 255, 244 / 255],
+  [248 / 255, 20 / 255, 40 / 255],
+  [255 / 255, 198 / 255, 8 / 255],
+  [248 / 255, 140 / 255, 18 / 255],
+  [8 / 255, 41 / 255, 148 / 255],
+  [152 / 255, 56 / 255, 142 / 255],
+  [8 / 255, 156 / 255, 49 / 255],
+  [12 / 255, 17 / 255, 15 / 255],
+];
+
 /**
  * Collection of historical and contemporary RYB color cube definitions.
  * Each cube is based on different color theories and historical works.
@@ -621,6 +632,14 @@ cubes.set("apple80s", {
   year: 1989,
   reference: "apple80s.png",
   cube: RYB_APPLE80s,
+});
+
+cubes.set("clayton", {
+  title: "Intrinsic Value Plate",
+  author: "Greg Clayton",
+  year: 2017,
+  reference: "A260P03_IntrinsicValue1.gif",
+  cube: RYB_CLAYTON,
 });
 
 // mordern
