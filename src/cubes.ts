@@ -414,6 +414,17 @@ const RYB_CLAYTON: ColorCube = [
   [12 / 255, 17 / 255, 15 / 255],
 ];
 
+const RYB_FARBENKUGEL: ColorCube = [
+  [238 / 255, 221 / 255, 177 / 255],
+  [211 / 255, 24 / 255, 34 / 255],
+  [248 / 255, 211 / 255, 36 / 255],
+  [242 / 255, 116 / 255, 30 / 255],
+  [51 / 255, 114 / 255, 143 / 255],
+  [104 / 255, 73 / 255, 78 / 255],
+  [90 / 255, 127 / 255, 42 / 255],
+  [13 / 255, 17 / 255, 19 / 255],
+];
+
 /**
  * Collection of historical and contemporary RYB color cube definitions.
  * Each cube is based on different color theories and historical works.
@@ -576,6 +587,14 @@ cubes.set("chevreul", {
   year: 1839,
   reference: "Cercle_chromatique_Chevreul_2.jpg",
   cube: RYB_CHEVREUL,
+});
+
+cubes.set("runge", {
+  title: "Farbenkugel",
+  author: "Philipp Otto Runge",
+  year: 1810,
+  reference: "farbenkugel.png",
+  cube: RYB_FARBENKUGEL,
 });
 
 cubes.set("maycock", {
