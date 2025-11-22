@@ -48,6 +48,26 @@ import { ryb2rgb } from 'rybitten';
 const { ryb2rgb } = require('rybitten');
 ```
 
+### Usage in Browser / p5.js (UMD)
+
+For projects that don't use a bundler (like p5.js sketches on OpenProcessing), you can use the UMD build. This exposes a global `rybitten` object.
+
+```html
+<script src="https://unpkg.com/rybitten"></script>
+<script>
+  function setup() {
+    createCanvas(400, 400);
+    noLoop();
+  }
+
+  function draw() {
+    // Access functions via the global 'rybitten' object
+    const rgb = rybitten.ryb2rgb([0, 1, 0]); 
+    background(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
+  }
+</script>
+```
+
 ## Quick Start 🚀
 
 **All RGB and RYB values are in the range `[0, 1]`.**
@@ -68,7 +88,7 @@ Convert RYB to RGB using trilinear interpolation.
 
 - `coords`: `[0…1, 0…1, 0…1]` RYB coordinates
 - `options`: (*optional*) An object with the following properties:
-  - `cube`: (*optional*): [See the note on the color cube below](#cube) defaults to `RYB_ITTEN`
+  - `cube`: (*optional*): [See the note on the color cube below](#interpolation-color-cube-%EF%B8%8F) defaults to `RYB_ITTEN`
   - `easingFn`: (*optional*) Custom easing function used for the interpolation, defaults to `smoothstep`
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
 
@@ -80,7 +100,7 @@ Convert HSL to RGB, then apply the RYB space.
 
 - `hsl`: Array of `[hue (0…360), saturation (0…1), lightness (0…1)]`
 - `options`: (*optional*) An object with the following properties:
-  - `cube`: (*optional*) [See the note on the color cube below](#interpolation-color-cube,
+  - `cube`: (*optional*) [See the note on the color cube below](#interpolation-color-cube-%EF%B8%8F)
   - `easingFn`: (*optional*) A custom easing function for the interpolation, defaults to `smoothstep`
   - `invertLightness`: (*optional*) Inverts the lightness value, defaults to `true` (0 is black, 1 is white), if set to `false` l:0 is white, l:1 is black
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
