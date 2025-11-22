@@ -57,6 +57,7 @@
   },
   "scripts": {
     "dev": "vite --open src/index.html",
+    "dev:p5": "vite --open src/p5.html",
     "build": "npm run build:lib && npm run build:html",
     "build:html": "vite build --config vite.configdemo.js",
     "build:umd": "vite build --config vite.config.umd.js --outDir dist",

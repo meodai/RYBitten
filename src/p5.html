@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p5.js Example</title>
+  <script src="https://unpkg.com/rybitten"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+  <script>
+    let i = 0;
+
+    function setup() {
+      createCanvas(400, 400);
+      colorMode(RGB, 1); // rybitten returns RGB values in [0, 1]
+      noStroke();
+    }
+
+    function draw() {
+      i += 1;
+      // Access functions via the global 'rybitten' object
+      colorMode(rybitten.RYB);
+      background(
+        rybitten.ryb2rgb([1, 1, 1])
+      );
+      for (let x = 0; x < 20; x++) {
+        for (let y = 0; y < 20; y++) {
+          fill(
+            rybitten.rybHsl2rgb([
+              (x / 20 * 360 + i) % 360,
+              1,
+              y / 20
+            ])
+          );
+          rect(x * 20, y * 20, 20, 20);
+        }
+      }
+      fill(rybitten.ryb2rgb([0, 0, 0]));
+      rect(200 - 50, 200 - 50, 100, 100);
+
+      fill(rybitten.ryb2rgb([1, 1, 1]));
+      rect(200 - 25, 200 - 25, 50, 50);
+    }
+  </script>
+</body>
+</html>
