@@ -9,7 +9,15 @@ export const RYBHSL = "rybhsl";
 export const ryb = (cube?: ColorCube) => ({ mode: RYB, cube });
 export const rybhsl = (cube?: ColorCube) => ({ mode: RYBHSL, cube });
 
+/**
+ * Extends p5.js with RYB color mode support.
+ * This function is called automatically when the library is loaded.
+ * You can also call it manually if needed: rybitten.extendP5(p5)
+ */
 export function extendP5(p5: any) {
+  // Only extend once
+  if (p5.prototype._rybExtended) return;
+  p5.prototype._rybExtended = true;
   // Add RYB constant to the p5 prototype
   p5.prototype.RYB = RYB;
   p5.prototype.RYBHSL = RYBHSL;
@@ -146,4 +154,17 @@ export function extendP5(p5: any) {
   p5.prototype.stroke = wrap(originalStroke);
   p5.prototype.background = wrap(originalBackground);
   p5.prototype.color = wrap(originalColor);
+}
+
+// Auto-extend p5 when the library loads
+// This uses the 'init' hook as recommended by p5.js addon guidelines
+declare const p5: any;
+if (typeof p5 !== "undefined") {
+  // In global mode, p5 is available immediately
+  extendP5(p5);
+  
+  // Register init hook for instance mode
+  p5.prototype.registerMethod("init", function(this: any) {
+    extendP5(this.constructor);
+  });
 }
