@@ -162,9 +162,9 @@ declare const p5: any;
 if (typeof p5 !== "undefined") {
   // In global mode, p5 is available immediately
   extendP5(p5);
-  
+
   // Register init hook for instance mode
-  p5.prototype.registerMethod("init", function(this: any) {
+  p5.prototype.registerMethod("init", function (this: any) {
     extendP5(this.constructor);
   });
 }
