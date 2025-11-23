@@ -9,9 +9,6 @@
   </head>
   <body>
     <script>
-      // No need to call rybitten.extendP5(p5) anymore!
-      // The library auto-extends p5 following addon guidelines
-
       function setup() {
         createCanvas(800, 800);
         colorMode(rybitten.RYBHSL);
@@ -22,22 +19,47 @@
         const stripes = 36;
         const barWidth = width / stripes;
         const rowHeight = height / 3;
+        const whiteBlackHeight = 30; // Height for white/black bars
 
         // First row: Standard p5 HSL rainbow
         colorMode(HSL, 360, 100, 100);
+        // White bar across top
+        fill(0, 0, 100);
+        rect(0, 0, width, whiteBlackHeight);
+        // Rainbow
         for (let i = 0; i < stripes; i++) {
           const hue = (i / stripes) * 360;
           fill(hue, 100, 50);
-          rect(i * barWidth, 0, barWidth, rowHeight);
+          rect(
+            i * barWidth,
+            whiteBlackHeight,
+            barWidth,
+            rowHeight - whiteBlackHeight * 2,
+          );
         }
+        // Black bar across bottom
+        fill(0, 0, 0);
+        rect(0, rowHeight - whiteBlackHeight, width, whiteBlackHeight);
 
         // Second row: Default RYB HSL rainbow
         colorMode(rybitten.RYBHSL);
+        // White bar across top
+        fill(0, 0, 100);
+        rect(0, rowHeight, width, whiteBlackHeight);
+        // Rainbow
         for (let i = 0; i < stripes; i++) {
           const hue = (i / stripes) * 360;
           fill(hue, 100, 50);
-          rect(i * barWidth, rowHeight, barWidth, rowHeight);
+          rect(
+            i * barWidth,
+            rowHeight + whiteBlackHeight,
+            barWidth,
+            rowHeight - whiteBlackHeight * 2,
+          );
         }
+        // Black bar across bottom
+        fill(0, 0, 0);
+        rect(0, rowHeight * 2 - whiteBlackHeight, width, whiteBlackHeight);
 
         // Third row: Custom cube RYB HSL rainbow
         colorMode(
@@ -52,11 +74,23 @@
             [60 / 255, 52 / 255, 40 / 255],
           ]),
         );
+        // White bar across top
+        fill(0, 0, 100);
+        rect(0, rowHeight * 2, width, whiteBlackHeight);
+        // Rainbow
         for (let i = 0; i < stripes; i++) {
           const hue = (i / stripes) * 360;
           fill(hue, 100, 50);
-          rect(i * barWidth, rowHeight * 2, barWidth, rowHeight);
+          rect(
+            i * barWidth,
+            rowHeight * 2 + whiteBlackHeight,
+            barWidth,
+            rowHeight - whiteBlackHeight * 2,
+          );
         }
+        // Black bar across bottom
+        fill(0, 0, 0);
+        rect(0, height - whiteBlackHeight, width, whiteBlackHeight);
 
         noLoop();
       }
