@@ -190,10 +190,11 @@ function wrapAngle(angle: number): number {
  * @see {@link https://github.com/Evercoder/culori/|Culori Source}
  */
 export function hslToRgb(hsl: ColorCoords): ColorCoords {
-  let [h, s, l] = hsl;
+  let [h] = hsl;
+  const [, s, l] = hsl;
   h = wrapAngle(h || 0);
-  let m1 = l + s * (l < 0.5 ? l : 1 - l);
-  let m2 = m1 - (m1 - l) * 2 * Math.abs(((h / 60) % 2) - 1);
+  const m1 = l + s * (l < 0.5 ? l : 1 - l);
+  const m2 = m1 - (m1 - l) * 2 * Math.abs(((h / 60) % 2) - 1);
   let res;
   switch (Math.floor(h / 60)) {
     case 0:
