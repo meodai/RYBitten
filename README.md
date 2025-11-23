@@ -50,7 +50,7 @@ const { ryb2rgb } = require('rybitten');
 
 ### Usage in Browser / p5.js (UMD)
 
-For projects that don't use a bundler (like p5.js sketches on OpenProcessing), you can use the UMD build. This exposes a global `rybitten` object.
+For projects that don't use a bundler (like p5.js sketches), you can use the UMD build. This exposes a global `rybitten` object.
 
 ```html
 <script src="https://unpkg.com/rybitten"></script>
@@ -67,6 +67,58 @@ For projects that don't use a bundler (like p5.js sketches on OpenProcessing), y
   }
 </script>
 ```
+
+#### p5.js Color Mode Extension
+
+RYBitten includes a special p5.js extension that adds native RYB color mode support, just like RGB, HSB, or HSL. The extension automatically initializes when you include the p5-specific UMD build:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+<script src="https://unpkg.com/rybitten/dist/p5.rybitten.umd.js"></script>
+<script>
+  function setup() {
+    createCanvas(400, 400);
+    
+    // Use RYB color mode just like RGB or HSL!
+    colorMode(RYB);
+    background(255, 0, 0); // Red in RYB space
+    fill(0, 255, 0);       // Yellow in RYB space
+    circle(200, 200, 100);
+  }
+</script>
+```
+
+**Available Color Modes:**
+
+- `RYB` - Red-Yellow-Blue color mode (0-255 range by default)
+- `RYBHSL` - RYB with Hue-Saturation-Lightness (360, 100, 100 range by default)
+
+**Using Custom Color Cubes in p5.js:**
+
+```javascript
+function setup() {
+  createCanvas(400, 400);
+  
+  // Use a custom historical color cube
+  // Note: The UMD build does not export the cubes collection.
+  // Copy the cube values you want to use directly in your code.
+  colorMode(rybhsl([
+    [233/255, 199/255, 173/255],  // White
+    [214/255, 76/255, 127/255],   // Red
+    [238/255, 204/255, 124/255],  // Yellow
+    [230/255, 174/255, 115/255],  // Orange
+    [86/255, 141/255, 146/255],   // Blue
+    [118/255, 83/255, 97/255],    // Violet
+    [196/255, 192/255, 118/255],  // Green
+    [60/255, 52/255, 40/255]      // Black
+  ]));
+  
+  fill(0, 100, 50); // Hue 0, full saturation, mid lightness
+  rect(0, 0, 200, 200);
+}
+```
+
+The extension works with both p5.js 1.x and 2.0, and supports both global and instance modes.
 
 ## Quick Start 🚀
 
