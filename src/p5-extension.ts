@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export * from "./main";
 import { ryb2rgb, rybHsl2rgb } from "./main";
-import { RYB_ITTEN } from "./cubes";
+import { RYB_ITTEN, type ColorCube } from "./cubes";
 
 export const RYB = "ryb";
 export const RYBHSL = "rybhsl";
 
-export const ryb = (cube?: any) => ({ mode: RYB, cube });
-export const rybhsl = (cube?: any) => ({ mode: RYBHSL, cube });
+export const ryb = (cube?: ColorCube) => ({ mode: RYB, cube });
+export const rybhsl = (cube?: ColorCube) => ({ mode: RYBHSL, cube });
 
 export function extendP5(p5: any) {
   // Add RYB constant to the p5 prototype
