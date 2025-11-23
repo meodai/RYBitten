@@ -1,4 +1,4 @@
-# RYBitten 👄
+# RYBitten 🔴🟡🔵
 
 A color space conversion library for transforming between RGB and RYB (Red-Yellow-Blue) colors.
 
