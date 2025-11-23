@@ -50,7 +50,9 @@ export function extendP5(p5: any) {
       }
 
       let rgb;
-      const options = instance._rybCube ? { cube: instance._rybCube } : { cube: RYB_ITTEN };
+      const options = instance._rybCube
+        ? { cube: instance._rybCube }
+        : { cube: RYB_ITTEN };
 
       if (instance._rybMode === RYBHSL) {
         rgb = rybHsl2rgb([v1 * 360, v2, v3], options);
