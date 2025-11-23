@@ -1,47 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.js Example</title>
-  <script src="https://unpkg.com/rybitten"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p5.js Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script src="../dist/p5.rybitten.umd.js"></script>
 </head>
 <body>
   <script>
-    let i = 0;
+    rybitten.extendP5(p5);
 
     function setup() {
-      createCanvas(400, 400);
-      colorMode(RGB, 1); // rybitten returns RGB values in [0, 1]
+      createCanvas(800, 400);
+      colorMode(rybitten.RYBHSL);
       noStroke();
     }
 
     function draw() {
-      i += 1;
-      // Access functions via the global 'rybitten' object
-      colorMode(rybitten.RYB);
-      background(
-        rybitten.ryb2rgb([1, 1, 1])
-      );
-      for (let x = 0; x < 20; x++) {
-        for (let y = 0; y < 20; y++) {
-          fill(
-            rybitten.rybHsl2rgb([
-              (x / 20 * 360 + i) % 360,
-              1,
-              y / 20
-            ])
-          );
-          rect(x * 20, y * 20, 20, 20);
-        }
+      // Draw RYB HSL rainbow (36 stripes)
+      const stripes = 36;
+      const barWidth = width / stripes;
+      for (let i = 0; i < stripes; i++) {
+        const hue = (i / stripes) * 360;
+        fill(hue, 100, 50);
+        rect(i * barWidth, 0, barWidth, height / 2);
       }
-      fill(rybitten.ryb2rgb([0, 0, 0]));
-      rect(200 - 50, 200 - 50, 100, 100);
-
-      fill(rybitten.ryb2rgb([1, 1, 1]));
-      rect(200 - 25, 200 - 25, 50, 50);
+      
+      // Draw saturation gradient at bottom
+      colorMode(rybitten.RYBHSL);
+      for (let x = 0; x < width; x++) {
+        const sat = map(x, 0, width, 0, 100);
+        fill(0, sat, 50); // Red hue, varying saturation
+        rect(x, height / 2, 1, height / 4);
+      }
+      
+      // Draw lightness gradient at bottom
+      for (let x = 0; x < width; x++) {
+        const light = map(x, 0, width, 0, 100);
+        fill(0, 100, light); // Red hue, full saturation, varying lightness
+        rect(x, height * 0.75, 1, height / 4);
+      }
+      
+      noLoop();
     }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

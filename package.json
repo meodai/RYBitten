@@ -61,7 +61,8 @@
     "build": "npm run build:lib && npm run build:html",
     "build:html": "vite build --config vite.configdemo.js",
     "build:umd": "vite build --config vite.config.umd.js --outDir dist",
-    "build:lib": "npm run lint && tsc && vite build --outDir dist && npm run build:umd",
+    "build:p5": "vite build --config vite.config.p5.js --outDir dist",
+    "build:lib": "npm run lint && tsc && vite build --outDir dist && npm run build:umd && npm run build:p5",
     "lint": "eslint && npx prettier --check ./src/",
     "prettier": "npx prettier --write ./src/",
     "preview": "vite preview"
