@@ -6,9 +6,23 @@
     <title>p5.js Example</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
     <script src="../dist/p5.rybitten.umd.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      canvas {
+        border: 4px solid #000;
+      }
+    </style>
   </head>
   <body>
     <script>
+      let frameCounter = 0;
       function setup() {
         createCanvas(800, 800);
         colorMode(rybitten.RYBHSL);
@@ -16,49 +30,59 @@
       }
 
       function draw() {
+        frameCounter += 0.25;
         const stripes = 36;
         const barWidth = width / stripes;
-        const rowHeight = height / 3;
+        const rowHeight = height / 4;
         const whiteBlackHeight = 30; // Height for white/black bars
+        const lightnessSteps = 5; // Number of lightness variations per hue
+        const segmentHeight =
+          (rowHeight - whiteBlackHeight * 2) / lightnessSteps;
 
         // First row: Standard p5 HSL rainbow
         colorMode(HSL, 360, 100, 100);
-        // White bar across top
-        fill(0, 0, 100);
+        // Black bar across top
+        fill(0, 0, 0);
         rect(0, 0, width, whiteBlackHeight);
-        // Rainbow
+        // Rainbow with lightness variations
         for (let i = 0; i < stripes; i++) {
           const hue = (i / stripes) * 360;
-          fill(hue, 100, 50);
-          rect(
-            i * barWidth,
-            whiteBlackHeight,
-            barWidth,
-            rowHeight - whiteBlackHeight * 2,
-          );
+          for (let l = 0; l < lightnessSteps; l++) {
+            const lightness = 80 - (l / (lightnessSteps - 1)) * 60; // Range from 80 to 20
+            fill((hue + frameCounter) % 360, 100, lightness);
+            rect(
+              i * barWidth,
+              whiteBlackHeight + l * segmentHeight,
+              barWidth,
+              segmentHeight,
+            );
+          }
         }
-        // Black bar across bottom
-        fill(0, 0, 0);
+        // White bar across bottom
+        fill(0, 0, 100);
         rect(0, rowHeight - whiteBlackHeight, width, whiteBlackHeight);
 
         // Second row: Default RYB HSL rainbow
         colorMode(rybitten.RYBHSL);
-        // White bar across top
-        fill(0, 0, 100);
+        // Black bar across top
+        fill(0, 0, 0);
         rect(0, rowHeight, width, whiteBlackHeight);
-        // Rainbow
+        // Rainbow with lightness variations
         for (let i = 0; i < stripes; i++) {
           const hue = (i / stripes) * 360;
-          fill(hue, 100, 50);
-          rect(
-            i * barWidth,
-            rowHeight + whiteBlackHeight,
-            barWidth,
-            rowHeight - whiteBlackHeight * 2,
-          );
+          for (let l = 0; l < lightnessSteps; l++) {
+            const lightness = 80 - (l / (lightnessSteps - 1)) * 60;
+            fill((hue + frameCounter) % 360, 100, lightness);
+            rect(
+              i * barWidth,
+              rowHeight + whiteBlackHeight + l * segmentHeight,
+              barWidth,
+              segmentHeight,
+            );
+          }
         }
-        // Black bar across bottom
-        fill(0, 0, 0);
+        // White bar across bottom
+        fill(0, 0, 100);
         rect(0, rowHeight * 2 - whiteBlackHeight, width, whiteBlackHeight);
 
         // Third row: Custom cube RYB HSL rainbow
@@ -74,25 +98,59 @@
             [60 / 255, 52 / 255, 40 / 255],
           ]),
         );
-        // White bar across top
-        fill(0, 0, 100);
+        // Black bar across top
+        fill(0, 0, 0);
         rect(0, rowHeight * 2, width, whiteBlackHeight);
-        // Rainbow
+        // Rainbow with lightness variations
         for (let i = 0; i < stripes; i++) {
           const hue = (i / stripes) * 360;
-          fill(hue, 100, 50);
-          rect(
-            i * barWidth,
-            rowHeight * 2 + whiteBlackHeight,
-            barWidth,
-            rowHeight - whiteBlackHeight * 2,
-          );
+          for (let l = 0; l < lightnessSteps; l++) {
+            const lightness = 80 - (l / (lightnessSteps - 1)) * 60;
+            fill((hue + frameCounter) % 360, 100, lightness);
+            rect(
+              i * barWidth,
+              rowHeight * 2 + whiteBlackHeight + l * segmentHeight,
+              barWidth,
+              segmentHeight,
+            );
+          }
         }
-        // Black bar across bottom
-        fill(0, 0, 0);
-        rect(0, height - whiteBlackHeight, width, whiteBlackHeight);
+        // White bar across bottom
+        fill(0, 0, 100);
+        rect(0, rowHeight * 3 - whiteBlackHeight, width, whiteBlackHeight);
 
-        noLoop();
+        colorMode(
+          rybitten.rybhsl([
+            [236 / 255, 237 / 255, 241 / 255],
+            [200 / 255, 75 / 255, 49 / 255],
+            [235 / 255, 207 / 255, 13 / 255],
+            [228 / 255, 168 / 255, 21 / 255],
+            [39 / 255, 108 / 255, 176 / 255],
+            [188 / 255, 57 / 255, 104 / 255],
+            [122 / 255, 176 / 255, 62 / 255],
+            [4 / 255, 4 / 255, 4 / 255],
+          ]),
+        );
+        // Black bar across top
+        fill(0, 0, 0);
+        rect(0, rowHeight * 3, width, whiteBlackHeight);
+        // Rainbow with lightness variations
+        for (let i = 0; i < stripes; i++) {
+          const hue = (i / stripes) * 360;
+          for (let l = 0; l < lightnessSteps; l++) {
+            const lightness = 80 - (l / (lightnessSteps - 1)) * 60;
+            fill((hue + frameCounter) % 360, 100, lightness);
+            rect(
+              i * barWidth,
+              rowHeight * 3 + whiteBlackHeight + l * segmentHeight,
+              barWidth,
+              segmentHeight,
+            );
+          }
+        }
+        // White bar across bottom
+        fill(0, 0, 100);
+        rect(0, height - whiteBlackHeight, width, whiteBlackHeight);
       }
     </script>
   </body>
