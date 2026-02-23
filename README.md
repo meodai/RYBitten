@@ -208,21 +208,16 @@ Each gamut is an object with the following properties:
 import { rybHsl2rgb } from 'rybitten';
 import { cubes } from 'rybitten/cubes';
 
-const cube = cubes.get('munsell');
+const { cube } = cubes.get('munsell');
 
-console.log(cube); 
+console.log(cube);
 /**
- * {
- *  title: 'Munsell',
- *  reference: 'munsell.jpg',
- *  year: 1905,
- *  cube: [
- *  ...cube data
- *  ]
- * }
+ * [
+ *  ...8 ColorCoords entries
+ * ]
  */
 
-rybHsl2rgb([0, 1, 0.5], {cube});
+rybHsl2rgb([0, 1, 0.5], { cube });
 ```
 
 ## TypeScript Support 📝
@@ -258,22 +253,30 @@ const { title, author, year, reference } = cubes.get('munsell');
 | --- | --- | --- | --- |
 | itten | Johannes Itten: Chromatic Circle | 1961 | [reference](references/farbkreis_extended.png) |
 | itten-normalized | Johannes Itten: Chromatic Circle (Paper-white) | 1961 | [reference](references/Johannes-Itten-The-chromatic-circle-some-exercises-on-the-contrast-of-pure-colors.webp) |
+| itten-neutral | Nathan Gossett & Baoquan Chen: Paint Inspired Color Compositing | 2004 | [reference](references/itten-ryb.pdf) |
 | bezold | Wilhelm von Bezold: Farbentafel | 1874 | [reference](references/Bezold_Farbentafel_1874.jpg) |
 | boutet | Claude Boutet: Twelve-color color circles | 1708 | [reference](references/Boutet_1708_color_circles.jpg) |
 | hett | J. A. H. Hett: RGV Color Wheel | 1908 | [reference](references/RGV_color_wheel_1908.png) |
 | schiffermueller | Ignaz Schiffermüller: Versuch eines Farbensystems | 1772 | [reference](references/020_schiffermueller1.jpg) |
-| harris | Harris: The Natural System of Colours | 1766 | [reference](references/Moses_Harris_The_Natural_System_of_Colours.jpg) |
+| harris | Moses Harris: The Natural System of Colours | 1766 | [reference](references/Moses_Harris_The_Natural_System_of_Colours.jpg) |
+| harrisc82 | Moses Harris / C82: The Natural System of Colours | 1766 | [reference](references/harrisc82.png) |
+| harrisc82alt | Moses Harris / C82: The Natural System of Colours (alt) | 1766 | [reference](references/harrisc82alt.png) |
 | goethe | Goethe: Farbenkreis | 1809 | [reference](references/Goethe_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens_1809.jpg) |
 | munsell | Munsell Color System | 1905 | [reference](references/munsell-atlas-11.jpg) |
+| munsell-alt | Cleland & Munsell: A Grammar of Color | 1921 | [reference](references/munsell-alt.jpg) |
 | hayer | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg) |
 | bormann | Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course" | 1931 | [reference](references/bormann.png) |
 | chevreul | Michel Eugène Chevreul: Chromatic Circle | 1839 | |
+| runge | Philipp Otto Runge: Farbenkugel | 1810 | [reference](references/farbenkugel.png) |
 | maycock | Mark M. Maycock's "Scale of Normal Colors and their Hues" | 1895 | |
 | colorprinter | John Earhart's "The Color Printer" | 1892 | |
-| japschool | Japanese School Textbook  | 1930 | [reference](references/textbook-3.jpg) |
-| kindergarten1890 | Milton Bradley's Kindergarten Occupation Material | 1890 | [reference](references/kindergarten-1890.jpg) |
+| japschool | Japanese School Textbook  | 1930 | [reference](references/japschool.png) |
+| kindergarten1890 | Milton Bradley's Kindergarten Occupation Material | 1890 | [reference](references/kindergarten1890.jpg) |
 | albers | Josef Albers: Interaction of Color | 1942 | [reference](references/albers-color-harmony.jpg) |
-| lohse |  Richard Paul Lohse's "Kunsthalle Bern Poster"  | 1970 | [reference](references/lohse.png) |
+| lohse | Richard Paul Lohse's "Kunsthalle Bern Poster" | 1970 | [reference](references/lohse.png) |
+| marvel-news | Marvel Comics: 64 Color Chart on Newsprint | 1982 | [reference](references/marvel-news.png) |
+| apple80s | Apple: HyperCard User Manual | 1989 | [reference](references/apple80s.png) |
+| apple90s | Apple: Macintosh Reference Manual | 1990 | [reference](references/apple90s.png) |
 | rgb | James Clerk Maxwell's "Inverted RGB" | 1860 | |
 
 #### Featured Artist Spectrum
@@ -284,6 +287,9 @@ The following color spaces were provided by artists and designers who have contr
 | --- | --- | --- | --- |
 | [ippsketch](https://ippsketch.com/) | Ippsketch: imposter syndrome | 2022 | [reference](references/ippsketch.png) |
 | ten | Roni Kaufman's "Ten" | 2022 | [reference](references/ten.png) |
+| pixelart | Tofu: Pixel Art | 2024 | [reference](references/pixelart.png) |
+| ryan | Ryan: Compositions Palette | 2024 | [reference](references/ryan.png) |
+| clayton | Greg Clayton: Intrinsic Value Plate | 2017 | [reference](references/A260P03_IntrinsicValue1.gif) |
 
 ## Utility Functions 🛠️
 
@@ -325,6 +331,21 @@ const value = trilerp(
   0, 1, 1, 1,  // back face values
   0.5, 0.5, 0.5 // position in cube
 );
+```
+
+### hslToRgb(hsl: [h: number, s: number, l: number]): ColorCoords
+
+Converts standard HSL color values to RGB. Adapted from [Culori](https://github.com/Evercoder/culori) (MIT License).
+
+- `hsl`: Array of `[hue (0…360), saturation (0…1), lightness (0…1)]`
+- `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
+
+```javascript
+import { hslToRgb } from 'rybitten';
+
+hslToRgb([0, 1, 0.5]);    // returns [1, 0, 0] (red)
+hslToRgb([120, 1, 0.5]);  // returns [0, 1, 0] (green)
+hslToRgb([240, 1, 0.5]);  // returns [0, 0, 1] (blue)
 ```
 
 ## License 📄
