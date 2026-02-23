@@ -1,16 +1,6 @@
 import { RYB_ITTEN } from "./cubes";
 import type { ColorCoords } from "./cubes";
 
-type CubeCoords = [
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-];
 interface Blerp {
   (
     a00: number,
@@ -39,11 +29,10 @@ interface Trilerp {
 /**
  * Applies smoothstep smoothing to a value, creating an S-curve.
  * The function interpolates smoothly between 0 and 1 using the formula: t * t * (3 - 2 * t)
- * Also known as "Smootherstep" or "Ken Perlin's smoothstep"
  *
  * @param t - Input value between 0 and 1
  * @returns Smoothed value between 0 and 1
- * @see {@link https://en.wikipedia.org/wiki/Smoothstep#Smootherstep|Smoothstep on Wikipedia}
+ * @see {@link https://en.wikipedia.org/wiki/Smoothstep|Smoothstep on Wikipedia}
  *
  * @example
  * easingSmoothstep(0.5); // returns 0.5
@@ -143,13 +132,13 @@ export function ryb2rgb(
   const r = easingFn(coords[0]);
   const g = easingFn(coords[1]);
   const b = easingFn(coords[2]);
-  const reds = cube.map((it) => it[0]) as CubeCoords;
-  const greens = cube.map((it) => it[1]) as CubeCoords;
-  const blues = cube.map((it) => it[2]) as CubeCoords;
+  // Cube channels are indexed directly to avoid three temporary array allocations
+  // per call (one per channel via .map()). For hot paths such as animation loops
+  // calling ryb2rgb thousands of times per frame, this reduces GC pressure.
   return [
-    trilerp(...reds, r, g, b),
-    trilerp(...greens, r, g, b),
-    trilerp(...blues, r, g, b),
+    trilerp(cube[0][0], cube[1][0], cube[2][0], cube[3][0], cube[4][0], cube[5][0], cube[6][0], cube[7][0], r, g, b),
+    trilerp(cube[0][1], cube[1][1], cube[2][1], cube[3][1], cube[4][1], cube[5][1], cube[6][1], cube[7][1], r, g, b),
+    trilerp(cube[0][2], cube[1][2], cube[2][2], cube[3][2], cube[4][2], cube[5][2], cube[6][2], cube[7][2], r, g, b),
   ];
 }
 

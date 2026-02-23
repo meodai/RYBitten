@@ -7,9 +7,18 @@ export type ColorCoords = [number, number, number];
 /**
  * Represents a color cube with exactly 8 RGB colors for RYB to RGB mapping.
  * The colors are ordered as: white, red, yellow, orange, blue, violet, green, black
- * @typedef {ColorCoords[] & { length: 8 }} ColorCube
+ * @typedef {[ColorCoords, ColorCoords, ColorCoords, ColorCoords, ColorCoords, ColorCoords, ColorCoords, ColorCoords]} ColorCube
  */
-export type ColorCube = ColorCoords[] & { length: 8 };
+export type ColorCube = [
+  ColorCoords,
+  ColorCoords,
+  ColorCoords,
+  ColorCoords,
+  ColorCoords,
+  ColorCoords,
+  ColorCoords,
+  ColorCoords,
+];
 
 /**
  * Map storing historical and modern color cube definitions with their metadata.
@@ -21,14 +30,14 @@ export type ColorCube = ColorCoords[] & { length: 8 };
  *   cube: ColorCube
  * }>} CubesMap
  */
-export type CubesMap = Map<
+export type CubesMap = ReadonlyMap<
   string,
   {
-    title: string;
-    author: string;
-    reference: string;
-    year: number;
-    cube: ColorCube;
+    readonly title: string;
+    readonly author: string;
+    readonly reference: string;
+    readonly year: number;
+    readonly cube: ColorCube;
   }
 >;
 
@@ -286,7 +295,7 @@ const RYB_JAPSCHOOL: ColorCube = [
   [31 / 255, 27 / 255, 28 / 255],
 ];
 
-const RYB_KIDERGARTEN1890: ColorCube = [
+const RYB_KINDERGARTEN1890: ColorCube = [
   [236 / 255, 231 / 255, 213 / 255],
   [188 / 255, 32 / 255, 43 / 255],
   [233 / 255, 201 / 255, 0 / 255],
@@ -441,9 +450,9 @@ const RYB_FARBENKUGEL: ColorCube = [
  * - cube: The actual color values as RGB coordinates
  */
 
-const cubes: CubesMap = new Map();
+const _cubes: Map<string, { title: string; author: string; reference: string; year: number; cube: ColorCube }> = new Map();
 
-cubes.set("itten", {
+_cubes.set("itten", {
   title: "Chromatic Circle",
   author: "Johannes Itten",
   year: 1961,
@@ -451,7 +460,7 @@ cubes.set("itten", {
   cube: RYB_ITTEN,
 });
 
-cubes.set("itten-normalized", {
+_cubes.set("itten-normalized", {
   title: "Chromatic Circle (Paper-white)",
   author: "Johannes Itten",
   year: 1961,
@@ -460,7 +469,7 @@ cubes.set("itten-normalized", {
   cube: RYB_ITTEN_ALT,
 });
 
-cubes.set("itten-neutral", {
+_cubes.set("itten-neutral", {
   title: "Nathan Gossett & Baoquan Chen",
   author: "Johannes Itten",
   year: 1961,
@@ -468,7 +477,7 @@ cubes.set("itten-neutral", {
   cube: RYB_ITTEN_NEUTRAL,
 });
 
-cubes.set("bezold", {
+_cubes.set("bezold", {
   title: "Farbentafel",
   author: "Wilhelm von Bezold",
   year: 1874,
@@ -476,7 +485,7 @@ cubes.set("bezold", {
   cube: RYB_BEZOLD,
 });
 
-cubes.set("boutet", {
+_cubes.set("boutet", {
   title: "Twelve-color color circles ",
   author: "Claude Boutet",
   year: 1708,
@@ -484,15 +493,15 @@ cubes.set("boutet", {
   cube: RYB_BOUTET,
 });
 
-cubes.set("hett", {
+_cubes.set("hett", {
   title: "RGV Color Wheel",
   author: "J. A. H. Hett",
   year: 1908,
-  reference: "RGV_color_wheel_1908",
+  reference: "RGV_color_wheel_1908.png",
   cube: RYB_HETT,
 });
 
-cubes.set("schiffermueller", {
+_cubes.set("schiffermueller", {
   title: "Versuch eines Farbensystems",
   author: "Ignaz Schiffermüller",
   year: 1772,
@@ -500,7 +509,7 @@ cubes.set("schiffermueller", {
   cube: RYB_SCHIFFERMUELLER,
 });
 
-cubes.set("harris", {
+_cubes.set("harris", {
   title: "The Natural System of Colours",
   author: "Moses Harris",
   year: 1766,
@@ -508,7 +517,7 @@ cubes.set("harris", {
   cube: RYB_HARRIS,
 });
 
-cubes.set("harrisc82", {
+_cubes.set("harrisc82", {
   title: "The Natural System of Colours",
   author: "Moses Harris / C82",
   year: 1766,
@@ -516,7 +525,7 @@ cubes.set("harrisc82", {
   cube: RYB_HARRISC82,
 });
 
-cubes.set("harrisc82alt", {
+_cubes.set("harrisc82alt", {
   title: "The Natural System of Colours",
   author: "Moses Harris / C82",
   year: 1766,
@@ -524,7 +533,7 @@ cubes.set("harrisc82alt", {
   cube: RYB_HARRISC82_ALT,
 });
 
-cubes.set("goethe", {
+_cubes.set("goethe", {
   title: "Farbenkreis",
   author: "Johann Wolfgang von Goethe",
   year: 1809,
@@ -533,7 +542,7 @@ cubes.set("goethe", {
   cube: RYB_GOETHE,
 });
 
-cubes.set("munsell", {
+_cubes.set("munsell", {
   title: "Munsell Color System",
   author: "Albert Henry Munsell",
   year: 1905,
@@ -541,7 +550,7 @@ cubes.set("munsell", {
   cube: RYB_MUNSELL,
 });
 
-cubes.set("munsell-alt", {
+_cubes.set("munsell-alt", {
   title: "A Grammar of Color",
   author: "Cleland, T. M. & Albert Henry Munsell",
   year: 1921,
@@ -549,7 +558,7 @@ cubes.set("munsell-alt", {
   cube: RYB_MUNSELL_ALT,
 });
 
-cubes.set("hayter", {
+_cubes.set("hayter", {
   title: "New Practical Treatise on the Three Primitive Colours",
   author: "Charles Hayter",
   year: 1826,
@@ -557,7 +566,7 @@ cubes.set("hayter", {
   cube: RYB_HAYTER,
 });
 
-cubes.set("bormann", {
+_cubes.set("bormann", {
   title: "Gouache tint study for Josef Alber's Preliminary Course",
   author: "Heinrich-Siegfried Bormann",
   year: 1931,
@@ -565,7 +574,7 @@ cubes.set("bormann", {
   cube: RYB_BORMANN,
 });
 
-cubes.set("albers", {
+_cubes.set("albers", {
   title: "Interaction of Color",
   author: "Josef Albers",
   year: 1942,
@@ -573,7 +582,7 @@ cubes.set("albers", {
   cube: RYB_ALBERS,
 });
 
-cubes.set("lohse", {
+_cubes.set("lohse", {
   title: "Kunsthalle Bern Poster",
   author: "Richard Paul Lohse",
   year: 1970,
@@ -581,7 +590,7 @@ cubes.set("lohse", {
   cube: RYB_LOHSE,
 });
 
-cubes.set("chevreul", {
+_cubes.set("chevreul", {
   title: "Cercle chromatique",
   author: "Michel Eugène Chevreul",
   year: 1839,
@@ -589,7 +598,7 @@ cubes.set("chevreul", {
   cube: RYB_CHEVREUL,
 });
 
-cubes.set("runge", {
+_cubes.set("runge", {
   title: "Farbenkugel",
   author: "Philipp Otto Runge",
   year: 1810,
@@ -597,7 +606,7 @@ cubes.set("runge", {
   cube: RYB_FARBENKUGEL,
 });
 
-cubes.set("maycock", {
+_cubes.set("maycock", {
   title: "Scale of Normal Colors and their Hues",
   author: "Mark M. Maycock",
   year: 1895,
@@ -605,7 +614,7 @@ cubes.set("maycock", {
   cube: RYB_MAYCOCK,
 });
 
-cubes.set("colorprinter", {
+_cubes.set("colorprinter", {
   title: "The Color Printer",
   author: "John Earhart",
   year: 1892,
@@ -613,7 +622,7 @@ cubes.set("colorprinter", {
   cube: RYB_COLORPRINTER,
 });
 
-cubes.set("japschool", {
+_cubes.set("japschool", {
   title: "Japanese Textbook",
   author: "Japanese School",
   year: 1930,
@@ -621,15 +630,15 @@ cubes.set("japschool", {
   cube: RYB_JAPSCHOOL,
 });
 
-cubes.set("kindergarten1890", {
+_cubes.set("kindergarten1890", {
   title: "Kindergarten Workbook",
   author: "Milton Bradley",
   year: 1890,
   reference: "kindergarten1890.jpg",
-  cube: RYB_KIDERGARTEN1890,
+  cube: RYB_KINDERGARTEN1890,
 });
 
-cubes.set("marvel-news", {
+_cubes.set("marvel-news", {
   title: "64 Color Chart on Newsprint",
   author: "Marvel Comics",
   year: 1982,
@@ -637,7 +646,7 @@ cubes.set("marvel-news", {
   cube: RYB_MARVEL_NEWS,
 });
 
-cubes.set("apple90s", {
+_cubes.set("apple90s", {
   title: "Macintosh Reference Manual",
   author: "Apple",
   year: 1990,
@@ -645,7 +654,7 @@ cubes.set("apple90s", {
   cube: RYB_APPLE90s,
 });
 
-cubes.set("apple80s", {
+_cubes.set("apple80s", {
   title: "HyperCard User Manual",
   author: "Apple",
   year: 1989,
@@ -653,7 +662,7 @@ cubes.set("apple80s", {
   cube: RYB_APPLE80s,
 });
 
-cubes.set("clayton", {
+_cubes.set("clayton", {
   title: "Intrinsic Value Plate",
   author: "Greg Clayton",
   year: 2017,
@@ -661,9 +670,9 @@ cubes.set("clayton", {
   cube: RYB_CLAYTON,
 });
 
-// mordern
+// modern
 
-cubes.set("pixelart", {
+_cubes.set("pixelart", {
   title: "Pixel Art",
   author: "Tofu",
   year: 2024,
@@ -671,7 +680,7 @@ cubes.set("pixelart", {
   cube: RYB_PixelArt,
 });
 
-cubes.set("ippsketch", {
+_cubes.set("ippsketch", {
   title: "Imposter Syndrome",
   author: "Ippsketch",
   year: 2021,
@@ -679,7 +688,7 @@ cubes.set("ippsketch", {
   cube: RYB_IPPSKETCH,
 });
 
-cubes.set("ryan", {
+_cubes.set("ryan", {
   title: "Compositions Palette",
   author: "Ryan",
   year: 2024,
@@ -687,7 +696,7 @@ cubes.set("ryan", {
   cube: RYB_RYAN,
 });
 
-cubes.set("ten", {
+_cubes.set("ten", {
   title: "Ten",
   author: "Roni Kaufman",
   year: 2022,
@@ -695,7 +704,7 @@ cubes.set("ten", {
   cube: RYB_TEN,
 });
 
-cubes.set("rgb", {
+_cubes.set("rgb", {
   title: "Inverted RGB",
   author: "James Clerk Maxwell",
   year: 1860,
@@ -712,4 +721,4 @@ cubes.set("rgb", {
   ],
 });
 
-export { cubes };
+export const cubes: CubesMap = _cubes;
