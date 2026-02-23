@@ -136,9 +136,45 @@ export function ryb2rgb(
   // per call (one per channel via .map()). For hot paths such as animation loops
   // calling ryb2rgb thousands of times per frame, this reduces GC pressure.
   return [
-    trilerp(cube[0][0], cube[1][0], cube[2][0], cube[3][0], cube[4][0], cube[5][0], cube[6][0], cube[7][0], r, g, b),
-    trilerp(cube[0][1], cube[1][1], cube[2][1], cube[3][1], cube[4][1], cube[5][1], cube[6][1], cube[7][1], r, g, b),
-    trilerp(cube[0][2], cube[1][2], cube[2][2], cube[3][2], cube[4][2], cube[5][2], cube[6][2], cube[7][2], r, g, b),
+    trilerp(
+      cube[0][0],
+      cube[1][0],
+      cube[2][0],
+      cube[3][0],
+      cube[4][0],
+      cube[5][0],
+      cube[6][0],
+      cube[7][0],
+      r,
+      g,
+      b,
+    ),
+    trilerp(
+      cube[0][1],
+      cube[1][1],
+      cube[2][1],
+      cube[3][1],
+      cube[4][1],
+      cube[5][1],
+      cube[6][1],
+      cube[7][1],
+      r,
+      g,
+      b,
+    ),
+    trilerp(
+      cube[0][2],
+      cube[1][2],
+      cube[2][2],
+      cube[3][2],
+      cube[4][2],
+      cube[5][2],
+      cube[6][2],
+      cube[7][2],
+      r,
+      g,
+      b,
+    ),
   ];
 }
 
