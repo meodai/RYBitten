@@ -704,22 +704,6 @@ _cubes.set("ten", {
   cube: RYB_TEN,
 });
 
-_cubes.set("rgb", {
-  title: "Inverted RGB",
-  author: "James Clerk Maxwell",
-  year: 1860,
-  reference: "rgb-cube.png",
-  cube: [
-    [1, 1, 1],
-    [1, 0, 0],
-    [0, 1, 0],
-    [1, 1, 0],
-    [0, 0, 1],
-    [1, 0, 1],
-    [0, 1, 1],
-    [0, 0, 0],
-  ],
-});
 
 // CMY (Cyan-Magenta-Yellow) subtractive primaries expressed in RGB space.
 // Input axes: C (red slot), M (yellow slot), Y (blue slot).
@@ -737,6 +721,23 @@ _cubes.set("cmy", {
     [0, 0, 1],   // blue    (C+M)
     [1, 0, 0],   // red     (M+Y)
     [0, 0, 0],   // black   (all ink)
+  ],
+});
+
+_cubes.set("rgb", {
+  title: "Inverted RGB",
+  author: "James Clerk Maxwell",
+  year: 1860,
+  reference: "rgb-cube.png",
+  cube: [
+    [1, 1, 1],
+    [1, 0, 0],
+    [0, 1, 0],
+    [1, 1, 0],
+    [0, 0, 1],
+    [1, 0, 1],
+    [0, 1, 1],
+    [0, 0, 0],
   ],
 });
 
