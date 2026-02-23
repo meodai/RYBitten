@@ -721,4 +721,23 @@ _cubes.set("rgb", {
   ],
 });
 
+// CMY (Cyan-Magenta-Yellow) subtractive primaries expressed in RGB space.
+// Input axes: C (red slot), M (yellow slot), Y (blue slot).
+_cubes.set("cmy", {
+  title: "CMY Subtractive Primaries",
+  author: "Jacob Christoph Le Blon",
+  year: 1725,
+  reference: "",
+  cube: [
+    [1, 1, 1],   // white   (no ink)
+    [0, 1, 1],   // cyan    (C primary)
+    [1, 1, 0],   // yellow  (Y primary)
+    [0, 1, 0],   // green   (C+Y)
+    [1, 0, 1],   // magenta (M primary)
+    [0, 0, 1],   // blue    (C+M)
+    [1, 0, 0],   // red     (M+Y)
+    [0, 0, 0],   // black   (all ink)
+  ],
+});
+
 export const cubes: CubesMap = _cubes;
