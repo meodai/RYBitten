@@ -434,6 +434,17 @@ const RYB_FARBENKUGEL: ColorCube = [
   [13 / 255, 17 / 255, 19 / 255],
 ];
 
+const RYB_ARQUITETURA_DECORACAO: ColorCube = [
+  [0.9765, 0.9647, 0.9255],
+  [0.9765, 0.4392, 0.4431],
+  [0.949, 0.9059, 0.4157],
+  [0.9373, 0.5961, 0.498],
+  [0.4431, 0.7098, 0.8],
+  [0.9098, 0.7961, 0.8],
+  [0.6275, 0.851, 0.4863],
+  [0.0863, 0.0745, 0.051]
+];
+
 /**
  * Collection of historical and contemporary RYB color cube definitions.
  * Each cube is based on different color theories and historical works.
@@ -653,6 +664,14 @@ _cubes.set("marvel-news", {
   year: 1982,
   reference: "marvel-news.png",
   cube: RYB_MARVEL_NEWS,
+});
+
+_cubes.set("arquitetura-decoracao", {
+  title: "Sugestões. Arquitetura Decoração",
+  author: "Unknown – Sao Paulo",
+  year: 1956,
+  reference: "arquitetura-decoracao.png",
+  cube: RYB_ARQUITETURA_DECORACAO,
 });
 
 _cubes.set("apple90s", {
