@@ -65,7 +65,10 @@
     "build:lib": "npm run lint && tsc && vite build --outDir dist && npm run build:umd && npm run build:p5",
     "lint": "eslint && npx prettier --check ./src/",
     "prettier": "npx prettier --write ./src/",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ci": "vitest run --coverage"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
