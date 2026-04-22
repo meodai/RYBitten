@@ -18,6 +18,6 @@ export default [
     },
   },
   {
-    ignores: ["dist/**", "node_modules/**", "demo/**"],
+    ignores: ["dist/**", "node_modules/**", "demo/**", "coverage/**"],
   },
 ];

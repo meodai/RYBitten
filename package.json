@@ -55,6 +55,10 @@
   "bugs": {
     "url": "https://github.com/meodai/RYBitten/issues"
   },
+  "homepage": "https://meodai.github.io/RYBitten/",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite --open src/index.html",
     "dev:p5": "vite --open src/p5.html",
