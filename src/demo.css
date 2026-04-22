@@ -128,7 +128,8 @@ a:visited {
   bottom: 0;
   width: 5vw;
 
-  background: linear-gradient(0deg, var(--gradient)),
+  background:
+    linear-gradient(0deg, var(--gradient)),
     linear-gradient(0deg, var(--gradientHard));
   background-size:
     calc(1px + 50%) 100%,
@@ -722,7 +723,8 @@ label.swatch {
   opacity: 0.5;
   */
 
-  background: radial-gradient(
+  background:
+    radial-gradient(
       closest-side,
       var(--black),
       rgba(0, 0, 0, 0),
