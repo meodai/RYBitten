@@ -63,10 +63,13 @@ export const lerp = (a: number, b: number, t: number): number =>
  * Performs bilinear interpolation between four points in a 2D space.
  * Useful for interpolating values on a rectangular grid.
  *
- * @param a00 - Value at coordinate (0,0)
- * @param a01 - Value at coordinate (0,1)
- * @param a10 - Value at coordinate (1,0)
- * @param a11 - Value at coordinate (1,1)
+ * Parameter names use matrix-style row-major indexing (`a_ij` with i=ty, j=tx),
+ * which means `a01` sits at (tx=1, ty=0) and `a10` sits at (tx=0, ty=1).
+ *
+ * @param a00 - Value at coordinate (tx=0, ty=0)
+ * @param a01 - Value at coordinate (tx=1, ty=0)
+ * @param a10 - Value at coordinate (tx=0, ty=1)
+ * @param a11 - Value at coordinate (tx=1, ty=1)
  * @param tx - Interpolation factor along x-axis (0 to 1)
  * @param ty - Interpolation factor along y-axis (0 to 1)
  * @returns Interpolated value
@@ -81,16 +84,18 @@ export const blerp: Blerp = (a00, a01, a10, a11, tx, ty) => {
 /**
  * Performs trilinear interpolation between eight values in a 3D space.
  * Based on Culori's implementation (MIT License)
- * MIT License Culori
  *
- * @param a000 - Value at coordinate (0,0,0)
- * @param a010 - Value at coordinate (0,1,0)
- * @param a100 - Value at coordinate (1,0,0)
- * @param a110 - Value at coordinate (1,1,0)
- * @param a001 - Value at coordinate (0,0,1)
- * @param a011 - Value at coordinate (0,1,1)
- * @param a101 - Value at coordinate (1,0,1)
- * @param a111 - Value at coordinate (1,1,1)
+ * Parameter names use matrix-style row-major indexing (`a_ijk` with i=ty, j=tx, k=tz),
+ * so `a010` sits at (tx=1, ty=0, tz=0), etc.
+ *
+ * @param a000 - Value at coordinate (tx=0, ty=0, tz=0)
+ * @param a010 - Value at coordinate (tx=1, ty=0, tz=0)
+ * @param a100 - Value at coordinate (tx=0, ty=1, tz=0)
+ * @param a110 - Value at coordinate (tx=1, ty=1, tz=0)
+ * @param a001 - Value at coordinate (tx=0, ty=0, tz=1)
+ * @param a011 - Value at coordinate (tx=1, ty=0, tz=1)
+ * @param a101 - Value at coordinate (tx=0, ty=1, tz=1)
+ * @param a111 - Value at coordinate (tx=1, ty=1, tz=1)
  * @param tx - Interpolation factor along x-axis (0 to 1)
  * @param ty - Interpolation factor along y-axis (0 to 1)
  * @param tz - Interpolation factor along z-axis (0 to 1)
