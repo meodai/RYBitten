@@ -161,7 +161,8 @@ const createRamps = async (amount = 18, stepsPerRamp = 9) => {
     (acc: { [key: string]: string }, hex: string) => {
       const prefixedHex = `#${hex}`;
       const color = names.find(
-        (color: any) => color.requestedHex === prefixedHex,
+        (color: { requestedHex: string; name: string }) =>
+          color.requestedHex === prefixedHex,
       );
       acc[prefixedHex] = color?.name || "unknown";
       return acc;
@@ -310,7 +311,7 @@ function setSwatchColor(rgb: ColorCoords, bypassTimer = false) {
   $swatchRGB.querySelector(".swatch__value")!.textContent = `${r} ${g} ${b}`;
   $swatchRYB.querySelector(".swatch__value")!.textContent = `${r2} ${y2} ${b2}`;
 
-  swatchTimer && clearTimeout(swatchTimer);
+  if (swatchTimer) clearTimeout(swatchTimer);
   const time = bypassTimer ? 0 : 1000;
   swatchTimer = setTimeout(() => {
     // get both names
@@ -335,7 +336,7 @@ function setSwatchColor(rgb: ColorCoords, bypassTimer = false) {
 }
 
 // generate a well saturated color
-let swatchColorHSL = [
+const swatchColorHSL = [
   Math.random() * 360,
   0.2 + Math.random() * 0.8,
   0.85 + Math.random() * 0.1,

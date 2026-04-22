@@ -3,16 +3,26 @@
 A color space conversion library for transforming between RGB and RYB (Red-Yellow-Blue) colors.
 
 [![npm version](https://badge.fury.io/js/rybitten.svg)](https://badge.fury.io/js/rybitten)
+[![CI](https://github.com/meodai/RYBitten/actions/workflows/ci.yml/badge.svg)](https://github.com/meodai/RYBitten/actions/workflows/ci.yml)
+[![Types](https://img.shields.io/npm/types/rybitten)](https://www.npmjs.com/package/rybitten)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <img src="screenshots/colorcloth.png" alt="Cloth particles using RYBitten" />
 
 ## What is RYBitten?
 
-**RYBitten** is a lightweight library for translating colors between RGB and a custom RYB (Red-Yellow-Blue) color space. It’s designed for developers, generative artists, and designers who want to create harmonious, consistent, or randomized color palettes effortlessly. The library emulates Johannes Itten's chromatic circle using trilinear interpolation and customizable options, making it a versatile tool for creative projects.
+**RYBitten** is a lightweight library for translating colors between RGB and a custom RYB (Red-Yellow-Blue) color space. It's designed for developers, generative artists, and designers who want to create harmonious, consistent, or randomized color palettes effortlessly. The library emulates Johannes Itten's chromatic circle using trilinear interpolation and customizable options, making it a versatile tool for creative projects.
 
 > "Play becomes joy, joy becomes work, work becomes play."
 > **Johannes Itten, Bauhaus**
+
+## What's new in 1.0 🎉
+
+- **Stable API.** v1.0 locks the public surface; see [`STABILITY.md`](./STABILITY.md) for what's covered by semver.
+- **Fully tested.** Vitest suite covering conversion math, HSL helpers, and an algorithmic roundtrip for every historical cube — 151 tests, 95%+ branch coverage.
+- **Modern tooling.** ESLint 9 flat config, typescript-eslint 8, TypeScript 5.9.
+- **CI-backed.** GitHub Actions runs lint, type-check, tests, build, and a tarball smoke test on Node 22 and the current LTS.
+- **Tighter p5 types.** The p5 extension ships with real types instead of a file-wide `any` suppression.
 
 ## Features ✨
 
@@ -225,7 +235,7 @@ rybHsl2rgb([0, 1, 0.5], { cube });
 RYBitten is written in TypeScript and includes type definitions out of the box:
 
 ```typescript
-import type { ColorCoords, ColorCube } from 'rybitten';
+import type { ColorCoords, ColorCube } from 'rybitten/cubes';
 ```
 
 ### Available Color Gamuts
@@ -347,6 +357,10 @@ hslToRgb([0, 1, 0.5]);    // returns [1, 0, 0] (red)
 hslToRgb([120, 1, 0.5]);  // returns [0, 1, 0] (green)
 hslToRgb([240, 1, 0.5]);  // returns [0, 0, 1] (blue)
 ```
+
+## Stability 🔒
+
+RYBitten follows semantic versioning from v1.0 onward. See [`STABILITY.md`](./STABILITY.md) for the exact contract: what's covered, what's explicitly not (notably, cube numeric values may be refined in minor releases), and the deprecation policy.
 
 ## License 📄
 

@@ -31,5 +31,14 @@ export default defineConfig({
       ],
     },
   },
-  plugins: [dts()],
+  plugins: [dts({ exclude: ["src/__tests__/**", "src/demo.ts"] })],
+  test: {
+    include: ["src/__tests__/**/*.test.ts"],
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "html", "lcov"],
+      include: ["src/main.ts", "src/cubes.ts"],
+      exclude: ["src/__tests__/**", "src/p5-extension.ts", "src/demo.ts"],
+    },
+  },
 });
