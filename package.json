@@ -19,7 +19,12 @@
   "type": "module",
   "files": [
     "dist",
-    "src"
+    "src/cubes.ts",
+    "src/main.ts",
+    "src/p5-extension.ts",
+    "src/vite-env.d.ts",
+    "CHANGELOG.md",
+    "STABILITY.md"
   ],
   "exports": {
     ".": {

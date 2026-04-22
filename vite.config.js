@@ -31,7 +31,7 @@ export default defineConfig({
       ],
     },
   },
-  plugins: [dts()],
+  plugins: [dts({ exclude: ["src/__tests__/**", "src/demo.ts"] })],
   test: {
     include: ["src/__tests__/**/*.test.ts"],
     coverage: {
