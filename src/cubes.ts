@@ -445,6 +445,17 @@ const RYB_ARQUITETURA_DECORACAO: ColorCube = [
   [0.0863, 0.0745, 0.051],
 ];
 
+const RYB_CHURCH: ColorCube = [
+  [221 / 255, 215 / 255, 183 / 255],
+  [142 / 255, 42 / 255, 37 / 255],
+  [217 / 255, 194 / 255, 18 / 255],
+  [192 / 255, 114 / 255, 50 / 255],
+  [67 / 255, 80 / 255, 119 / 255],
+  [83 / 255, 51 / 255, 88 / 255],
+  [99 / 255, 130 / 255, 47 / 255],
+  [21 / 255, 19 / 255, 13 / 255],
+];
+
 /**
  * Collection of historical and contemporary RYB color cube definitions.
  * Each cube is based on different color theories and historical works.
@@ -608,6 +619,14 @@ _cubes.set("lohse", {
   year: 1970,
   reference: "lohse.png",
   cube: RYB_LOHSE,
+});
+
+_cubes.set("church", {
+  title: "An Elementary Manual for Students",
+  author: "A.H. Church",
+  year: 1887,
+  reference: "church.png",
+  cube: RYB_CHURCH,
 });
 
 _cubes.set("chevreul", {
