@@ -456,6 +456,17 @@ const RYB_CHURCH: ColorCube = [
   [21 / 255, 19 / 255, 13 / 255],
 ];
 
+const RYB_TRILOBE_SYNOPTIQUE: ColorCube = [
+  [251 / 255, 227 / 255, 172 / 255],
+  [227 / 255, 16 / 255, 7 / 255],
+  [255 / 255, 216 / 255, 0 / 255],
+  [251 / 255, 166 / 255, 9 / 255],
+  [3 / 255, 61 / 255, 120 / 255],
+  [139 / 255, 35 / 255, 67 / 255],
+  [115 / 255, 131 / 255, 18 / 255],
+  [24 / 255, 13 / 255, 14 / 255],
+];
+
 /**
  * Collection of historical and contemporary RYB color cube definitions.
  * Each cube is based on different color theories and historical works.
@@ -643,6 +654,14 @@ _cubes.set("runge", {
   year: 1810,
   reference: "farbenkugel.png",
   cube: RYB_FARBENKUGEL,
+});
+
+_cubes.set("trilobe-synoptique", {
+  title: "Trilobe Synoptique",
+  author: "Charles Lacouture",
+  year: 1890,
+  reference: "Charles Lacouture, Trilobe Synoptique.jpeg",
+  cube: RYB_TRILOBE_SYNOPTIQUE,
 });
 
 _cubes.set("maycock", {
