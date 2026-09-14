@@ -4,6 +4,37 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) starting with v1.0.0.
 
+## [Unreleased]
+
+### Added
+
+- Test suite for the p5 extension (mode switching, argument conversion, alpha scaling, state restoration, and both p5 1.x / 2.x registration paths).
+
+### Changed
+
+- `RYB_ITTEN` moved into its own module (`src/itten.ts`). Importing only `ryb2rgb` from the main entry no longer pulls the full cube catalog into consumer bundles, and the UMD builds shrink from ~13 KB to under 4 KB. `rybitten/cubes` still re-exports `RYB_ITTEN`, so no import paths change.
+- Cube `reference` fields that pointed at images not present in `references/` are now empty strings (`apple80s`, `apple90s`, `arquitetura-decoracao`, `church`, `colorprinter`, `japschool`, `pixelart`, `rgb`, `ryan`, `ten`). `marvel-news` and `maycock` now point at the images that were already in the folder.
+
+### Fixed
+
+- p5 2.x: loading the p5 UMD no longer throws. p5 2.0 removed `prototype.registerMethod`; the extension now uses `p5.registerAddon` when available and falls back to `registerMethod` on 1.x.
+- p5 RYBHSL mode: `fill(gray)` / `fill(gray, alpha)` produced a saturated colour because the gray value was read as a hue. It is now treated as lightness with zero saturation, matching p5's own HSL behaviour.
+- README: cube table now lists `church`, `trilobe-synoptique`, `arquitetura-decoracao` and `cmy`; the `hayter` key was misspelled; several reference links pointed at missing files.
+- `references/kindergarden1890.jpg` renamed to `kindergarten1890.jpg` to match the key and the README.
+- Corrected the CMY cube comment describing which input slot carries M and Y.
+
+## [1.2.0] - 2026-06-10
+
+### Added
+
+- `trilobe-synoptique` cube — Charles Lacouture, *Trilobe Synoptique* (1890).
+
+## [1.1.0] - 2026-06-07
+
+### Added
+
+- `church` cube — A.H. Church, *An Elementary Manual for Students* (1887).
+
 ## [1.0.0] - 2026-04-22
 
 ### Added

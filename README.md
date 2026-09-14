@@ -19,7 +19,7 @@ A color space conversion library for transforming between RGB and RYB (Red-Yello
 ## What's new in 1.0 🎉
 
 - **Stable API.** v1.0 locks the public surface; see [`STABILITY.md`](./STABILITY.md) for what's covered by semver.
-- **Fully tested.** Vitest suite covering conversion math, HSL helpers, and an algorithmic roundtrip for every historical cube — 151 tests, 95%+ branch coverage.
+- **Fully tested.** Vitest suite covering conversion math, HSL helpers, and an algorithmic roundtrip for every historical cube — 178 tests, 95%+ branch coverage.
 - **Modern tooling.** ESLint 9 flat config, typescript-eslint 8, TypeScript 5.9.
 - **CI-backed.** GitHub Actions runs lint, type-check, tests, build, and a tarball smoke test on Node 22 and the current LTS.
 - **Tighter p5 types.** The p5 extension ships with real types instead of a file-wide `any` suppression.
@@ -274,19 +274,23 @@ const { title, author, year, reference } = cubes.get('munsell');
 | goethe | Goethe: Farbenkreis | 1809 | [reference](references/Goethe_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens_1809.jpg) |
 | munsell | Munsell Color System | 1905 | [reference](references/munsell-atlas-11.jpg) |
 | munsell-alt | Cleland & Munsell: A Grammar of Color | 1921 | [reference](references/munsell-alt.jpg) |
-| hayer | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg) |
+| hayter | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg) |
 | bormann | Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course" | 1931 | [reference](references/bormann.png) |
 | chevreul | Michel Eugène Chevreul: Chromatic Circle | 1839 | |
 | runge | Philipp Otto Runge: Farbenkugel | 1810 | [reference](references/farbenkugel.png) |
-| maycock | Mark M. Maycock's "Scale of Normal Colors and their Hues" | 1895 | |
+| maycock | Mark M. Maycock's "Scale of Normal Colors and their Hues" | 1895 | [reference](references/vintage-re-make-of-mark-maycocks-scale-of-normal-colors-and-their-hues-illustration-from-1895-prints.webp) |
 | colorprinter | John Earhart's "The Color Printer" | 1892 | |
-| japschool | Japanese School Textbook  | 1930 | [reference](references/japschool.png) |
+| japschool | Japanese School Textbook  | 1930 | |
 | kindergarten1890 | Milton Bradley's Kindergarten Occupation Material | 1890 | [reference](references/kindergarten1890.jpg) |
 | albers | Josef Albers: Interaction of Color | 1942 | [reference](references/albers-color-harmony.jpg) |
 | lohse | Richard Paul Lohse's "Kunsthalle Bern Poster" | 1970 | [reference](references/lohse.png) |
-| marvel-news | Marvel Comics: 64 Color Chart on Newsprint | 1982 | [reference](references/marvel-news.png) |
-| apple80s | Apple: HyperCard User Manual | 1989 | [reference](references/apple80s.png) |
-| apple90s | Apple: Macintosh Reference Manual | 1990 | [reference](references/apple90s.png) |
+| marvel-news | Marvel Comics: 64 Color Chart on Newsprint | 1982 | [reference](references/marvel-news-print-80s.webp) |
+| apple80s | Apple: HyperCard User Manual | 1989 | |
+| apple90s | Apple: Macintosh Reference Manual | 1990 | |
+| church | A.H. Church: An Elementary Manual for Students | 1887 | |
+| trilobe-synoptique | Charles Lacouture: Trilobe Synoptique | 1890 | [reference](references/Charles%20Lacouture%2C%20Trilobe%20Synoptique.jpeg) |
+| arquitetura-decoracao | Sugestões. Arquitetura Decoração (São Paulo) | 1956 | |
+| cmy | Jacob Christoph Le Blon: CMY Subtractive Primaries | 1725 | |
 | rgb | James Clerk Maxwell's "Inverted RGB" | 1860 | |
 
 #### Featured Artist Spectrum
@@ -296,9 +300,9 @@ The following color spaces were provided by artists and designers who have contr
 | Key | Title | Year | Reference |
 | --- | --- | --- | --- |
 | [ippsketch](https://ippsketch.com/) | Ippsketch: imposter syndrome | 2022 | [reference](references/ippsketch.png) |
-| ten | Roni Kaufman's "Ten" | 2022 | [reference](references/ten.png) |
-| pixelart | Tofu: Pixel Art | 2024 | [reference](references/pixelart.png) |
-| ryan | Ryan: Compositions Palette | 2024 | [reference](references/ryan.png) |
+| ten | Roni Kaufman's "Ten" | 2022 | |
+| pixelart | Tofu: Pixel Art | 2024 | |
+| ryan | Ryan: Compositions Palette | 2024 | |
 | clayton | Greg Clayton: Intrinsic Value Plate | 2017 | [reference](references/A260P03_IntrinsicValue1.gif) |
 
 ## Utility Functions 🛠️

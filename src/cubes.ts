@@ -606,7 +606,7 @@ _cubes.set("church", {
   title: "An Elementary Manual for Students",
   author: "A.H. Church",
   year: 1887,
-  reference: "church.png",
+  reference: "",
   cube: RYB_CHURCH,
 });
 
@@ -638,7 +638,8 @@ _cubes.set("maycock", {
   title: "Scale of Normal Colors and their Hues",
   author: "Mark M. Maycock",
   year: 1895,
-  reference: "maycock.png",
+  reference:
+    "vintage-re-make-of-mark-maycocks-scale-of-normal-colors-and-their-hues-illustration-from-1895-prints.webp",
   cube: RYB_MAYCOCK,
 });
 
@@ -646,7 +647,7 @@ _cubes.set("colorprinter", {
   title: "The Color Printer",
   author: "John Earhart",
   year: 1892,
-  reference: "colorprinter.png",
+  reference: "",
   cube: RYB_COLORPRINTER,
 });
 
@@ -654,7 +655,7 @@ _cubes.set("japschool", {
   title: "Japanese Textbook",
   author: "Japanese School",
   year: 1930,
-  reference: "japschool.png",
+  reference: "",
   cube: RYB_JAPSCHOOL,
 });
 
@@ -670,7 +671,7 @@ _cubes.set("marvel-news", {
   title: "64 Color Chart on Newsprint",
   author: "Marvel Comics",
   year: 1982,
-  reference: "marvel-news.png",
+  reference: "marvel-news-print-80s.webp",
   cube: RYB_MARVEL_NEWS,
 });
 
@@ -678,7 +679,7 @@ _cubes.set("arquitetura-decoracao", {
   title: "Sugestões. Arquitetura Decoração",
   author: "Unknown – Sao Paulo",
   year: 1956,
-  reference: "arquitetura-decoracao.png",
+  reference: "",
   cube: RYB_ARQUITETURA_DECORACAO,
 });
 
@@ -686,7 +687,7 @@ _cubes.set("apple90s", {
   title: "Macintosh Reference Manual",
   author: "Apple",
   year: 1990,
-  reference: "apple90s.png",
+  reference: "",
   cube: RYB_APPLE90s,
 });
 
@@ -694,7 +695,7 @@ _cubes.set("apple80s", {
   title: "HyperCard User Manual",
   author: "Apple",
   year: 1989,
-  reference: "apple80s.png",
+  reference: "",
   cube: RYB_APPLE80s,
 });
 
@@ -712,7 +713,7 @@ _cubes.set("pixelart", {
   title: "Pixel Art",
   author: "Tofu",
   year: 2024,
-  reference: "pixelart.png",
+  reference: "",
   cube: RYB_PixelArt,
 });
 
@@ -728,7 +729,7 @@ _cubes.set("ryan", {
   title: "Compositions Palette",
   author: "Ryan",
   year: 2024,
-  reference: "ryan.png",
+  reference: "",
   cube: RYB_RYAN,
 });
 
@@ -736,12 +737,12 @@ _cubes.set("ten", {
   title: "Ten",
   author: "Roni Kaufman",
   year: 2022,
-  reference: "ten.png",
+  reference: "",
   cube: RYB_TEN,
 });
 
 // CMY (Cyan-Magenta-Yellow) subtractive primaries expressed in RGB space.
-// Input axes: C (red slot), M (yellow slot), Y (blue slot).
+// Input axes: C in the red slot, Y in the yellow slot, M in the blue slot.
 _cubes.set("cmy", {
   title: "CMY Subtractive Primaries",
   author: "Jacob Christoph Le Blon",
@@ -763,7 +764,7 @@ _cubes.set("rgb", {
   title: "Inverted RGB",
   author: "James Clerk Maxwell",
   year: 1860,
-  reference: "rgb-cube.png",
+  reference: "",
   cube: [
     [1, 1, 1],
     [1, 0, 0],
