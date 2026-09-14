@@ -20,6 +20,7 @@
   "files": [
     "dist",
     "src/cubes.ts",
+    "src/itten.ts",
     "src/main.ts",
     "src/p5-extension.ts",
     "src/vite-env.d.ts",

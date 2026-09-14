@@ -1,6 +1,7 @@
 export * from "./main";
 import { ryb2rgb, rybHsl2rgb } from "./main";
-import { RYB_ITTEN, type ColorCube } from "./cubes";
+import { RYB_ITTEN } from "./itten";
+import type { ColorCube } from "./cubes";
 
 export const RYB = "ryb";
 export const RYBHSL = "rybhsl";

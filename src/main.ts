@@ -1,4 +1,4 @@
-import { RYB_ITTEN } from "./cubes";
+import { RYB_ITTEN } from "./itten";
 import type { ColorCoords } from "./cubes";
 
 interface Blerp {
