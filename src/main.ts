@@ -123,7 +123,12 @@ export const trilerp: Trilerp = (
 };
 
 /**
- * Converts RYB color coordinates to RGB color space
+ * Converts RYB color coordinates to RGB color space.
+ *
+ * Inputs are not clamped. Values outside [0, 1] are passed through the easing
+ * function and extrapolated beyond the cube, so the result may leave [0, 1].
+ * Clamp your inputs first if you need in-gamut output.
+ *
  * @param coords - Array of [red, yellow, blue] values between 0 and 1
  * @param options - Configuration options
  * @param options.cube - Color cube for conversion (defaults to RYB_ITTEN)
@@ -254,6 +259,9 @@ export function hslToRgb(hsl: ColorCoords): ColorCoords {
 /**
  * Converts a color from RYB-HSL color space to RGB color space.
  * Combines HSL to RGB conversion with RYB to RGB mapping using a color cube.
+ *
+ * Hue wraps around 360°, but saturation and lightness are not clamped; see
+ * {@link ryb2rgb} for how out-of-range values behave.
  *
  * @param hsl - Array of [hue, saturation, lightness]
  * @param hsl[0] - Hue value in degrees (0-360)

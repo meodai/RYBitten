@@ -19,7 +19,7 @@ A color space conversion library for transforming between RGB and RYB (Red-Yello
 ## What's new in 1.0 🎉
 
 - **Stable API.** v1.0 locks the public surface; see [`STABILITY.md`](./STABILITY.md) for what's covered by semver.
-- **Fully tested.** Vitest suite covering conversion math, HSL helpers, and an algorithmic roundtrip for every historical cube — 178 tests, 95%+ branch coverage.
+- **Fully tested.** Vitest suite covering conversion math, HSL helpers, and an algorithmic roundtrip for every historical cube — 215 tests, 95%+ branch coverage.
 - **Modern tooling.** ESLint 9 flat config, typescript-eslint 8, TypeScript 5.9.
 - **CI-backed.** GitHub Actions runs lint, type-check, tests, build, and a tarball smoke test on Node 22 and the current LTS.
 - **Tighter p5 types.** The p5 extension ships with real types instead of a file-wide `any` suppression.
@@ -156,6 +156,8 @@ Convert RYB to RGB using trilinear interpolation.
 
 **Note**: RYB uses a subtractive color model where black = all colors, white = no colors. **white will turn to black, and black will turn to white.**
 
+**Note**: Inputs are not clamped. Values outside `[0, 1]` are extrapolated through the easing function and the cube, and the result may fall outside `[0, 1]`. Clamp first if you need in-gamut output.
+
 ### rybHsl2rgb(hsl: [h: number, s: number, l: number], options?): ColorCoords
 
 Convert HSL to RGB, then apply the RYB space.
@@ -213,6 +215,8 @@ Each gamut is an object with the following properties:
 - `reference`: A reference image used to pick the edges of the custom color gamut
 - `year`: The year the color space was introduced
 - `cube`: The color cube used for interpolation
+
+The presets are frozen. To tweak one, copy it first: `cube.map(rgb => [...rgb])`.
 
 ```javascript
 import { rybHsl2rgb } from 'rybitten';

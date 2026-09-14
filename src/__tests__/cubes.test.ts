@@ -38,6 +38,28 @@ describe("cubes map — structural", () => {
   );
 });
 
+describe("presets are frozen", () => {
+  it("RYB_ITTEN and its triples are frozen", () => {
+    expect(Object.isFrozen(RYB_ITTEN)).toBe(true);
+    for (const rgb of RYB_ITTEN) expect(Object.isFrozen(rgb)).toBe(true);
+  });
+
+  it.each(Array.from(cubes.entries()))(
+    "entry '%s' is frozen and rejects in-place mutation",
+    (_key, entry) => {
+      expect(Object.isFrozen(entry)).toBe(true);
+      expect(Object.isFrozen(entry.cube)).toBe(true);
+      // Modules are strict, so writes to frozen objects throw.
+      expect(() => {
+        entry.cube[0][0] = 5;
+      }).toThrow(TypeError);
+      expect(() => {
+        (entry.cube as number[][])[0] = [5, 5, 5];
+      }).toThrow(TypeError);
+    },
+  );
+});
+
 describe("RYB_ITTEN — structural", () => {
   it("has 8 RGB triples in [0, 1]", () => {
     expect(RYB_ITTEN).toHaveLength(8);

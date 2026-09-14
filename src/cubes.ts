@@ -1,4 +1,4 @@
-import { RYB_ITTEN } from "./itten";
+import { RYB_ITTEN, freezeCube } from "./itten";
 
 /**
  * Represents a color in RGB/HSX... space as an array of three numbers.
@@ -776,5 +776,12 @@ _cubes.set("rgb", {
     [0, 0, 0],
   ],
 });
+
+// Presets are shared singletons; freeze them so a consumer (or the demo) cannot
+// mutate a cube in place and silently change the library defaults.
+for (const entry of _cubes.values()) {
+  freezeCube(entry.cube);
+  Object.freeze(entry);
+}
 
 export const cubes: CubesMap = _cubes;

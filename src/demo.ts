@@ -2,7 +2,11 @@ import "./demo.css";
 import { rybHsl2rgb, ryb2rgb } from "./main";
 import { ColorCoords, ColorCube, cubes } from "./cubes";
 
-let currentCube: ColorCube = cubes.get("itten-normalized")!.cube;
+// Presets are frozen; work on a copy so edits never touch the shared cube.
+const cloneCube = (cube: ColorCube): ColorCube =>
+  cube.map((rgb) => [...rgb]) as ColorCube;
+
+let currentCube: ColorCube = cloneCube(cubes.get("itten-normalized")!.cube);
 
 const logCube = (cube: ColorCube) => {
   console.log("Customized RYB_CUBE");
@@ -556,7 +560,7 @@ $select.addEventListener("change", (e) => {
   const value = $target.value;
   const cube = cubes.get(value);
   if (cube) {
-    currentCube = cube.cube;
+    currentCube = cloneCube(cube.cube);
     repaint();
   }
 });*/
@@ -599,7 +603,7 @@ $presetsList.addEventListener(
     const value = $target.value;
     const cube = cubes.get(value);
     if (cube) {
-      currentCube = cube.cube;
+      currentCube = cloneCube(cube.cube);
       repaint();
     }
   },

@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 - `RYB_ITTEN` moved into its own module (`src/itten.ts`). Importing only `ryb2rgb` from the main entry no longer pulls the full cube catalog into consumer bundles, and the UMD builds shrink from ~13 KB to under 4 KB. `rybitten/cubes` still re-exports `RYB_ITTEN`, so no import paths change.
+- Every preset cube (including `RYB_ITTEN`) and every `cubes` entry is now deep-frozen. Mutating a preset in place used to silently change the library default; it now throws in strict mode. Copy a cube before editing it.
+- Documented that `ryb2rgb` / `rybHsl2rgb` do not clamp their inputs.
 - Cube `reference` fields that pointed at images not present in `references/` are now empty strings (`apple80s`, `apple90s`, `arquitetura-decoracao`, `church`, `colorprinter`, `japschool`, `pixelart`, `rgb`, `ryan`, `ten`). `marvel-news` and `maycock` now point at the images that were already in the folder.
 
 ### Fixed

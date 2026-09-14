@@ -1,6 +1,15 @@
 import type { ColorCube } from "./cubes";
 
 /**
+ * Deep-freezes a cube (the outer tuple and each RGB triple) so shared presets
+ * cannot be mutated by accident. Returns the same reference for chaining.
+ */
+export const freezeCube = (cube: ColorCube): ColorCube => {
+  for (const rgb of cube) Object.freeze(rgb);
+  return Object.freeze(cube) as ColorCube;
+};
+
+/**
  * Default RYB color cube based on Johannes Itten's chromatic circle (1961).
  * Contains 8 key colors in RGB space:
  * 1. White    - Base color, slightly warm [253/255, 246/255, 237/255]
@@ -12,7 +21,7 @@ import type { ColorCube } from "./cubes";
  * 7. Green    - Secondary [0, 142/255, 91/255]
  * 8. Black    - Shade [29/255, 28/255, 28/255]
  */
-export const RYB_ITTEN: ColorCube = [
+export const RYB_ITTEN: ColorCube = freezeCube([
   // white
   [253 / 255, 246 / 255, 237 / 255],
 
@@ -36,4 +45,4 @@ export const RYB_ITTEN: ColorCube = [
 
   // black
   [29 / 255, 28 / 255, 28 / 255],
-];
+]);
