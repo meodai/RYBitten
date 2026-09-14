@@ -16,6 +16,8 @@ export const rybhsl = (cube?: ColorCube) => ({ mode: RYBHSL, cube });
  */
 interface P5Constructor {
   prototype: P5Prototype;
+  /** p5 2.x addon hook. Absent on 1.x. */
+  registerAddon?: (addon: (p5: P5Constructor) => void) => void;
 }
 
 interface P5Prototype {
@@ -24,7 +26,8 @@ interface P5Prototype {
   stroke: (...args: unknown[]) => unknown;
   background: (...args: unknown[]) => unknown;
   color: (...args: unknown[]) => unknown;
-  registerMethod: (hook: string, fn: (this: P5Instance) => void) => void;
+  /** p5 1.x lifecycle hook. Removed in 2.x. */
+  registerMethod?: (hook: string, fn: (this: P5Instance) => void) => void;
   _rybExtended?: boolean;
   RYB?: string;
   RYBHSL?: string;
@@ -38,8 +41,7 @@ interface P5Prototype {
  */
 interface P5Instance {
   constructor: P5Constructor;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- p5's own typing here is a plain `any`; narrowing it would require module augmentation of p5 itself, which we deliberately avoid.
-  _rybMode?: string | false | any;
+  _rybMode?: string | false;
   _rybMaxes?: [number, number, number, number];
   _rybCube?: ColorCube;
 }
@@ -173,11 +175,16 @@ export function extendP5(p5: P5Constructor): void {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- p5 is an untyped global when loaded via <script>; we deliberately accept the weak type here.
 declare const p5: any;
 if (typeof p5 !== "undefined") {
-  extendP5(p5 as P5Constructor);
-  (p5 as P5Constructor).prototype.registerMethod(
-    "init",
-    function (this: P5Instance) {
+  const ctor = p5 as P5Constructor;
+  extendP5(ctor);
+  if (typeof ctor.registerAddon === "function") {
+    // p5 2.x: the addon API hands us the constructor again for any
+    // instance created later; extendP5 is idempotent so this is safe.
+    ctor.registerAddon((p5c) => extendP5(p5c));
+  } else if (typeof ctor.prototype.registerMethod === "function") {
+    // p5 1.x: re-run on init in case the prototype was replaced.
+    ctor.prototype.registerMethod("init", function (this: P5Instance) {
       extendP5(this.constructor);
-    },
-  );
+    });
+  }
 }
