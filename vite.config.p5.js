@@ -14,13 +14,9 @@ export default defineConfig({
       output: {
         entryFileNames: "p5.rybitten.umd.js",
         exports: "named",
-        // We want to extend the global rybitten object if it exists, or create it.
-        // But UMD usually assigns to a variable.
-        // If we name it "rybitten", it might overwrite the main library if loaded after.
-        // But since this file exports * from main, it is a superset.
-        // So overwriting is actually fine/desired if the user loads this INSTEAD of the main lib.
-        // If they load BOTH, it's redundant but safe if they are identical versions.
-        name: "rybitten", 
+        // Same global name as the main UMD. This bundle re-exports everything
+        // from main, so loading it instead of (or after) rybitten.umd.js is safe.
+        name: "rybitten",
       },
     },
   },

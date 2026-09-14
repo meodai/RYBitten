@@ -1,0 +1,8 @@
+dist
+demo
+coverage
+node_modules
+references
+screenshots
+docs
+package-lock.json

@@ -29,13 +29,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
-- `trilobe-synoptique` cube — Charles Lacouture, *Trilobe Synoptique* (1890).
+- `trilobe-synoptique` cube — Charles Lacouture, _Trilobe Synoptique_ (1890).
 
 ## [1.1.0] - 2026-06-07
 
 ### Added
 
-- `church` cube — A.H. Church, *An Elementary Manual for Students* (1887).
+- `church` cube — A.H. Church, _An Elementary Manual for Students_ (1887).
 
 ## [1.0.0] - 2026-04-22
 

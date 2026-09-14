@@ -14,7 +14,10 @@ export default [
     files: ["src/__tests__/**/*.ts"],
     rules: {
       // Tests occasionally need looser patterns (e.g. spread into corner args)
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
     },
   },
   {

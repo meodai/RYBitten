@@ -31,7 +31,11 @@ try {
   // 3. Set up scratch project.
   writeFileSync(
     join(scratch, "package.json"),
-    JSON.stringify({ name: "smoke", version: "1.0.0", type: "module" }, null, 2),
+    JSON.stringify(
+      { name: "smoke", version: "1.0.0", type: "module" },
+      null,
+      2,
+    ),
   );
   run(`npm install "${tarballAbs}" --no-save --no-audit --no-fund`, scratch);
 

@@ -49,13 +49,13 @@ Or include it directly in your HTML:
 ```
 
 ### Include RYBitten in your project
-  
+
 ```javascript
 // ES6 style
-import { ryb2rgb } from 'rybitten';
+import { ryb2rgb } from "rybitten";
 
 // CommonJS style
-const { ryb2rgb } = require('rybitten');
+const { ryb2rgb } = require("rybitten");
 ```
 
 ### Usage in Browser / p5.js (UMD)
@@ -72,7 +72,7 @@ For projects that don't use a bundler (like p5.js sketches), you can use the UMD
 
   function draw() {
     // Access functions via the global 'rybitten' object
-    const rgb = rybitten.ryb2rgb([0, 1, 0]); 
+    const rgb = rybitten.ryb2rgb([0, 1, 0]);
     background(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
   }
 </script>
@@ -88,11 +88,11 @@ RYBitten includes a special p5.js extension that adds native RYB color mode supp
 <script>
   function setup() {
     createCanvas(400, 400);
-    
+
     // Use RYB color mode just like RGB or HSL!
     colorMode(RYB);
     background(255, 0, 0); // Red in RYB space
-    fill(0, 255, 0);       // Yellow in RYB space
+    fill(0, 255, 0); // Yellow in RYB space
     circle(200, 200, 100);
   }
 </script>
@@ -108,21 +108,23 @@ RYBitten includes a special p5.js extension that adds native RYB color mode supp
 ```javascript
 function setup() {
   createCanvas(400, 400);
-  
+
   // Use a custom historical color cube
   // Note: The UMD build does not export the cubes collection.
   // Copy the cube values you want to use directly in your code.
-  colorMode(rybhsl([
-    [233/255, 199/255, 173/255],  // White
-    [214/255, 76/255, 127/255],   // Red
-    [238/255, 204/255, 124/255],  // Yellow
-    [230/255, 174/255, 115/255],  // Orange
-    [86/255, 141/255, 146/255],   // Blue
-    [118/255, 83/255, 97/255],    // Violet
-    [196/255, 192/255, 118/255],  // Green
-    [60/255, 52/255, 40/255]      // Black
-  ]));
-  
+  colorMode(
+    rybhsl([
+      [233 / 255, 199 / 255, 173 / 255], // White
+      [214 / 255, 76 / 255, 127 / 255], // Red
+      [238 / 255, 204 / 255, 124 / 255], // Yellow
+      [230 / 255, 174 / 255, 115 / 255], // Orange
+      [86 / 255, 141 / 255, 146 / 255], // Blue
+      [118 / 255, 83 / 255, 97 / 255], // Violet
+      [196 / 255, 192 / 255, 118 / 255], // Green
+      [60 / 255, 52 / 255, 40 / 255], // Black
+    ]),
+  );
+
   fill(0, 100, 50); // Hue 0, full saturation, mid lightness
   rect(0, 0, 200, 200);
 }
@@ -135,7 +137,7 @@ The extension works with both p5.js 1.x and 2.0, and supports both global and in
 **All RGB and RYB values are in the range `[0, 1]`.**
 
 ```javascript
-import { ryb2rgb } from 'rybitten';
+import { ryb2rgb } from "rybitten";
 
 const rgbColor = ryb2rgb([1, 0, 0.5]);
 
@@ -149,9 +151,9 @@ console.log(rgbColor); // Outputs the RGB equivalent
 Convert RYB to RGB using trilinear interpolation.
 
 - `coords`: `[0…1, 0…1, 0…1]` RYB coordinates
-- `options`: (*optional*) An object with the following properties:
-  - `cube`: (*optional*): [See the note on the color cube below](#interpolation-color-cube-%EF%B8%8F) defaults to `RYB_ITTEN`
-  - `easingFn`: (*optional*) Custom easing function used for the interpolation, defaults to `smoothstep`
+- `options`: (_optional_) An object with the following properties:
+  - `cube`: (_optional_): [See the note on the color cube below](#interpolation-color-cube-%EF%B8%8F) defaults to `RYB_ITTEN`
+  - `easingFn`: (_optional_) Custom easing function used for the interpolation, defaults to `smoothstep`
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
 
 **Note**: RYB uses a subtractive color model where black = all colors, white = no colors. **white will turn to black, and black will turn to white.**
@@ -163,10 +165,10 @@ Convert RYB to RGB using trilinear interpolation.
 Convert HSL to RGB, then apply the RYB space.
 
 - `hsl`: Array of `[hue (0…360), saturation (0…1), lightness (0…1)]`
-- `options`: (*optional*) An object with the following properties:
-  - `cube`: (*optional*) [See the note on the color cube below](#interpolation-color-cube-%EF%B8%8F)
-  - `easingFn`: (*optional*) A custom easing function for the interpolation, defaults to `smoothstep`
-  - `invertLightness`: (*optional*) Inverts the lightness value, defaults to `true` (0 is black, 1 is white), if set to `false` l:0 is white, l:1 is black
+- `options`: (_optional_) An object with the following properties:
+  - `cube`: (_optional_) [See the note on the color cube below](#interpolation-color-cube-%EF%B8%8F)
+  - `easingFn`: (_optional_) A custom easing function for the interpolation, defaults to `smoothstep`
+  - `invertLightness`: (_optional_) Inverts the lightness value, defaults to `true` (0 is black, 1 is white), if set to `false` l:0 is white, l:1 is black
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
 
 Converts HSL coordinates to RGB, then translates them to the custom RYB color space using ryb2rgb. The HSL coordinates are in the range `[0,360], [0, 1], [0, 1]`. Lightness is inverted to match the RYB color space.
@@ -181,22 +183,22 @@ The cube is inverted to match the subtractive color model, where white is the ab
 const RYB_CUBE = [
   // White
   [253 / 255, 246 / 255, 237 / 255],
-  
+
   // Red
   [227 / 255, 36 / 255, 33 / 255],
-  
+
   // Yellow
   [243 / 255, 230 / 255, 0],
-  
+
   // Orange
   [240 / 255, 142 / 255, 28 / 255],
-  
+
   // Blue
   [22 / 255, 153 / 255, 218 / 255],
-  
+
   // Violet
   [120 / 255, 34 / 255, 170 / 255],
-  
+
   // Green
   [0, 142 / 255, 91 / 255],
 
@@ -219,10 +221,10 @@ Each gamut is an object with the following properties:
 The presets are frozen. To tweak one, copy it first: `cube.map(rgb => [...rgb])`.
 
 ```javascript
-import { rybHsl2rgb } from 'rybitten';
-import { cubes } from 'rybitten/cubes';
+import { rybHsl2rgb } from "rybitten";
+import { cubes } from "rybitten/cubes";
 
-const { cube } = cubes.get('munsell');
+const { cube } = cubes.get("munsell");
 
 console.log(cube);
 /**
@@ -239,7 +241,7 @@ rybHsl2rgb([0, 1, 0.5], { cube });
 RYBitten is written in TypeScript and includes type definitions out of the box:
 
 ```typescript
-import type { ColorCoords, ColorCube } from 'rybitten/cubes';
+import type { ColorCoords, ColorCube } from "rybitten/cubes";
 ```
 
 ### Available Color Gamuts
@@ -247,67 +249,67 @@ import type { ColorCoords, ColorCube } from 'rybitten/cubes';
 The library provides a collection of historical and modern color gamuts through the `cubes` Map. Import and use them like this:
 
 ```javascript
-import { rybHsl2rgb } from 'rybitten';
-import { cubes } from 'rybitten/cubes';
+import { rybHsl2rgb } from "rybitten";
+import { cubes } from "rybitten/cubes";
 
 // Access any gamut by its key
-const munsellCube = cubes.get('munsell').cube;
-const albersCube = cubes.get('albers').cube;
+const munsellCube = cubes.get("munsell").cube;
+const albersCube = cubes.get("albers").cube;
 
 // Use it in color conversion
 const rgbColor = rybHsl2rgb([0, 1, 0.5], { cube: munsellCube });
 
 // Get metadata about the color space
-const { title, author, year, reference } = cubes.get('munsell');
+const { title, author, year, reference } = cubes.get("munsell");
 ```
 
 #### Historical Color Spaces
 
-| Key | Title | Year | Reference |
-| --- | --- | --- | --- |
-| itten | Johannes Itten: Chromatic Circle | 1961 | [reference](references/farbkreis_extended.png) |
-| itten-normalized | Johannes Itten: Chromatic Circle (Paper-white) | 1961 | [reference](references/Johannes-Itten-The-chromatic-circle-some-exercises-on-the-contrast-of-pure-colors.webp) |
-| itten-neutral | Nathan Gossett & Baoquan Chen: Paint Inspired Color Compositing | 2004 | [reference](references/itten-ryb.pdf) |
-| bezold | Wilhelm von Bezold: Farbentafel | 1874 | [reference](references/Bezold_Farbentafel_1874.jpg) |
-| boutet | Claude Boutet: Twelve-color color circles | 1708 | [reference](references/Boutet_1708_color_circles.jpg) |
-| hett | J. A. H. Hett: RGV Color Wheel | 1908 | [reference](references/RGV_color_wheel_1908.png) |
-| schiffermueller | Ignaz Schiffermüller: Versuch eines Farbensystems | 1772 | [reference](references/020_schiffermueller1.jpg) |
-| harris | Moses Harris: The Natural System of Colours | 1766 | [reference](references/Moses_Harris_The_Natural_System_of_Colours.jpg) |
-| harrisc82 | Moses Harris / C82: The Natural System of Colours | 1766 | [reference](references/harrisc82.png) |
-| harrisc82alt | Moses Harris / C82: The Natural System of Colours (alt) | 1766 | [reference](references/harrisc82alt.png) |
-| goethe | Goethe: Farbenkreis | 1809 | [reference](references/Goethe_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens_1809.jpg) |
-| munsell | Munsell Color System | 1905 | [reference](references/munsell-atlas-11.jpg) |
-| munsell-alt | Cleland & Munsell: A Grammar of Color | 1921 | [reference](references/munsell-alt.jpg) |
-| hayter | Charles Hayter: New Practical Treatise on the Three Primitive Colours | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg) |
-| bormann | Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course" | 1931 | [reference](references/bormann.png) |
-| chevreul | Michel Eugène Chevreul: Chromatic Circle | 1839 | |
-| runge | Philipp Otto Runge: Farbenkugel | 1810 | [reference](references/farbenkugel.png) |
-| maycock | Mark M. Maycock's "Scale of Normal Colors and their Hues" | 1895 | [reference](references/vintage-re-make-of-mark-maycocks-scale-of-normal-colors-and-their-hues-illustration-from-1895-prints.webp) |
-| colorprinter | John Earhart's "The Color Printer" | 1892 | |
-| japschool | Japanese School Textbook  | 1930 | |
-| kindergarten1890 | Milton Bradley's Kindergarten Occupation Material | 1890 | [reference](references/kindergarten1890.jpg) |
-| albers | Josef Albers: Interaction of Color | 1942 | [reference](references/albers-color-harmony.jpg) |
-| lohse | Richard Paul Lohse's "Kunsthalle Bern Poster" | 1970 | [reference](references/lohse.png) |
-| marvel-news | Marvel Comics: 64 Color Chart on Newsprint | 1982 | [reference](references/marvel-news-print-80s.webp) |
-| apple80s | Apple: HyperCard User Manual | 1989 | |
-| apple90s | Apple: Macintosh Reference Manual | 1990 | |
-| church | A.H. Church: An Elementary Manual for Students | 1887 | |
-| trilobe-synoptique | Charles Lacouture: Trilobe Synoptique | 1890 | [reference](references/Charles%20Lacouture%2C%20Trilobe%20Synoptique.jpeg) |
-| arquitetura-decoracao | Sugestões. Arquitetura Decoração (São Paulo) | 1956 | |
-| cmy | Jacob Christoph Le Blon: CMY Subtractive Primaries | 1725 | |
-| rgb | James Clerk Maxwell's "Inverted RGB" | 1860 | |
+| Key                   | Title                                                                                | Year | Reference                                                                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------ | ---- | --------------------------------------------------------------------------------------------------------------------------------- |
+| itten                 | Johannes Itten: Chromatic Circle                                                     | 1961 | [reference](references/farbkreis_extended.png)                                                                                    |
+| itten-normalized      | Johannes Itten: Chromatic Circle (Paper-white)                                       | 1961 | [reference](references/Johannes-Itten-The-chromatic-circle-some-exercises-on-the-contrast-of-pure-colors.webp)                    |
+| itten-neutral         | Nathan Gossett & Baoquan Chen: Paint Inspired Color Compositing                      | 2004 | [reference](references/itten-ryb.pdf)                                                                                             |
+| bezold                | Wilhelm von Bezold: Farbentafel                                                      | 1874 | [reference](references/Bezold_Farbentafel_1874.jpg)                                                                               |
+| boutet                | Claude Boutet: Twelve-color color circles                                            | 1708 | [reference](references/Boutet_1708_color_circles.jpg)                                                                             |
+| hett                  | J. A. H. Hett: RGV Color Wheel                                                       | 1908 | [reference](references/RGV_color_wheel_1908.png)                                                                                  |
+| schiffermueller       | Ignaz Schiffermüller: Versuch eines Farbensystems                                    | 1772 | [reference](references/020_schiffermueller1.jpg)                                                                                  |
+| harris                | Moses Harris: The Natural System of Colours                                          | 1766 | [reference](references/Moses_Harris_The_Natural_System_of_Colours.jpg)                                                            |
+| harrisc82             | Moses Harris / C82: The Natural System of Colours                                    | 1766 | [reference](references/harrisc82.png)                                                                                             |
+| harrisc82alt          | Moses Harris / C82: The Natural System of Colours (alt)                              | 1766 | [reference](references/harrisc82alt.png)                                                                                          |
+| goethe                | Goethe: Farbenkreis                                                                  | 1809 | [reference](references/Goethe_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens_1809.jpg)                 |
+| munsell               | Munsell Color System                                                                 | 1905 | [reference](references/munsell-atlas-11.jpg)                                                                                      |
+| munsell-alt           | Cleland & Munsell: A Grammar of Color                                                | 1921 | [reference](references/munsell-alt.jpg)                                                                                           |
+| hayter                | Charles Hayter: New Practical Treatise on the Three Primitive Colours                | 1826 | [reference](references/Color_diagram_Charles_Hayter.jpg)                                                                          |
+| bormann               | Heinrich-Siegfried Bormann: Gouache tint study for Josef Alber's Preliminary Course" | 1931 | [reference](references/bormann.png)                                                                                               |
+| chevreul              | Michel Eugène Chevreul: Chromatic Circle                                             | 1839 |                                                                                                                                   |
+| runge                 | Philipp Otto Runge: Farbenkugel                                                      | 1810 | [reference](references/farbenkugel.png)                                                                                           |
+| maycock               | Mark M. Maycock's "Scale of Normal Colors and their Hues"                            | 1895 | [reference](references/vintage-re-make-of-mark-maycocks-scale-of-normal-colors-and-their-hues-illustration-from-1895-prints.webp) |
+| colorprinter          | John Earhart's "The Color Printer"                                                   | 1892 |                                                                                                                                   |
+| japschool             | Japanese School Textbook                                                             | 1930 |                                                                                                                                   |
+| kindergarten1890      | Milton Bradley's Kindergarten Occupation Material                                    | 1890 | [reference](references/kindergarten1890.jpg)                                                                                      |
+| albers                | Josef Albers: Interaction of Color                                                   | 1942 | [reference](references/albers-color-harmony.jpg)                                                                                  |
+| lohse                 | Richard Paul Lohse's "Kunsthalle Bern Poster"                                        | 1970 | [reference](references/lohse.png)                                                                                                 |
+| marvel-news           | Marvel Comics: 64 Color Chart on Newsprint                                           | 1982 | [reference](references/marvel-news-print-80s.webp)                                                                                |
+| apple80s              | Apple: HyperCard User Manual                                                         | 1989 |                                                                                                                                   |
+| apple90s              | Apple: Macintosh Reference Manual                                                    | 1990 |                                                                                                                                   |
+| church                | A.H. Church: An Elementary Manual for Students                                       | 1887 |                                                                                                                                   |
+| trilobe-synoptique    | Charles Lacouture: Trilobe Synoptique                                                | 1890 | [reference](references/Charles%20Lacouture%2C%20Trilobe%20Synoptique.jpeg)                                                        |
+| arquitetura-decoracao | Sugestões. Arquitetura Decoração (São Paulo)                                         | 1956 |                                                                                                                                   |
+| cmy                   | Jacob Christoph Le Blon: CMY Subtractive Primaries                                   | 1725 |                                                                                                                                   |
+| rgb                   | James Clerk Maxwell's "Inverted RGB"                                                 | 1860 |                                                                                                                                   |
 
 #### Featured Artist Spectrum
 
 The following color spaces were provided by artists and designers who have contributed to the project.
 
-| Key | Title | Year | Reference |
-| --- | --- | --- | --- |
-| [ippsketch](https://ippsketch.com/) | Ippsketch: imposter syndrome | 2022 | [reference](references/ippsketch.png) |
-| ten | Roni Kaufman's "Ten" | 2022 | |
-| pixelart | Tofu: Pixel Art | 2024 | |
-| ryan | Ryan: Compositions Palette | 2024 | |
-| clayton | Greg Clayton: Intrinsic Value Plate | 2017 | [reference](references/A260P03_IntrinsicValue1.gif) |
+| Key                                 | Title                               | Year | Reference                                           |
+| ----------------------------------- | ----------------------------------- | ---- | --------------------------------------------------- |
+| [ippsketch](https://ippsketch.com/) | Ippsketch: imposter syndrome        | 2022 | [reference](references/ippsketch.png)               |
+| ten                                 | Roni Kaufman's "Ten"                | 2022 |                                                     |
+| pixelart                            | Tofu: Pixel Art                     | 2024 |                                                     |
+| ryan                                | Ryan: Compositions Palette          | 2024 |                                                     |
+| clayton                             | Greg Clayton: Intrinsic Value Plate | 2017 | [reference](references/A260P03_IntrinsicValue1.gif) |
 
 ## Utility Functions 🛠️
 
@@ -319,18 +321,17 @@ But if you are anything like me, you might find them useful for other purposes w
 Linear interpolation between two values.
 
 ```javascript
-import { lerp } from 'rybitten';
+import { lerp } from "rybitten";
 
 lerp(0, 100, 0.5); // returns 50
 ```
-
 
 ### blerp(a00: number, a01: number, a10: number, a11: number, tx: number, ty: number): number
 
 Bilinear interpolation between four points in a 2D space. Useful for interpolating values on a rectangular grid.
 
 ```javascript
-import { blerp } from 'rybitten';
+import { blerp } from "rybitten";
 
 // Interpolate between four corners of a unit square
 blerp(0, 1, 1, 2, 0.5, 0.5); // returns center value
@@ -341,13 +342,21 @@ blerp(0, 1, 1, 2, 0.5, 0.5); // returns center value
 Trilinear interpolation between eight points in a 3D space. This is the core interpolation function used for the color cube conversion.
 
 ```javascript
-import { trilerp } from 'rybitten';
+import { trilerp } from "rybitten";
 
 // Interpolate within a color cube
 const value = trilerp(
-  0, 1, 1, 1,  // front face values
-  0, 1, 1, 1,  // back face values
-  0.5, 0.5, 0.5 // position in cube
+  0,
+  1,
+  1,
+  1, // front face values
+  0,
+  1,
+  1,
+  1, // back face values
+  0.5,
+  0.5,
+  0.5, // position in cube
 );
 ```
 
@@ -359,11 +368,11 @@ Converts standard HSL color values to RGB. Adapted from [Culori](https://github.
 - `@return`: `[0…1, 0…1, 0…1]` RGB coordinates
 
 ```javascript
-import { hslToRgb } from 'rybitten';
+import { hslToRgb } from "rybitten";
 
-hslToRgb([0, 1, 0.5]);    // returns [1, 0, 0] (red)
-hslToRgb([120, 1, 0.5]);  // returns [0, 1, 0] (green)
-hslToRgb([240, 1, 0.5]);  // returns [0, 0, 1] (blue)
+hslToRgb([0, 1, 0.5]); // returns [1, 0, 0] (red)
+hslToRgb([120, 1, 0.5]); // returns [0, 1, 0] (green)
+hslToRgb([240, 1, 0.5]); // returns [0, 0, 1] (blue)
 ```
 
 ## Stability 🔒
