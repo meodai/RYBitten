@@ -166,6 +166,37 @@ describe("extendP5 — argument conversion", () => {
     expectRgb(last(calls.fill), rybHsl2rgb([90, 0.5, 0.25]));
   });
 
+  it("RYBHSL: a single gray value is lightness with zero saturation", () => {
+    const { FakeP5, calls } = makeFakeP5();
+    extendP5(FakeP5);
+    const p = makeInstance(FakeP5);
+    p.colorMode(RYBHSL);
+    p.fill(50);
+    expectRgb(last(calls.fill), rybHsl2rgb([0, 0, 0.5]));
+  });
+
+  it("RYBHSL: gray + alpha keeps alpha and stays achromatic", () => {
+    const { FakeP5, calls } = makeFakeP5();
+    extendP5(FakeP5);
+    const p = makeInstance(FakeP5);
+    p.colorMode(RYBHSL);
+    p.fill(100, 0.25);
+    const out = last(calls.fill);
+    expectRgb(out.slice(0, 3), rybHsl2rgb([0, 0, 1]));
+    expect(out[3]).toBeCloseTo(0.25, CLOSE);
+  });
+
+  it("RYBHSL: gray 100 is white and gray 0 is black (cube vertices)", () => {
+    const { FakeP5, calls } = makeFakeP5();
+    extendP5(FakeP5);
+    const p = makeInstance(FakeP5);
+    p.colorMode(RYBHSL);
+    p.fill(100);
+    expectRgb(last(calls.fill), RYB_ITTEN[0]);
+    p.fill(0);
+    expectRgb(last(calls.fill), RYB_ITTEN[7]);
+  });
+
   it("RYBHSL: custom cube is forwarded", () => {
     const { FakeP5, calls } = makeFakeP5();
     extendP5(FakeP5);

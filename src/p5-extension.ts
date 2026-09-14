@@ -72,10 +72,17 @@ export function extendP5(p5: P5Constructor): void {
       let v1: number, v2: number, v3: number;
       let a: unknown;
 
-      if (args.length === 1) {
-        v1 = v2 = v3 = (args[0] as number) / maxes[0];
-      } else if (args.length === 2) {
-        v1 = v2 = v3 = (args[0] as number) / maxes[0];
+      if (args.length === 1 || args.length === 2) {
+        // Single-value form is grayscale, mirroring p5's own behaviour:
+        // in RYB it walks the white→black diagonal of the cube; in RYBHSL
+        // it is a lightness with zero saturation (not a hue).
+        if (instance._rybMode === RYBHSL) {
+          v1 = 0;
+          v2 = 0;
+          v3 = (args[0] as number) / maxes[2];
+        } else {
+          v1 = v2 = v3 = (args[0] as number) / maxes[0];
+        }
         a = args[1];
       } else if (args.length >= 3) {
         v1 = (args[0] as number) / maxes[0];
